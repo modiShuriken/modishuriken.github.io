@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>博客的优化</title>
+    <url>/posts/b1ed4171/</url>
+    <content><![CDATA[<h1 id="hexo-优化"><a href="#hexo-优化" class="headerlink" title="hexo 优化"></a>hexo 优化</h1><span id="more"></span>
+
+<h2 id="文章内部"><a href="#文章内部" class="headerlink" title="文章内部"></a>文章内部</h2><ul>
+<li>实现博客主页只显示部分文章内容，只需要在<code>md</code>文件某一行插入<code>&lt;!--more--&gt;</code>。首页只会显示标记以前的内容，标记后的内容可以通过阅读更多查阅，也可以设置自动摘录。</li>
+<li>或者自动摘录</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">melody.yml</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
+
+<p>注意：使用自动摘录可能会导致代码区出错。所以如果你想在索引页中显示代码，那么你最好不要使用这个功能！</p>
+<ul>
+<li><p>文件开头设置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: post title</span><br><span class="line">date: 2021-12-31 22:07:24</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">password: </span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="hexo-nextT设置"><a href="#hexo-nextT设置" class="headerlink" title="hexo+nextT设置"></a>hexo+nextT设置</h2><p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Link1</a></p>
+<p><a href="https://blog.csdn.net/u012294515/article/details/83094693">Link2</a></p>
+<h3 id="隐藏底部”强力驱动“内容"><a href="#隐藏底部”强力驱动“内容" class="headerlink" title="隐藏底部”强力驱动“内容"></a>隐藏底部”强力驱动“内容</h3><p>打开 themes&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;footer.swig，</p>
+<p>找到下面内容，把这段代码首尾分别加上：<code>&lt;!--</code> 和<code>--&gt;</code>，或者直接删除。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.powered.enable %&#125;</span><br><span class="line">&lt;div class=&quot;powered-by&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.powered&#x27;, &#x27;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#x27; + nofollow + &#x27; href=&quot;https://hexo.io&quot;&gt;Hexo&lt;/a&gt;&#x27;) &#125;&#125;&#123;% if theme.footer.powered.version %&#125; v&#123;&#123; hexo_env(&#x27;version&#x27;) &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.powered.enable and theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;div class=&quot;theme-info&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.theme&#x27;) &#125;&#125; – &#123;#</span><br><span class="line">#&#125;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#123;&#123; nofollow &#125;&#125; href=&quot;https://theme-next.org&quot;&gt;&#123;#</span><br><span class="line">#&#125;NexT.&#123;&#123; theme.scheme &#125;&#125;&#123;#</span><br><span class="line">#&#125;&lt;/a&gt;&#123;% if theme.footer.theme.version %&#125; v&#123;&#123; version &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="移动端显示回顶部按钮"><a href="#移动端显示回顶部按钮" class="headerlink" title="移动端显示回顶部按钮"></a>移动端显示回顶部按钮</h3><p>主题的设计模版是 Muse 或 Mist，就可以直接在主题配置文件中配置：</p>
+<p>修改主题配置<code>themes/next/_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Enable sidebar on narrow view</span><br><span class="line">onmobile: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>安装插件<code>hexo-generator-searchdb</code>,执行以下命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>hexo/_config.yml</code>站点配置文件,末尾新增以下代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>themes/next/_config.yml</code>主题配置文件，搜索关键字<code>local_search</code>找到如下代码，将<code>enable</code>设置为<code>true</code>，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置网站图标"><a href="#设置网站图标" class="headerlink" title="设置网站图标"></a>设置网站图标</h3><p>找一张（32 * 32）（16*16）的 ico 图标，或者去别的网站下载或者制作，并将图标名称改为 favicon.ico，然后把图标放在 <code>/themes/next/source/images</code> 里，并且修改主题配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Put your favicon.ico into `hexo-site/source/` directory.</span><br><span class="line">favicon: /favicon.ico</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="代码块复制选项"><a href="#代码块复制选项" class="headerlink" title="代码块复制选项"></a>代码块复制选项</h3><p>Next6 中自带了复制代码按钮， 在next的配置文件中找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">border_radius: 8   # 按钮圆滑度</span><br><span class="line">copy_button:  # 设置是否开启代码块复制按钮</span><br><span class="line">	enable: true</span><br><span class="line">	show_result: true  # 是否显示复制成功信息</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文章加密访问"><a href="#文章加密访问" class="headerlink" title="文章加密访问"></a>文章加密访问</h3><p>打开<code>themes-&gt;next-&gt;layout-&gt;_partials-&gt;head.swig</code>文件,找到这样一段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;&#123;&#123; pace_js_uri &#125;&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;link href=&quot;&#123;&#123; pace_css_uri &#125;&#125;&quot; rel=&quot;stylesheet&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后在下面插入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  &lt;script&gt;</span><br><span class="line">    (function () &#123;</span><br><span class="line">        if (&#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">            if (prompt(&#x27;请输入文章密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">                alert(&#x27;密码错误！&#x27;);</span><br><span class="line">                if (history.length === 1) &#123;</span><br><span class="line">                    location.replace(&quot;http://zxiaoxuan.cn&quot;); // 这里替换成你的首页</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    history.back();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>文章内部的开头就要添加password</p>
+<h3 id="修改加载特效"><a href="#修改加载特效" class="headerlink" title="修改加载特效"></a>修改加载特效</h3><p>由于网页不可能一直都秒进，总会等待一段时间的，所以可以设置顶部加载条。</p>
+<p>在主题的配置文件中搜索<code>pace</code>，找到如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line">  # Themes list:</span><br><span class="line">  # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span><br><span class="line">  # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改文章的链接"><a href="#修改文章的链接" class="headerlink" title="修改文章的链接"></a>修改文章的链接</h3><p>生成简洁且唯一的URL</p>
+<p>安装插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   #算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     #进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line"></span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line"></span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="更改Google字体库"><a href="#更改Google字体库" class="headerlink" title="更改Google字体库"></a>更改Google字体库</h3><p>改为Google国内的字体库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">host: https://fonts.geekzu.org</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="博客背景图片（未）"><a href="#博客背景图片（未）" class="headerlink" title="博客背景图片（未）"></a>博客背景图片（未）</h3><p>在<code>themes/next/source/css/_custom/custom.styl</code>中添加CSS样式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 背景图片</span><br><span class="line">body::before &#123;</span><br><span class="line">    background-image: url(https://背景图.jpg);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-size: cover;</span><br><span class="line">    background-position: 50% 50%;</span><br><span class="line">    content: &quot; &quot;;</span><br><span class="line">    position: fixed;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    top: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    z-index: -2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="归档页优化（未）"><a href="#归档页优化（未）" class="headerlink" title="归档页优化（未）"></a>归档页优化（未）</h3><p>修改&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post-collapse.swig后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% macro render(post) %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;article class=&quot;post post-type-&#123;&#123; post.type | default(&#x27;normal&#x27;) &#125;&#125;&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;</span><br><span class="line">    &lt;header class=&quot;post-header&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125; class=&quot;post-title&quot;&gt;</span><br><span class="line">        &#123;% if post.link %&#125;&#123;# Link posts #&#125;</span><br><span class="line">          &lt;a class=&quot;post-title-link post-title-link-external&quot; target=&quot;_blank&quot; href=&quot;&#123;&#123; url_for(post.link) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">            &#123;&#123; post.title or post.link &#125;&#125;</span><br><span class="line">            &lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">            &lt;a class=&quot;post-title-link&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">              &#123;% if post.type === &#x27;picture&#x27; %&#125;</span><br><span class="line">                &#123;&#123; post.content &#125;&#125;</span><br><span class="line">              &#123;% else %&#125;</span><br><span class="line">                &lt;span itemprop=&quot;name&quot;&gt;&#123;&#123; post.title | default(__(&#x27;post.untitled&#x27;)) &#125;&#125;&lt;/span&gt;</span><br><span class="line">              &#123;% endif %&#125;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">      &lt;/&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;post-meta&quot;&gt;</span><br><span class="line">        &lt;time class=&quot;post-time&quot; itemprop=&quot;dateCreated&quot;</span><br><span class="line">              datetime=&quot;&#123;&#123; moment(post.date).format() &#125;&#125;&quot;</span><br><span class="line">              content=&quot;&#123;&#123; date(post.date, config.date_format) &#125;&#125;&quot; &gt;</span><br><span class="line">          &#123;&#123; date(post.date, &#x27;MM-DD&#x27;) &#125;&#125;</span><br><span class="line">        &lt;/time&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  &lt;/article&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endmacro %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="追加版权信息（未）"><a href="#追加版权信息（未）" class="headerlink" title="追加版权信息（未）"></a>追加版权信息（未）</h3><ol>
+<li>修改主题<code>配置文件</code>,搜索<code>post_copyright</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_copyright:</span><br><span class="line">- enable: false</span><br><span class="line">+ enable: true</span><br><span class="line">  license: CC BY-NC-SA 3.0</span><br><span class="line">  license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果觉得默认不好看,则可以自定义样式,找到<code>themes/next/layout/_macro/post.swig</code>，在<code>footer</code>之前添加如下代码(添加之前确保已添加样式)：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">	  &lt;p id=&quot;div-border-left-red&quot;&gt;</span><br><span class="line">	   &lt;b&gt;本文基于&lt;a target=&quot;_blank&quot; title=&quot;Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)&quot; href=&quot;http://creativecommons.org/licenses/by-sa/4.0/&quot;&gt; 知识共享署名-相同方式共享 4.0 &lt;/a&gt;国际许可协议发布&lt;/b&gt;&lt;br/&gt;</span><br><span class="line">	    &lt;span&gt;</span><br><span class="line">	    &lt;b&gt;本文地址：&lt;/b&gt;&lt;a href=&quot;&#123;&#123; url_for(page.path) &#125;&#125;&quot; title=&quot;&#123;&#123; page.title &#125;&#125;&quot;&gt;&#123;&#123; page.permalink &#125;&#125;&lt;/a&gt;&lt;br/&gt;&lt;b&gt;转载请注明出处，谢谢！&lt;/b&gt;</span><br><span class="line">	    &lt;/span&gt;</span><br><span class="line">	  &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="动态title（未）"><a href="#动态title（未）" class="headerlink" title="动态title（未）"></a>动态title（未）</h3><p><code>themes/next/source/js/src</code>下创建<code>dytitle.js</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var OriginTitile = document.title;</span><br><span class="line">var titleTime;</span><br><span class="line">document.addEventListener(&#x27;visibilitychange&#x27;, function () &#123;</span><br><span class="line">    if (document.hidden) &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/TEP.png&quot;);</span><br><span class="line">        document.title = &#x27;w(ﾟДﾟ)w 出BUG啦！！！！&#x27;;</span><br><span class="line">        clearTimeout(titleTime);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/favicon.png&quot;);</span><br><span class="line">        document.title = &#x27;♪(^∇^*)又好了。。。 &#x27; + OriginTitile;</span><br><span class="line">        titleTime = setTimeout(function () &#123;</span><br><span class="line">            document.title = OriginTitile;</span><br><span class="line">        &#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="创建标签页和分类页"><a href="#创建标签页和分类页" class="headerlink" title="创建标签页和分类页"></a>创建标签页和分类页</h2><p>在网站根目录下执行以下代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories     #或者tags</span><br></pre></td></tr></table></figure>
+
+<p>Hexo\source 目录中会生成一个 categories 文件夹，文件夹内有一个 index.md 文件，打开此文件，将其中的 type 修改为 categories 即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2021-08-16 10:27:28</span><br><span class="line">type: &quot;categories&quot;           #或者tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>个人博客的建立</title>
     <url>/posts/78ed23a3/</url>
     <content><![CDATA[<h1 id="基于hexo和GitHub的个人博客"><a href="#基于hexo和GitHub的个人博客" class="headerlink" title="基于hexo和GitHub的个人博客"></a>基于hexo和GitHub的个人博客</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
@@ -85,7 +206,7 @@
 <li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
 <li>deploy: </li>
 <li>type:  git </li>
-<li>repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
 <li>branch: main</li>
 <li>注意有空格</li>
 <li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
@@ -195,7 +316,6 @@
 </blockquote>
 <p>例如：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: false</span><br><span class="line"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span><br></pre></td></tr></table></figure>
-
 
 ]]></content>
       <categories>
