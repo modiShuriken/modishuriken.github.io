@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>个人博客的建立</title>
+    <url>/posts/78ed23a3/</url>
+    <content><![CDATA[<h1 id="基于hexo和GitHub的个人博客"><a href="#基于hexo和GitHub的个人博客" class="headerlink" title="基于hexo和GitHub的个人博客"></a>基于hexo和GitHub的个人博客</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><ol>
+<li>准备安装包</li>
+<li>next到默认编辑器，我先有notepad3，所以选择它为默认编辑器（有全局path）</li>
+<li>next到<code>Let Git decide</code>，可以默认，也可以选mian</li>
+<li>一直next到实验项，有<code>NEW</code>字样的，都不选</li>
+<li>安装结束</li>
+</ol>
+<h3 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h3><ol>
+<li>安装一直next即可，注意换安装路径</li>
+<li>设置环境变量</li>
+<li>打开安装目录，新建<code>node_global</code>和<code>node_cache</code> 两个文件夹</li>
+<li>输入“cmd”，点击“以管理员身份运行”</li>
+<li>在命令提示符窗口输入<code>npm config set prefix &quot;安装路径\node_global&quot;</code></li>
+<li>接着输入<code>npm config set cache &quot;安装路径\node_cache&quot;</code></li>
+<li>环境变量中设置：<ul>
+<li>系统中：变量名为<code>NODE_PATH</code> ，变量值为<code>安装路径\node_global\node_modules</code> </li>
+<li>用户Path中：更改<code>../Roaming/npm</code>为<code>安装路径\node_global</code></li>
+<li>系统Path中：新建，输入<code>%NODE_PATH%</code></li>
+</ul>
+</li>
+<li>下面的操作都需管理员身份：可在nodejs文件属性-&gt;安全-&gt;编辑-&gt;选择Users-&gt;完全控制-&gt;确定后退出</li>
+<li>管理员cmd输入：<code>npm install -g npm-windows-upgrade</code></li>
+<li>管理员Windows powershell输入：<code>set-ExecutionPolicy RemoteSigned</code>-&gt;Y，确定-&gt;选默认最高</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><ol>
+<li>本地建立一个Hexo文件夹</li>
+<li>在文件夹中，右键-&gt;<code>Git Bash</code></li>
+<li>命令框中安装Hexo</li>
+<li>输入<code>npm install -g hexo</code></li>
+<li>初始化<code>hexoinit</code></li>
+<li>npm install</li>
+<li>hexo server，到此测试基本完成</li>
+<li>下面是重新部署命令，可以不输入</li>
+<li>hexo clean</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+<li>以上为本地测试</li>
+</ol>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><ol>
+<li>准备一个仓库<code>modishuriken.github.io</code></li>
+<li>仓库名字后缀一定是<code>github.io</code></li>
+<li>公开的</li>
+<li>用cmd：ping <code>modishuriken.github.io</code></li>
+<li>记住IP地址</li>
+</ol>
+<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h3><ol>
+<li>注册域名</li>
+<li>使用DNS解析服务</li>
+<li>选择域名-&gt;解析设置</li>
+<li>设置两个记录类型<ul>
+<li>记录类型：A、 主机记录：@、 解析路线：默认、记录值：IP地址、TTL：10min</li>
+<li>记录类型：CNAME、 主机记录：www、 解析路线：默认、记录值：<code>modishuriken.github.io</code>、TTL：10min</li>
+</ul>
+</li>
+</ol>
+<h2 id="设置IP解析的地方"><a href="#设置IP解析的地方" class="headerlink" title="设置IP解析的地方"></a>设置IP解析的地方</h2><ol>
+<li>阿里云的DNS解析</li>
+<li>在本地创建的Hexo文件夹下的source文件夹中创建<ul>
+<li>右键新建txt文本-&gt;输入你购买的域名<a href="http://www.modishuriken.top/">www.modishuriken.top</a>  -&gt;保存关闭</li>
+<li>右键该文本重命名-&gt;将.txt后缀去掉-&gt;会提示文件不可用继续确定即可</li>
+</ul>
+</li>
+<li>在GitHub上：<ul>
+<li>进入setting-&gt;Repositories-&gt;选择modishuriken.github.io</li>
+<li>choose Settings</li>
+<li>find GitHub Page</li>
+<li>choose theme and wait a moment</li>
+<li>flash Github Page</li>
+<li>Custom domain -&gt; input: <a href="http://www.modishuriken.top/">www.modishuriken.top</a> -&gt; save</li>
+</ul>
+</li>
+<li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
+<li>deploy: </li>
+<li>type:  git </li>
+<li>repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>branch: main</li>
+<li>注意有空格</li>
+<li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="搞定上面的后，进入bash"><a href="#搞定上面的后，进入bash" class="headerlink" title="搞定上面的后，进入bash"></a>搞定上面的后，进入bash</h2><p>git部署至Hexo</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="依次输入"><a href="#依次输入" class="headerlink" title="依次输入"></a>依次输入</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">	生成静态文件</span><br><span class="line">hexo d</span><br><span class="line">	部署到服务器，这一步需要保证Github上拥有本机的公钥</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean 		</span><br><span class="line">		清除缓存文件 (db.json) 和已生成的静态文件 (public)</span><br><span class="line">		在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</span><br><span class="line">		</span><br><span class="line">hexo generate</span><br><span class="line">		生成静态文件</span><br><span class="line">		</span><br><span class="line">hexo deploy</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="日常上传"><a href="#日常上传" class="headerlink" title="日常上传"></a>日常上传</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean //清除缓存</span><br><span class="line">$ hexo g  //生成静态文件</span><br><span class="line">$ hexo d  //上传Github</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="关于使用hexo"><a href="#关于使用hexo" class="headerlink" title="关于使用hexo"></a>关于使用hexo</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">详情</a></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="网站配置"><a href="#网站配置" class="headerlink" title="网站配置"></a>网站配置</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>title</code></td>
+<td align="left">网站标题</td>
+</tr>
+<tr>
+<td align="left"><code>subtitle</code></td>
+<td align="left">网站副标题</td>
+</tr>
+<tr>
+<td align="left"><code>description</code></td>
+<td align="left">网站描述</td>
+</tr>
+<tr>
+<td align="left"><code>keywords</code></td>
+<td align="left">网站的关键词。支持多个关键词。</td>
+</tr>
+<tr>
+<td align="left"><code>author</code></td>
+<td align="left">您的名字</td>
+</tr>
+<tr>
+<td align="left"><code>language</code></td>
+<td align="left">网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 <code>zh-Hans</code>和 <code>zh-CN</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>timezone</code></td>
+<td align="left">网站时区。Hexo 默认使用您电脑的时区。请参考 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a> 进行设置，如 <code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。一般的，对于中国大陆地区可以使用 <code>Asia/Shanghai</code>。</td>
+</tr>
+</tbody></table>
+<p>其中，<code>description</code>主要用于SEO，告诉搜索引擎一个关于您站点的简单描述，通常建议在其中包含您网站的关键词。<code>author</code>参数用于主题显示文章的作者。</p>
+<h4 id="网址配置"><a href="#网址配置" class="headerlink" title="网址配置"></a>网址配置</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th align="left">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>url</code></td>
+<td align="left">网址, 必须以 <code>http://</code> 或 <code>https://</code> 开头</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>root</code></td>
+<td align="left">网站根目录</td>
+<td align="left"><code>url&#39;s pathname</code></td>
+</tr>
+<tr>
+<td align="left"><code>permalink</code></td>
+<td align="left">文章的 <a href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式</td>
+<td align="left"><code>:year/:month/:day/:title/</code></td>
+</tr>
+<tr>
+<td align="left"><code>permalink_defaults</code></td>
+<td align="left">永久链接中各部分的默认值</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls</code></td>
+<td align="left">改写 <a href="https://hexo.io/zh-cn/docs/variables"><code>permalink</code></a> 的值来美化 URL</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls.trailing_index</code></td>
+<td align="left">是否在永久链接中保留尾部的 <code>index.html</code>，设置为 <code>false</code> 时去除</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls.trailing_html</code></td>
+<td align="left">是否在永久链接中保留尾部的 <code>.html</code>, 设置为 <code>false</code> 时去除 (<em>对尾部的 <code>index.html</code>无效</em>)</td>
+<td align="left"><code>true</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>网站存放在子目录</p>
+<p>如果您的网站存放在子目录中，例如 <code>http://example.com/blog</code>，则请将您的 <code>url</code> 设为 <code>http://example.com/blog</code> 并把 <code>root</code> 设为 <code>/blog/</code>。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: false</span><br><span class="line"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>git</tag>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+</search>
