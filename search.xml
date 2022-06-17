@@ -16,7 +16,30 @@
 <li><p>文件开头设置</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: post title</span><br><span class="line">date: 2021-12-31 22:07:24</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">password: </span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h2 id="hexo-nextT设置"><a href="#hexo-nextT设置" class="headerlink" title="hexo+nextT设置"></a>hexo+nextT设置</h2><p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Link1</a></p>
+<h2 id="hexo设置"><a href="#hexo设置" class="headerlink" title="hexo设置"></a>hexo设置</h2><h3 id="创建标签页和分类页"><a href="#创建标签页和分类页" class="headerlink" title="创建标签页和分类页"></a>创建标签页和分类页</h3><p>在网站根目录下执行以下代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories     #或者tags</span><br></pre></td></tr></table></figure>
+
+<p>Hexo\source 目录中会生成一个 categories 文件夹，文件夹内有一个 index.md 文件，打开此文件，将其中的 type 修改为 categories 即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2021-08-16 10:27:28</span><br><span class="line">type: &quot;categories&quot;           #或者tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改文章的链接"><a href="#修改文章的链接" class="headerlink" title="修改文章的链接"></a>修改文章的链接</h3><p>生成简洁且唯一的URL</p>
+<p>安装插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   #算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     #进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line"></span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line"></span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="网站信息设置"><a href="#网站信息设置" class="headerlink" title="网站信息设置"></a>网站信息设置</h3><ul>
+<li>编辑 <strong>站点配置文件</strong>， 设置 <code>author</code> 为你的昵称。</li>
+<li>编辑 <strong>站点配置文件</strong>， 设置 <code>description</code> 字段为你的站点描述。站点描述可以是你喜欢的一句签名:)</li>
+</ul>
+<h2 id="nextT主题设置"><a href="#nextT主题设置" class="headerlink" title="nextT主题设置"></a>nextT主题设置</h2><p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Link1</a></p>
 <p><a href="https://blog.csdn.net/u012294515/article/details/83094693">Link2</a></p>
 <h3 id="隐藏底部”强力驱动“内容"><a href="#隐藏底部”强力驱动“内容" class="headerlink" title="隐藏底部”强力驱动“内容"></a>隐藏底部”强力驱动“内容</h3><p>打开 themes&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;footer.swig，</p>
 <p>找到下面内容，把这段代码首尾分别加上：<code>&lt;!--</code> 和<code>--&gt;</code>，或者直接删除。</p>
@@ -64,15 +87,6 @@
 
 
 
-<h3 id="修改文章的链接"><a href="#修改文章的链接" class="headerlink" title="修改文章的链接"></a>修改文章的链接</h3><p>生成简洁且唯一的URL</p>
-<p>安装插件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-
-<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   #算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     #进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line"></span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line"></span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></table></figure>
-
 
 
 <h3 id="更改Google字体库"><a href="#更改Google字体库" class="headerlink" title="更改Google字体库"></a>更改Google字体库</h3><p>改为Google国内的字体库</p>
@@ -107,12 +121,29 @@
 
 
 
-<h2 id="创建标签页和分类页"><a href="#创建标签页和分类页" class="headerlink" title="创建标签页和分类页"></a>创建标签页和分类页</h2><p>在网站根目录下执行以下代码。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories     #或者tags</span><br></pre></td></tr></table></figure>
+<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>修改字段 <code>avatar</code>， 值设置成头像的链接地址。</p>
+<p>地址可以是URI，也可以是主题<code>source/images/</code>目录下</p>
+<h3 id="设置“订阅”"><a href="#设置“订阅”" class="headerlink" title="设置“订阅”"></a>设置“订阅”</h3><p>在主题配置文件中，找到<code>follow_me</code>下面可以设置RSS和WeChat</p>
+<h3 id="添加自定义菜单"><a href="#添加自定义菜单" class="headerlink" title="添加自定义菜单"></a>添加自定义菜单</h3><p>以新建「相册」菜单为例：在博客目录下的 source 文件夹下新建名为 photo 文件夹，然后在 photo 文件夹下新建一个 <a href="https://link.juejin.im/?target=http://index.md">index.md</a> 文件，然后在该文件填写：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 相册</span><br><span class="line">date: 2018-04-16 22:14:07</span><br><span class="line">type: &quot;photo&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
-<p>Hexo\source 目录中会生成一个 categories 文件夹，文件夹内有一个 index.md 文件，打开此文件，将其中的 type 修改为 categories 即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2021-08-16 10:27:28</span><br><span class="line">type: &quot;categories&quot;           #或者tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+<p>然后打开主题配置文件 <code>_config.yml</code>，在 menu 中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  archives: /archives || archive</span><br><span class="line">  categories: /categories || th</span><br><span class="line">  tags: /tags || tags</span><br><span class="line">  #添加了「相册」菜单</span><br><span class="line">  相册: /photo || camera</span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p><em>解释下：这里的「相册」是博客中显示的菜单名称，紧跟的 photo 要和前面 index.md 文件的 type 值一致，|| 后面的菜单的图标，图标名称来自于 FontAwesome icon，若没有配置图标，默认会使用问号图标。</em></p>
+</blockquote>
+<h3 id="设置文章封面"><a href="#设置文章封面" class="headerlink" title="设置文章封面"></a>设置文章封面</h3><p>如果只是插入本地图片作为文章封面，即在博客首页的时候会显示文章的封面图片，进入这篇文章的详细页面后，将不显示这张图片。</p>
+<p>按如下方式操作：</p>
+<p>1）修改 <code>\themes\next\layout\_macro\post.swing</code> 文件。将如下代码复制：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if post.summary_img  %&#125;</span><br><span class="line">  &lt;div class=&quot;out-img-topic&quot;&gt;</span><br><span class="line">    &lt;img src=&#123;&#123; post.summary_img &#125;&#125; class=&quot;img-topic&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）在新建的文章添加一个字段属性：<code>summary_img</code>。<code>summary_img</code> 的值是图片的路径，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: CSS 各种Hack手段</span><br><span class="line">date: 2017-06-25 03:25:24</span><br><span class="line">categories: 前端</span><br><span class="line">tags: [CSS]</span><br><span class="line">comments: false</span><br><span class="line">summary_img: /images/css-hack-1.png</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>图片存放的文件夹只能新建在 <code>source</code> 目录下。</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>blog</category>
@@ -124,9 +155,9 @@
   <entry>
     <title>个人博客的建立</title>
     <url>/posts/78ed23a3/</url>
-    <content><![CDATA[<h1 id="基于hexo和GitHub的个人博客"><a href="#基于hexo和GitHub的个人博客" class="headerlink" title="基于hexo和GitHub的个人博客"></a>基于hexo和GitHub的个人博客</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h1 id="基于hexo和GitHub的个人博客"><a href="#基于hexo和GitHub的个人博客" class="headerlink" title="基于hexo和GitHub的个人博客"></a>基于hexo和GitHub的个人博客</h1><span id="more"></span>
 
-<span id="more"></span>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 
 <h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><ol>
 <li>准备安装包</li>
@@ -206,7 +237,7 @@
 <li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
 <li>deploy: </li>
 <li>type:  git </li>
-<li>repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>repository: <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
 <li>branch: main</li>
 <li>注意有空格</li>
 <li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
