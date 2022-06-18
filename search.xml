@@ -123,7 +123,15 @@
 
 <h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>修改字段 <code>avatar</code>， 值设置成头像的链接地址。</p>
 <p>地址可以是URI，也可以是主题<code>source/images/</code>目录下</p>
-<h3 id="设置“订阅”"><a href="#设置“订阅”" class="headerlink" title="设置“订阅”"></a>设置“订阅”</h3><p>在主题配置文件中，找到<code>follow_me</code>下面可以设置RSS和WeChat</p>
+<h3 id="设置“订阅”"><a href="#设置“订阅”" class="headerlink" title="设置“订阅”"></a>设置“订阅”</h3><p>在主题配置文件中，找到<code>follow_me</code>下面可以设置RSS</p>
+<p>切换到根目录下，然后运行如下代码，安装<code>hexo-generator-feed</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install --save hexo-generator-feed</span><br></pre></td></tr></table></figure>
+
+<p>在<code>hexo</code>的<code>_config.yml</code>中，在最后添加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">plugins: hexo-generate-feed</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="添加自定义菜单"><a href="#添加自定义菜单" class="headerlink" title="添加自定义菜单"></a>添加自定义菜单</h3><p>以新建「相册」菜单为例：在博客目录下的 source 文件夹下新建名为 photo 文件夹，然后在 photo 文件夹下新建一个 <a href="https://link.juejin.im/?target=http://index.md">index.md</a> 文件，然后在该文件填写：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 相册</span><br><span class="line">date: 2018-04-16 22:14:07</span><br><span class="line">type: &quot;photo&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
@@ -146,7 +154,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>blog</category>
+        <category>JAVA前端及前端</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -237,7 +245,7 @@
 <li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
 <li>deploy: </li>
 <li>type:  git </li>
-<li>repository: <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
 <li>branch: main</li>
 <li>注意有空格</li>
 <li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
@@ -350,7 +358,7 @@
 
 ]]></content>
       <categories>
-        <category>blog</category>
+        <category>JAVA前端及前端</category>
       </categories>
       <tags>
         <tag>hexo</tag>
