@@ -206,6 +206,846 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/f145fed6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/f145fed6/" class="post-title-link" itemprop="url">Oracle</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：11:08:15" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Oracle1"><a href="#Oracle1" class="headerlink" title="Oracle1"></a>Oracle1</h1><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
+<h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
+<li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
+<li>网页客服端端口，会与tomcat的8080端口冲突</li>
+<li>如果安装失败，先停掉侦听服务，再停掉Service服务，然后运行安装包，进行卸载</li>
+</ol>
+<h2 id="用户说明"><a href="#用户说明" class="headerlink" title="用户说明"></a>用户说明</h2><ol>
+<li><p>Sys：超级用户，最高限权，具有sysdba角色，<strong>建立数据库</strong></p>
+<blockquote>
+<p>登录语句：sql&gt; conn sys&#x2F;sys as sysdba;</p>
+</blockquote>
+</li>
+<li><p>System：管理员，具有sysoper角色</p>
+<blockquote>
+<p>登录语句：sql&gt; conn system&#x2F;manager;</p>
+</blockquote>
+</li>
+<li><p>scott：普通用户，默认未解锁</p>
+</li>
+</ol>
+<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建</span><br><span class="line">sql&gt; create user 用户名 identified by 密码;</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">sql&gt; alter user 用户名 identified by 密码;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>注意：oralce对权限管理比较严谨，普通用户之间也是默认不能互相访问的，需要互相授权。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sql&gt; grant create session to 用户名;		授予用户创建session的权限，即登陆权限。</span><br><span class="line">sql&gt; alter user 用户名 quota unlimited on USERS;	授予用户使用表空间的权限。</span><br><span class="line">sql&gt; grant create table to 用户名;			授予创建表的权限。</span><br><span class="line">sql&gt; grant drop any table to 用户名;		授予删除任意表的权限</span><br><span class="line">sql&gt; grant insert any table to 用户名;		授予向任意表中插入行的权限</span><br><span class="line">sql&gt; grant update any table to 用户名;		修改任意表中行的权限</span><br><span class="line"></span><br><span class="line">sql&gt; grant select on emp  to 用户名;		授予用户查看指定表的权限</span><br><span class="line">sql&gt; conn 用户名/密码;</span><br><span class="line">sql&gt; select * from scott.emp;				用户可以查看用户scott中的表emp;</span><br><span class="line">sql&gt; revoke select on emp from 用户名;		收回用户的查询权限</span><br><span class="line">sql&gt; revoke all on emp from 用户名;		收回用户的所有权限</span><br><span class="line"></span><br><span class="line">或者管理员登陆</span><br><span class="line">GRANT SELECT,DELETE,UPDATE,INSERT ON scott.emp TO wangcao ;</span><br><span class="line">GRANT ALL PRIVILEGES ON scott.emp to wangcao;</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>三类：系统权限、角色、对象权限</p>
+<ul>
+<li><p>系统权限：在11g中系统权限有200个,比如create table，UNLIMITED TABLESPACE等</p>
+<blockquote>
+<p>查询当前用户拥有的系统权限：select * from user_sys_privs; </p>
+</blockquote>
+</li>
+<li><p>角色：一类权限的分组，不是很严格的系统可以授予开发用户CONNECT、RESOURCE角色权限</p>
+<blockquote>
+<p>DBA:该角色具有数据库所有的权限。<br>CONNECT:该角色具有连接数据库的权限，和create session的权限一样。<br>RESOURCE:该角色是应用程序开发角色，具有如下权限:</p>
+<p>​					select * from dba_sys_privs where GRANTEE&#x3D;’RESOURCE’; </p>
+</blockquote>
+<blockquote>
+<p>查询当前用户的角色：SELECT * FROM USER_ROLE_PRIVS; </p>
+</blockquote>
+</li>
+<li><p>对象权限：其它拥有用户的对象的权限，包括：<br>SELECT,DELETE,UPDATE,ALTER,INSERT,INDEX,REFERENCES,FLASHBACK,DEBUG,QUERY REWRITE,</p>
+<p>ON COMMIT REFRESH；</p>
+<p>不包括：<strong>drop</strong></p>
+<blockquote>
+<p>查询当前用户拥有的对象权限：SELECT * FROM USER_TAB_PRIVS;</p>
+<p>​														select * from session_privs;</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/53d0684b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/53d0684b/" class="post-title-link" itemprop="url">Linux</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：10:58:32" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Linux-CentOS-基础"><a href="#Linux-CentOS-基础" class="headerlink" title="Linux(CentOS)基础"></a>Linux(CentOS)基础</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>人们规定1970-1-1是UNIX诞生的日期</p>
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="Bridged-桥接"><a href="#Bridged-桥接" class="headerlink" title="Bridged-桥接"></a>Bridged-桥接</h3><p>主机网卡与虚拟机虚拟的网卡利用虚拟网桥进行通信。</p>
+<blockquote>
+<p>类似于把物理主机虚拟为一个交换机， 虚拟机和物理主机一起连接到这个交换机上（网卡是交换模式，即相互访问而互不干扰）</p>
+<p>同一网段</p>
+</blockquote>
+<p>特点： </p>
+<p>1· 容易和局域网中的其他主机ip地址冲突</p>
+<p>2· ip资源紧张不建议使用该模式</p>
+<h3 id="NAT-地址转换"><a href="#NAT-地址转换" class="headerlink" title="NAT- 地址转换"></a>NAT- 地址转换</h3><p>解决上述的ip问题， 但局域网中的其他主机无法访问</p>
+<h3 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h3><p>只与主机相互通讯，虚拟机为独立的系统</p>
+<h3 id="常用网络设置命令"><a href="#常用网络设置命令" class="headerlink" title="常用网络设置命令"></a>常用网络设置命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">reboot #重启主机</span><br><span class="line"></span><br><span class="line">systemctl restart network.service #重启网卡</span><br><span class="line"></span><br><span class="line">ip addr ifconfig #查看IP地址</span><br><span class="line"></span><br><span class="line">ping #检测网络是否通畅</span><br><span class="line"></span><br><span class="line">ctrl+c #结束ping命令</span><br><span class="line"></span><br><span class="line">clear,clear+l #清屏</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>根目录(利用 &#x2F; 表示)：Linux系统的起点（所有的数据都在此目录下)</p>
+<p><strong>文件名颜色的含义</strong>:<br>默认色代表普通文件。例：install.log<br>绿色代表可执行文件。例：rc.news<br>红色代表tar包文件。    例：vim-7.1.tar.bz2<br>蓝色代表目录文件。   例：aa<br>水红代表图象文件。   例：Sunset.jpg<br>青色代表链接文件。   例：rc4.d  （此类文件相当于快捷方式）<br>黄色代表设备文件。   例：fd0</p>
+<h2 id="基础命令操作"><a href="#基础命令操作" class="headerlink" title="基础命令操作"></a>基础命令操作</h2><p><strong>唤出快捷键</strong>：</p>
+<p>虚拟控制台切换(Ctrl+Alt+Fn组合键)<br>ctrl+alt+F1:图形桌面<br>ctrl+alt+F2~F6:字符控制台</p>
+<p><strong>命令行</strong> ：</p>
+<p>提示行：[root@localhost ~]#<br>[当前登录的用户@主机名 当前所在的位置] #</p>
+<ul>
+<li><p>以#结尾：超级管理员root</p>
+</li>
+<li><p>以$结尾：普通用户</p>
+</li>
+</ul>
+<p><strong>切换用户</strong>（CentOS）：<br>su [用户名]<br>su - [用户名]</p>
+<p><strong>基础命令</strong> ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command [-option][parameter1,parameter...]</span><br><span class="line">命令【选项】【参数】</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-option是命令的选项，分为长选项和短选项， - 是短选项, -- 是长选项，例</span><br><span class="line">如： -S,-h,--size,--help</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd [目标·的位置]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">/ 切换到根目录</span><br><span class="line">.. 回到上一级目录</span><br><span class="line">. 当前目录</span><br><span class="line">- 显示并打开到上一次操作的目录</span><br><span class="line">~ 当前用户的宿主目录（eg:# cd ~用户名 进入某个用户的家目录）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls [目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-a(all) 显示所有文件和目录，包括隐藏文件，隐藏文件是文件名</span><br><span class="line">以 &quot;.&quot; 开始的文件</span><br><span class="line">-l (long ) 显示详细信息</span><br><span class="line">-R（recursive） 递归显示当前目录下所有目录</span><br><span class="line">-r (reverse) 逆序排序</span><br><span class="line">-t（time） 按修改时间排序（降序）</span><br><span class="line">ll 相当于 ls –l</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-L 显示链接路径，当前路径，默认使用的是这个</span><br><span class="line">-P 物理路径</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat [filename]</span><br><span class="line">cat &gt;[filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-A 显示所有内容，包括隐藏的字符</span><br><span class="line">-n 显示行号</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">less [filename]</span><br><span class="line">more [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">空格或b:显示下一页，enter键 显示下一行，q或Q退出</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">head [filename]</span><br><span class="line">tail [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-n 指定行数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch </span><br><span class="line">---------------------------------------------------------</span><br><span class="line">touch  a.txt  b.txt  </span><br><span class="line">touch &#123;a.txt，b.txt&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir [directories_name]</span><br><span class="line">rmdir [directories_name]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-p -p 父目录不存在情况下先生成父目录 （parents）</span><br><span class="line">-p 递归删除子目录</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cp</span><br><span class="line">cp 1.txt 2.txt 3.txt /home/wushun/test2/</span><br><span class="line">cp test2 -r test3</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-r -R recursive 递归处理，复制目录</span><br><span class="line">-p 保留文件属性 （原文件的时间不变）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mv</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件test.log重命名为test1.txt</span></span><br><span class="line">mv test.log test1.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将test1.txt文件移到目录test3中</span></span><br><span class="line">mv test1.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件log1.txt,log2.txt,log3.txt移动到目录test3中。</span></span><br><span class="line">mv log1.txt log2.txt log3.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</span></span><br><span class="line">mv -i log1.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，即使file2存在，也是直接覆盖掉</span></span><br><span class="line">mv -f log3.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果目录dir2不存在，将目录dir1改名为dir2；否则，将dir1移动到dir2中。</span></span><br><span class="line">mv dir1 dir2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用</span></span><br><span class="line">rm -rf [filname]</span><br></pre></td></tr></table></figure>
+
+<h2 id="VIM基本操作"><a href="#VIM基本操作" class="headerlink" title="VIM基本操作"></a>VIM基本操作</h2><p><strong>命令模式</strong> ：esc键退出</p>
+<p><strong>输入模式</strong> ： 输入命令i、附加命令a、打开命令o、修改命令c、取代命令r或替换命令s</p>
+<p><strong>编辑模式（末行模式）</strong>： “：”键即可进</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">set</span> <span class="keyword">nu</span> 				设置行号</span><br><span class="line">:<span class="keyword">set</span> nonu 				取消行号</span><br><span class="line">ggG 					到第一行到最后一行</span><br><span class="line">nG 						到第n行</span><br><span class="line">:n 						到第n行</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">:<span class="keyword">w</span> 						保存修改</span><br><span class="line">new_filename			另存为指定文件</span><br><span class="line">:<span class="keyword">w</span> &gt;&gt; <span class="keyword">a</span>.txt 			内容追加到<span class="keyword">a</span>.txt文件中 文件需存在</span><br><span class="line">:<span class="keyword">wq</span> 					保存修改并退出</span><br><span class="line">shift+zz（ZZ） 			快捷键，保存修改并退出</span><br><span class="line">:q! 					不保存修改退出</span><br><span class="line">:wq!					保存修改并退出（文件所有者可忽略文件的只读属性）</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">yy、Y 					复制当前行</span><br><span class="line">nyy、nY 					复制当前行以下n行</span><br><span class="line">dd 						 剪切当前行</span><br><span class="line">ndd 					 剪切当前行以下n行</span><br><span class="line"><span class="keyword">p</span>、<span class="keyword">P</span>     			    粘贴在当前光标所在行下 或行上</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文档归档与解压缩"><a href="#文档归档与解压缩" class="headerlink" title="文档归档与解压缩"></a>文档归档与解压缩</h2><h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gzip[参数][文件或者目录]</span><br><span class="line"></span><br><span class="line">多出&quot;.gz&quot;的扩展名。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 将压缩数据输出到标准输出中，保留源文件</span><br><span class="line">-d 对压缩文件进行解压缩。</span><br><span class="line">-r 递归压缩指定目录下以及子目录下的所有文件。</span><br><span class="line">-v 对于每个压缩和解压缩的文件，显示相应的文件名和压缩比。</span><br><span class="line">-n(n表示数字)</span><br><span class="line">	用于指定压缩等级，-1 压缩等级最低，压缩比最差；-9 压缩比</span><br><span class="line">最高。默认压缩比是 -6。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#不保留原文件的压缩</span><br><span class="line">gzip 1.txt</span><br><span class="line">#保留原文件的压缩</span><br><span class="line">gzip -c 1.txt&gt;1.txt.gz</span><br><span class="line">#不保留源文件的解压</span><br><span class="line">gunzip 1.txt.gz</span><br><span class="line">gzip -d 345.txt.gz</span><br><span class="line">#保留源文件的解压</span><br><span class="line">gunzip -c 1.txt.gz&gt;4.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="bzip"><a href="#bzip" class="headerlink" title="bzip"></a>bzip</h3><p>略</p>
+<h3 id="tar-打包"><a href="#tar-打包" class="headerlink" title="tar-打包"></a>tar-打包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">tar[参数][文件或者目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 建立一个压缩文件的参数指令（create），后缀是.tar</span><br><span class="line">-x 解开一个压缩文件的参数指令（extract）</span><br><span class="line">-z 以gzip命令压缩/解压缩</span><br><span class="line">-j 以bzip2命令压缩/解压缩</span><br><span class="line">-v 压缩的过程中显示文件（verbose）</span><br><span class="line">-f 指定文件名,必选项</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#打包</span><br><span class="line">tar -cf test.tar 1.txt 2.txt 3.txt</span><br><span class="line">#解包，f参数必须放在后面</span><br><span class="line">tar -xzf test.tar</span><br><span class="line">#解压缩并解包</span><br><span class="line">tar -zcvf test.tar.gz *.txt</span><br><span class="line">tar -zxvf test.tar.gz</span><br><span class="line">#解压至指定路径，路径需存在</span><br><span class="line">tar -zxvf test.tar.gz test </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h2><h3 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="(&gt;, &gt;&gt;)"></a>(&gt;, &gt;&gt;)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 覆盖重定向</span><br><span class="line">&gt;&gt; 追加重定向</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title="(  |  )"></a>(  |  )</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12行</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12内容,打印行号</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5 | cat -n</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文本查找与搜索"><a href="#文本查找与搜索" class="headerlink" title="文本查找与搜索"></a>文本查找与搜索</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>过滤文本文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-n 输出行数</span><br><span class="line">-w 精确匹配</span><br><span class="line">-i 忽略大小写</span><br><span class="line">-v 反向选择</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/password 包含‘root’的信息</span></span><br><span class="line">grep root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/services 这个文件是是否包含 <span class="string">&#x27;init&#x27;</span>这个字符串，并输出行号</span></span><br><span class="line">grep init -n /etc/services</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">输出不包含root的行</span></span><br><span class="line">grep  -v root /etc/passwd </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">忽略大小写</span></span><br><span class="line">grep -i man /etc/man_db.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">^word 以字符串word开头</span></span><br><span class="line">grep ^root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">–word$ 以字符串word结尾</span></span><br><span class="line">grep bash$ /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤掉注释</span> </span><br><span class="line">grep -v ^# /etc/inittab</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤文件信息</span> </span><br><span class="line">ll /etc | grep yum</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">里的|是一个管道符，意思就是把我们前面命令的结果当做后面命令的输入</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示配置文件中的有效配置(去除空行与注释行)</span></span><br><span class="line">grep ^# /etc/default/useradd | grep -v ^$</span><br></pre></td></tr></table></figure>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">find [目录][条件1...]</span><br><span class="line"></span><br><span class="line">-type(f,d,l) 按类型 f:文本文件，d:目录，l:快捷方式</span><br><span class="line">-name 按名称</span><br><span class="line">-size(k、M、G) 按文件的大小来查找</span><br><span class="line">-user 按用户名来查找</span><br><span class="line">-mtime 按修改时间,都是过去的时间，单位是天</span><br><span class="line"></span><br><span class="line">#高级操作</span><br><span class="line">– find [范围] [条件] -exec 处理命令 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"> -exec：额外操作的开始，传递参数一次传递一个</span><br><span class="line">– &#123;&#125;：代表find查询的每一个结果</span><br><span class="line">– \; : 额外操作的结束</span><br><span class="line"></span><br><span class="line">#查找student用的所有文件及目录，并拷贝到/opt目录下</span><br><span class="line">find / -user student -exec cp &#123;&#125; /opt \;</span><br><span class="line">#查找boot目录中大于10M的文件，并拷贝到/optm</span><br><span class="line">find /boot/ -size  +10M  -exec  cp  &#123;&#125;   /opt   \;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="RPM"><a href="#RPM" class="headerlink" title="RPM"></a>RPM</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol>
+<li><p>软件包   </p>
+<p>&#x2F;dev&#x2F;sr0   #实际名字</p>
+<p>&#x2F;dev&#x2F;cdrom  #快捷方式</p>
+</li>
+<li><p>mount命令进行挂载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">建立挂载目录/dvd</span><br><span class="line">mount  /dev/cdrom   /dvd</span><br><span class="line">umount /dvd </span><br><span class="line"></span><br><span class="line">专门挂载目录/mnt</span><br><span class="line">mount /dev/cdrom /mnt</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">命令格式：rpm -q[子选项] [软件名称]</span><br><span class="line">命令选项：</span><br><span class="line">-a： 列出已安装的所有软件包</span><br><span class="line">-i： 查看指定软件的详细信息</span><br><span class="line">-l： 查看指定软件的文件安装清单</span><br><span class="line">-p： 用于查询未安装的包</span><br><span class="line">-f： 查询指定的文件是由那个程序包安装生成的</span><br><span class="line"></span><br><span class="line"># 常用</span><br><span class="line">rpm -q vsftpd</span><br><span class="line"></span><br><span class="line"># 已安装</span><br><span class="line">rpm -qa | grep vim</span><br><span class="line">rpm -ql firefox  #显示软件的安装清单</span><br><span class="line">rpm -qi firefox  #显示软件的信息</span><br><span class="line"></span><br><span class="line"># 文件属于哪个软件</span><br><span class="line">rpm -qf /etc/passwd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="常见的软件包"><a href="#常见的软件包" class="headerlink" title="常见的软件包"></a>常见的软件包</h3><p>源码包:</p>
+<p>​	通常以.tar.gz,tar.bz2格式的压缩包提供包含程序的原始代码文件</p>
+<p>deb软件包:</p>
+<p>​	扩展名为.deb，适用于debian系列的linux</p>
+<p>rpm软件包( 区别于Windows的分散安装):</p>
+<p>​	扩展名为.rpm，适用于RedHat系列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">软件名-版本信息.操作系统.硬件架构.rpm</span><br><span class="line">firefox-52.7.0-1.el7.centos.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装和卸载-rpm软件包"><a href="#安装和卸载-rpm软件包" class="headerlink" title="安装和卸载-rpm软件包"></a>安装和卸载-rpm软件包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">格式：rpm -i RPM包文件...</span><br><span class="line">辅助选项：</span><br><span class="line">-v： 显示细节信息</span><br><span class="line">-h： 以#号显示安装进度</span><br><span class="line">--force： 强制安装、覆盖安装</span><br><span class="line">--test： 测试安装，不做真实安装动作</span><br><span class="line"></span><br><span class="line">格式：rpm -e 软件包</span><br><span class="line">常用选项：</span><br><span class="line">--alimatches 卸载匹配所有指定名称的软件包的所有版本</span><br><span class="line">--nodeps 忽略依赖关系</span><br><span class="line">--test 测试卸载，不做真实卸载动作</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><p>解决依赖关系问题</p>
+<p>服务端：</p>
+<p>​	显示光盘的内容，挂载光驱设备</p>
+<p>客户端：</p>
+<p>​	书写客户端配置文件，指定服务器位置 &#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">配置固定格式：</span><br><span class="line">[仓库名称] ：自定义名称，具有唯一性</span><br><span class="line">配置项=值</span><br><span class="line">示例1：</span><br><span class="line">baseurl=file:///file</span><br><span class="line">[iweb028]name=hahaxixi</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0 #不检测红帽签名</span><br><span class="line"></span><br><span class="line">示例2：</span><br><span class="line">[iweb028]name=centos7</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1gpg</span><br><span class="line">check=1</span><br><span class="line">gpgkey=file:///mnt/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">验证是否配置成功</span><br><span class="line">[root@localhost ~]# yum repolist #列出仓库的信息 </span><br></pre></td></tr></table></figure>
+
+<p>流程：</p>
+<pre><code>yum命令--&gt;/etc/yum.repos.d/*.repo--&gt;得到服务器的baseurl=file:///file
+</code></pre>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装 yum install</span><br><span class="line">常用选项：</span><br><span class="line">-y： 自动安装 ，无需确认</span><br><span class="line">yum -y install  gcc</span><br><span class="line"></span><br><span class="line">卸载yum remove</span><br><span class="line">yum remove mariadb-server</span><br><span class="line"></span><br><span class="line">查询 yum list</span><br><span class="line">yum list bash</span><br><span class="line">yum search ftp   #模糊查询包含ftp即可</span><br><span class="line"></span><br><span class="line">清空yum的缓存</span><br><span class="line"> yum clean all </span><br><span class="line"> </span><br><span class="line">在你不知道具体包名时</span><br><span class="line">yum provides 想安装的软件名称 是由那个软件包提供，再安装这软件包即可</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户账户"><a href="#用户账户" class="headerlink" title="用户账户"></a>用户账户</h3><p>唯一标识：UID(编号从0开始，默认最大值60000)，例如：zhangsan（UID1200）</p>
+<ul>
+<li>管理员root的UID:永远为0</li>
+<li>普通用户的UID:默认从1000开始</li>
+</ul>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建： 命令useradd</span><br><span class="line">	– 格式：useradd [选项]... 用户名</span><br><span class="line">	•常用命令选项</span><br><span class="line">	-u： 指定 UID 标记号</span><br><span class="line">	-d： 指定宿主目录（家目录），缺省为 /home/用户名</span><br><span class="line">	-G： 指定所属的附加组,前提要存在</span><br><span class="line">	-s： 指定用户的登录解释器</span><br><span class="line"></span><br><span class="line">useradd -u 1400 iweb028</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">修改： 命令格式：usermod [选项]... 用户名</span><br><span class="line">	常用命令选项：</span><br><span class="line">	-l： 更改用户帐号的登录名称</span><br><span class="line">	-u： 用户id</span><br><span class="line">	-d： 家目录路径</span><br><span class="line">	-s： 登录解释器</span><br><span class="line">	-G： 附加组 //重置附加组</span><br><span class="line">	</span><br><span class="line">usermod -u 1600 abc3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置密码：passwd [选项]... 用户名</span><br><span class="line">	</span><br><span class="line">passwd abc3</span><br><span class="line">echo 123  |  passwd --stdin abc3 #非交互式设置密码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除： 格式：userdel [-r] 用户名</span><br><span class="line">添加 -r 选项，宿主目录/用户邮件也一并删除</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询id： id 用户名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="组账户"><a href="#组账户" class="headerlink" title="组账户"></a>组账户</h3><p>统一管理用户账户</p>
+<ul>
+<li>唯一标识：GID（编号从0开始，默认最大值60000），例如：sg(1500)</li>
+<li>原则：linux一个用户必须至少属于一个组</li>
+</ul>
+<p>分类： </p>
+<ul>
+<li>基本组：由系统创建，与用户同名的组</li>
+<li>附加组(从属组)：由管理员创建，由管理员管理组的成员</li>
+</ul>
+<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">新建：groupadd iweb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">管理：gpasswd [选项]... 组名</span><br><span class="line">-a： 添加组成员，每次只能加一个,追加组成员</span><br><span class="line">-d： 删除组成员，每次只能删一个</span><br><span class="line">-M： 定义组成员用户列表，可设置多个，会覆盖掉原有的组成员</span><br><span class="line">-A： 定义组管理员列表</span><br><span class="line"></span><br><span class="line">#将nb用户添加到stugrp</span><br><span class="line">gpasswd -a nb stugrp</span><br><span class="line">#批量添加组成员，会覆盖原来的成员</span><br><span class="line">gpasswd -M ‘jack,kenji’ stugrp  #定义组成员列表</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">删除： groupdel stugrp</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本地账户的数据文件"><a href="#本地账户的数据文件" class="headerlink" title="本地账户的数据文件"></a>本地账户的数据文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd #存放用户基本信息配置文件</span><br><span class="line">/etc/shadow #用户的密码信息</span><br><span class="line">/etc/group #存放用户组信息配置文件</span><br><span class="line">/etc/gshadow #组管理信息，组密码信息</span><br></pre></td></tr></table></figure>
+
+<p>其中：基本信息配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# head -1 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">用户名:密码占位符：uid：基本组gid:用户描述信息：家目录：解释器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@192 bak]# grep abc3 /etc/shadow</span><br><span class="line">abc3:$6$BP6SlU52$NsojEjJUfkaBGkv9Cvr1mEAfW8ASrKWYaIlvwDPwRMl0PC</span><br><span class="line">ecvcLYoZVo0HoipFW2vlNxV2GiV1kUow3fdJ5QD1:18891:0:99999:7:::</span><br><span class="line">#18891 上一次修改密码的时间：自1970-1-1到达上一次修改密码的时间，所经历的天数</span><br><span class="line"></span><br><span class="line">字段1：用户帐号的名称</span><br><span class="line">字段2：加密后的密码字符串</span><br><span class="line">字段3：上次修改密码的时间</span><br><span class="line">字段4：密码的最短有效天数，默认0</span><br><span class="line">字段5：密码的最长有效天数，默认99999</span><br><span class="line">字段6：密码过期前的警告天数，默认7</span><br><span class="line">字段7：密码过期后多少天禁用此用户账号</span><br><span class="line">字段8：帐号失效时间，默认值为空</span><br><span class="line">字段9：保留字段（未使用）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/group</span><br><span class="line">stugrp:x:1504:nsd06</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/gshadow</span><br><span class="line">stugrp:!:root:</span><br><span class="line">组名:密码加密字符串:组的管理员列表:组成员列表</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/75948c12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/75948c12/" class="post-title-link" itemprop="url">Oracle2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：11:09:31" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>结构化查询语言，<code>SQL92</code>标准</p>
+<p>不同数据库厂商又在标准的基础上进行了<strong>个性的扩充</strong></p>
+<p>如：Oracle中字符串使用<code>varchar2</code>，而<code>mysql</code>中使用<code>varchar</code></p>
+<p>​		Oracle习惯全大写：USER_NAME，<code>mysql</code>习惯全小写：user_name</p>
+<p>​		Oracle区分字符串大小写，<code>Mysql</code>不区分字符串大小写</p>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li><p>DQL-数据查询语言</p>
+<blockquote>
+<p>SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY</p>
+</blockquote>
+</li>
+<li><p>DML-数据操纵语言</p>
+<blockquote>
+<p>INSERT, UPDATE, DELETE</p>
+</blockquote>
+</li>
+<li><p>DDL-数据定义语言</p>
+<blockquote>
+<p>CREATE, ALTER, DROP</p>
+</blockquote>
+</li>
+<li><p>DCL-数据控制语言</p>
+<blockquote>
+<p>GRANT, REVOKE</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><p>二维表：记录和字段构成</p>
+<p>命名规则：多个单词用下划线隔开</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><table>
+<thead>
+<tr>
+<th align="left">数据类型(字符)</th>
+<th align="left">参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">char(n)</td>
+<td align="left">n&#x3D;1 to 2000 字节</td>
+<td>定长字符串，默认值为1个字节长(一个汉字2个字节长)，不足用空格填充</td>
+</tr>
+<tr>
+<td align="left">varchar2(n)</td>
+<td align="left">n&#x3D;1 to 4000 字节</td>
+<td>可变长的字符串，指明最大长度n。数据前后有空格，Oracle 8i会自动将其删去。索引的最大长度3209</td>
+</tr>
+</tbody></table>
+<p><strong>注</strong>：不同数据库版本长度限制可能会有不同</p>
+<table>
+<thead>
+<tr>
+<th>数据类型(数字)</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>number(m, n)</td>
+<td>m&#x3D;1 to 38<br>n&#x3D;-84 to 127</td>
+<td>可变长的数值列,m是所有<strong>有效数字</strong>的位数，n是<strong>小数点</strong>以后的位数<br>（m-n）位长度</td>
+</tr>
+</tbody></table>
+<p>如：number(5,2)，则这个字段的最大值是99,999，如果数值超出了位数限制就会被截取多余的位数。</p>
+<p><strong>注</strong>：</p>
+<ul>
+<li>四舍五入</li>
+<li>没有指定m的话，oracle默认使用38作为精度</li>
+<li>n默认设置为0， n小于0则把该数字取舍到小数点左边的指定位数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>数据类型(日期)</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Date</td>
+<td>无</td>
+<td>一个7字节的定宽日期&#x2F;时间数据类型。其中总包含7个属性，包括：<br>世纪、世纪中哪一年、月份、月中的哪一天、小时、分钟和秒</td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td>无</td>
+<td>一个7 字节或12字节的定宽日期&#x2F;时间数据类型。包含小数秒(fractional second)；<br>小数点右边最多可以保留9位</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>数据类型(二进制和大文本)</th>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Blob</td>
+<td>无</td>
+<td>在Oracle 10g及以后的版本中允许存储最多(4GB)×(数据库块大小)字节的数据。<br>存储电子表格、字处理文档、图像文件</td>
+</tr>
+<tr>
+<td>Clob</td>
+<td>无</td>
+<td>在Oracle 10g及以后的版本中允许存储最多(4GB)×(数据库块大小)字节的数据。<br>存储纯文本信息</td>
+</tr>
+</tbody></table>
+<h2 id="——-分割线——"><a href="#——-分割线——" class="headerlink" title="——-分割线——"></a>——-分割线——</h2><h2 id="表操作"><a href="#表操作" class="headerlink" title="表操作"></a>表操作</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> student(</span><br><span class="line">	id number(<span class="number">4</span>), 		<span class="comment">--学号</span></span><br><span class="line">	name VARCHAR2(<span class="number">20</span>), 	<span class="comment">--姓名</span></span><br><span class="line">	sex <span class="type">CHAR</span>(<span class="number">2</span>), 		<span class="comment">--性别</span></span><br><span class="line">	birthday <span class="type">DATE</span>,		<span class="comment">--出生日期</span></span><br><span class="line">	salary number(<span class="number">7</span>,<span class="number">2</span>), <span class="comment">--奖学金</span></span><br><span class="line">	<span class="keyword">PRIMARY</span> KEY(id) 	<span class="comment">--主键，记录唯一标识</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">DESC</span> student;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#########字段###############</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">ADD</span>(classId number); </span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student MODIFY classId number(<span class="number">10</span>);		<span class="comment">--字段长度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student <span class="keyword">DROP</span> <span class="keyword">COLUMN</span> classid; </span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student RENAME <span class="keyword">TO</span> tb_student;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tb_student RENAME <span class="keyword">TO</span> student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> student RENAME <span class="keyword">COLUMN</span> classid <span class="keyword">TO</span> temp;  <span class="comment">--字段名</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#删除表</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> student;			<span class="comment">--数据将永久性丢失</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">TRUNCATE</span> <span class="keyword">TABLE</span> student; 	<span class="comment">--一次性删掉所有数据，不删除表结构</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> student; 		<span class="comment">--一条一条的删除数据，后面可以添加where条件，不删除表结构。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--如果目标表不存在</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 新表名 <span class="keyword">as</span> <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 旧表名;</span><br><span class="line"><span class="comment">--如果目标表已存在,表结构需相同 </span></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> 新表名  <span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> 旧表名;</span><br><span class="line"><span class="comment">--复制其中的几个数据 </span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> 新表名 <span class="keyword">as</span> <span class="keyword">select</span> 字段<span class="number">1</span>，字段<span class="number">2.</span>. <span class="keyword">from</span> 旧表名</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student <span class="keyword">VALUES</span>(<span class="number">2</span>,<span class="string">&#x27;小明&#x27;</span>,<span class="string">&#x27;男&#x27;</span>, to_date(<span class="string">&#x27;1988-10-11&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd&#x27;</span>),<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> student (id,NAME,sex,salary,birthday) <span class="keyword">VALUES</span>(<span class="number">2</span>,<span class="string">&#x27;陈晨&#x27;</span>,<span class="string">&#x27;女&#x27;</span>,<span class="number">30000</span>,to_date(<span class="string">&#x27;2020-02-02&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd&#x27;</span>));		<span class="comment">--没有值的字段默认值null</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> sex<span class="operator">=</span><span class="string">&#x27;女&#x27;</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>; 					<span class="comment">--没有where条件将全表更新</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> NAME<span class="operator">=</span><span class="string">&#x27;陈妍&#x27;</span>,birthday<span class="operator">=</span>to_date(<span class="string">&#x27;2020-02-05&#x27;</span>,<span class="string">&#x27;yyyy-mm-dd&#x27;</span>) <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">UPDATE</span> student <span class="keyword">SET</span> NAME<span class="operator">=</span><span class="keyword">NULL</span> <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">3</span>; </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">3</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> student;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student; </span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> student <span class="keyword">WHERE</span> id<span class="operator">=</span><span class="number">1</span>; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="——-分割线——-1"><a href="#——-分割线——-1" class="headerlink" title="——-分割线——"></a>——-分割线——</h2><h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><p><strong>where</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> <span class="number">1</span><span class="operator">=</span><span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> <span class="number">1</span><span class="operator">=</span><span class="number">0</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> empno<span class="operator">=</span><span class="number">7369</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename<span class="operator">=</span><span class="string">&#x27;KING&#x27;</span> <span class="keyword">AND</span> deptno<span class="operator">=</span><span class="number">10</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename<span class="operator">=</span><span class="string">&#x27;JONES&#x27;</span> <span class="keyword">AND</span> deptno<span class="operator">=</span><span class="number">20</span>;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> dept <span class="keyword">WHERE</span> dname<span class="operator">=</span><span class="string">&#x27;ACCOUNTING&#x27;</span> <span class="keyword">OR</span> loc<span class="operator">=</span><span class="string">&#x27;DALLAS&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>like</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--通配符%代表0到n个字符，通配符下划线_代表1个字符</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename <span class="keyword">LIKE</span> <span class="string">&#x27;S%&#x27;</span>; 	<span class="comment">--S字母开头，效率高</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename <span class="keyword">LIKE</span> <span class="string">&#x27;%N%&#x27;</span>;	<span class="comment">--中间含有N，惯用</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename <span class="keyword">LIKE</span> <span class="string">&#x27;T___&#x27;</span>;	<span class="comment">--3个下划线</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> ename <span class="keyword">LIKE</span> <span class="string">&#x27;__N%&#x27;</span>;	<span class="comment">--2个下划线</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>null</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> mgr <span class="keyword">IS</span> <span class="keyword">NULL</span>; #字段内容为<span class="keyword">null</span>的</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> mgr <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>; #字段内容不为<span class="keyword">null</span>的</span><br></pre></td></tr></table></figure>
+
+<p><strong>between</strong>：闭区间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">WHERE</span> sal <span class="keyword">BETWEEN</span> <span class="number">5000</span> <span class="keyword">AND</span> <span class="number">10000</span>; </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="特殊查询"><a href="#特殊查询" class="headerlink" title="特殊查询"></a>特殊查询</h2><p><strong>nvl</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> nvl(mgr,empno),nvl(comm,<span class="number">0</span>) <span class="keyword">FROM</span> emp		<span class="comment">--字段值为null时替换</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>nvl2</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> nvl2(comm,sal<span class="operator">+</span>comm,sal) <span class="keyword">FROM</span> emp			<span class="comment">--字段值为null时，替换为表达式2的值，不为null时，替换为表达式1的值</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>distinct</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> job <span class="keyword">FROM</span> emp;					<span class="comment">--使用distinct关键字，去除重复的记录行</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>order by</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">ORDER</span> <span class="keyword">BY</span> sal #默认正序</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">ORDER</span> <span class="keyword">BY</span> sal <span class="keyword">ASC</span> #声明为正序</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> emp <span class="keyword">ORDER</span> <span class="keyword">BY</span> sal <span class="keyword">desc</span> #声明为倒序</span><br></pre></td></tr></table></figure>
+
+<p><strong>别名as</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ename,empno,sal<span class="operator">+</span>nvl(comm,<span class="number">0</span>) <span class="keyword">as</span> 总收入 <span class="keyword">FROM</span> emp </span><br></pre></td></tr></table></figure>
+
+<p><strong>in &amp; not in</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> dname <span class="keyword">from</span> dept <span class="keyword">WHERE</span> deptno <span class="keyword">in</span> (<span class="number">10</span>,<span class="number">20</span>)</span><br><span class="line">等价于</span><br><span class="line"><span class="keyword">SELECT</span> dname <span class="keyword">from</span> dept <span class="keyword">WHERE</span> deptno<span class="operator">=</span><span class="number">10</span> <span class="keyword">or</span> deptno<span class="operator">=</span><span class="number">20</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><p>​		多输入单输出</p>
+<p>​		忽略null值</p>
+<p><strong>count</strong>：记录总数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp <span class="keyword">where</span> ename <span class="keyword">like</span> <span class="string">&#x27;t%&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(empno) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>max</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(sal) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">max</span>(empno),<span class="built_in">max</span>(sal),<span class="built_in">max</span>(comm) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>min</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(sal) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(sal),<span class="built_in">max</span>(sal) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+<p><strong>avg</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(sal) <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(sal),<span class="built_in">min</span>(sal),<span class="built_in">max</span>(sal) <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
+
+<p><strong>sum</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(sal) <span class="keyword">from</span> emp;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">sum</span>(sal),<span class="built_in">sum</span>(comm) <span class="keyword">from</span> emp; 			<span class="comment">--统计字段为null时，不参与计算</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="分组查询"><a href="#分组查询" class="headerlink" title="分组查询"></a>分组查询</h2><p><strong>group by</strong>：用于对查询的结果进行分组统计</p>
+<p><strong>注</strong>：没有被分组函数包含的列必须出现在group by的后面</p>
+<p><strong>having</strong>：限制group by查询结果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno,job <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">where</span> deptno<span class="operator">=</span><span class="number">30</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> deptno,job</span><br><span class="line"><span class="keyword">having</span> <span class="built_in">count</span>(<span class="operator">*</span>)<span class="operator">&gt;=</span><span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="关联查询（连接查询）"><a href="#关联查询（连接查询）" class="headerlink" title="关联查询（连接查询）"></a>关联查询（连接查询）</h2><p>定义：查询两个或两个以上数据表或视图的查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table1.column,table1.column <span class="keyword">from</span> table1,table2</span><br><span class="line"><span class="keyword">where</span> table1.column1<span class="operator">=</span>table2.column2;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>笛卡尔积</strong>：做关联操作的每个表的每一行都和其他表的每一行做组合。通常没有意义</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> emp;#<span class="number">14</span>条记录</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> dept;#<span class="number">4</span>条记录</span><br><span class="line"><span class="keyword">select</span> emp.ename,dept.dname <span class="keyword">from</span> emp,dept; #<span class="number">56</span>条记录</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>内连接查询</strong>：把满足条件的数据查询出来</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table1.column,table1.column </span><br><span class="line"><span class="keyword">from</span> table1 <span class="keyword">inner</span> <span class="keyword">join</span> table2</span><br><span class="line"><span class="keyword">on</span> table1.column1<span class="operator">=</span>table2.couumn2 </span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--使用别名来区分不同的表</span></span><br><span class="line"><span class="keyword">select</span> e.<span class="operator">*</span>,d.<span class="operator">*</span> <span class="keyword">from</span> emp e</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> dept d</span><br><span class="line"><span class="keyword">on</span> e.deptno <span class="operator">=</span> d.deptno</span><br></pre></td></tr></table></figure>
+
+<p>注：内连接分为等值连接查询和非等值连接查询。连接查询的条件应该为n-1个，这样才能有效的避免笛卡尔积</p>
+<p><strong>外连接查询</strong>：把满足和不满足的条件数据查出来。有三类</p>
+<ul>
+<li><p>左外连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> emp.<span class="operator">*</span>,dept.dname <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">join</span> dept</span><br><span class="line"><span class="keyword">on</span> emp.deptno <span class="operator">=</span> d.deptno</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>右外连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> emp.<span class="operator">*</span>,dname <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">right</span> <span class="keyword">join</span> dept</span><br><span class="line"><span class="keyword">on</span> emp.deptno <span class="operator">=</span> d.deptno</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>满外连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> emp.<span class="operator">*</span>,dname <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">full</span> <span class="keyword">join</span> dept</span><br><span class="line"><span class="keyword">on</span> emp.deptno <span class="operator">=</span> d.deptno</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>自连接查询</strong>：数据的来源是一张表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> e.ename,m.ename,e.sal,m.sal <span class="keyword">from</span> emp e,emp m</span><br><span class="line"><span class="keyword">where</span> e.mgr <span class="operator">=</span> m.empno</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>定义：一个查询是另一个查询的条件</p>
+<p>范围：子查询可以出现在where子句，having子句，from子句中，select子句中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> sal <span class="operator">&gt;</span> (<span class="keyword">select</span> sal <span class="keyword">from</span> emp <span class="keyword">where</span> ename<span class="operator">=</span> <span class="string">&#x27;scott&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> deptno,<span class="built_in">min</span>(sal) <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> deptno</span><br><span class="line"><span class="keyword">having</span> <span class="built_in">min</span>(sal)<span class="operator">&gt;</span>(<span class="keyword">select</span> <span class="built_in">min</span>(sal) <span class="keyword">from</span> emp <span class="keyword">where</span> deptno<span class="operator">=</span><span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> e.<span class="operator">*</span> <span class="keyword">from</span> emp e,(<span class="keyword">select</span> deptno,<span class="built_in">avg</span>(sal) avg_sal <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno) x</span><br><span class="line"><span class="keyword">where</span> e.deptno <span class="operator">=</span> x.deptno</span><br><span class="line"><span class="keyword">and</span> e.sal<span class="operator">&gt;</span>x.avg_sal</span><br><span class="line"></span><br><span class="line"><span class="comment">--关联子查询</span></span><br><span class="line"><span class="keyword">select</span> e.ename,e.sal,(<span class="keyword">select</span> d.dname <span class="keyword">from</span> dept d <span class="keyword">where</span></span><br><span class="line">e.deptno<span class="operator">=</span>d.deptno) dname <span class="keyword">from</span> emp e;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p>oracle的分页查询需要用到<code>rownum</code></p>
+<p><code>rownum</code>被称作<strong>伪列</strong>：用于返回表示行数据顺序的数字</p>
+<p><code>rownum</code>的特性：查询一行添加一个行号，从1开始顺序添加。只能从1计数，不能从结果集中直接取。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> rownum,empno,ename,sal <span class="keyword">from</span> emp; </span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> rownum,empno,ename,sal <span class="keyword">from</span> emp <span class="keyword">where</span> rownum<span class="operator">&gt;</span><span class="number">3</span>;	<span class="comment">--查询是没有结果的</span></span><br><span class="line"><span class="keyword">select</span> emp.<span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> rownum <span class="operator">&lt;=</span> <span class="number">3</span>;				<span class="comment">--返回前三条数据</span></span><br><span class="line"><span class="keyword">select</span> emp.<span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> rownum <span class="operator">=</span> <span class="number">1</span>; 				<span class="comment">--返回第一条数据</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--要把rownum作为一个可以用的结果集，那么需要通过一个行内视图来实现</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> rownum rn,e.<span class="operator">*</span> <span class="keyword">from</span> emp e) </span><br></pre></td></tr></table></figure>
+
+<p><code>rownum</code>实现分页的效果</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> rownum rn,emp.<span class="operator">*</span> <span class="keyword">from</span> emp)</span><br><span class="line"><span class="keyword">where</span> rn <span class="keyword">between</span> <span class="number">1</span> <span class="keyword">and</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">  (<span class="keyword">select</span> rownum rn,e.<span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">    (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span>) e)</span><br><span class="line"><span class="keyword">where</span> rn<span class="operator">&gt;=</span><span class="number">3</span> <span class="keyword">and</span> rn<span class="operator">&lt;=</span><span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">(<span class="keyword">select</span> rownum rn, e.<span class="operator">*</span> <span class="keyword">from</span></span><br><span class="line">  (<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span>) e</span><br><span class="line"> <span class="keyword">where</span> rownum<span class="operator">&lt;=</span><span class="number">10</span>)</span><br><span class="line"><span class="keyword">where</span> rn<span class="operator">&gt;=</span><span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>rowid</code>用于定位数据库中一条记录的一个相对唯一地址值</p>
+<p><code>rowid</code>是一个伪列，它并不存在于表中</p>
+<p>应用：数据去重</p>
+<p>步骤：1.按照重复的内容进行分组<br>            2.取出每一组中的一条记录并保留(注意具有唯一性)<br>            3.删除未在保留范围的数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#按照重复的内容分组</span><br><span class="line"><span class="keyword">select</span> deptno,dname,loc <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno,dname</span><br><span class="line"></span><br><span class="line">#通过rowid的唯一性质找到分组后每组中唯一的数据</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">min</span>(rowid) <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno</span><br><span class="line"></span><br><span class="line">#选取要删除的数据</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">where</span> rowid <span class="keyword">not</span> <span class="keyword">in</span></span><br><span class="line">(<span class="keyword">select</span> <span class="built_in">min</span>(rowid) <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno)</span><br><span class="line"></span><br><span class="line">#删除重复的数据</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">where</span> rowid <span class="keyword">not</span> <span class="keyword">in</span></span><br><span class="line">(<span class="keyword">select</span> <span class="built_in">min</span>(rowid) <span class="keyword">from</span> <span class="keyword">copy</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="——-分割线——-2"><a href="#——-分割线——-2" class="headerlink" title="——-分割线——"></a>——-分割线——</h2><h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><p>**concat(arg1, arg2)**：返回<code>arg1</code>与<code>arg2</code>的拼接结果</p>
+<p><strong>||</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> concat(<span class="string">&#x27;ABC&#x27;</span>,<span class="string">&#x27;DEF&#x27;</span>) <span class="keyword">from</span> dual; </span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="string">&#x27;ABC&#x27;</span><span class="operator">||</span><span class="string">&#x27;DEF&#x27;</span> <span class="keyword">from</span> dual; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>**upper(arg1)  lower(arg1)**：返回<code>arg1</code>的大小写形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">lower</span>(<span class="string">&#x27;ABC&#x27;</span>) <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">upper</span>(<span class="string">&#x27;abc&#x27;</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**substr(arg1, pos, len)**：从<code>arg1</code>中指定的位置<code>pos</code>开始向右侧截取指定长度<code>len</code>的子字符串.</p>
+<p>​							<code>pos</code>为正则从字符串<code>arg1</code>左侧开始计数,如果为负则从字符串右侧开始计数.</p>
+<p>​							未指定<code>len</code>,则返回至该字符串从位置<code>pos</code>开始到串尾的子串</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--从右侧第三位开始向后截取1个字符</span></span><br><span class="line"><span class="keyword">select</span> substr(<span class="string">&#x27;abcdefgh&#x27;</span>,<span class="number">-3</span>,<span class="number">1</span>) <span class="keyword">from</span> dual;</span><br><span class="line"><span class="comment">--从左侧第二位开始，截取到末尾</span></span><br><span class="line"><span class="keyword">select</span> substr(<span class="string">&#x27;abcdefgh&#x27;</span>,<span class="number">2</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**length(arg1)**：求<code>arg1</code>的长度,<code>arg1</code>可以是<code>char,varchar2,clob或nclob</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> length(<span class="string">&#x27;abcdefg&#x27;</span>) <span class="keyword">from</span> dual; </span><br></pre></td></tr></table></figure>
+
+
+
+<p><em><em>replace(arg1,search,replace)<strong>：replace替换出现的</strong></em>所有</em>**search</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> replace(<span class="string">&#x27;abcdabce&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="string">&#x27;x&#x27;</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**instr(arg1,to_find,pos,occurrence)**：在<code>arg1</code>中查找<code>to_find</code>子字符串,并返回一个整数表示它出现的位置.</p>
+<p>​												参数<code>pos</code>指定在参数<code>arg1</code>中开始搜索的位置.</p>
+<p>​							（非必要）如果<code>pos</code>为正，左边位置开始.如果<code>pos</code>为负,右边位置开始.并且反向搜索.</p>
+<p>​							（非必要）参数<code>occurrence</code>指定搜索第几次出现的了字符串</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--从左侧第一个字符开始搜索，第一次出现abc的位置</span></span><br><span class="line"><span class="keyword">select</span> instr(<span class="string">&#x27;habchabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>) <span class="keyword">from</span> dual;		<span class="comment">--结果是2</span></span><br><span class="line"><span class="comment">--从左侧第一个字符开始搜索，第一次出现abc的位置</span></span><br><span class="line"><span class="keyword">select</span> instr(<span class="string">&#x27;habchabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">1</span>) <span class="keyword">from</span> dual; 	<span class="comment">--结果是2</span></span><br><span class="line"><span class="comment">--从左侧第一个字符开始搜索，第二次出现abc的位置</span></span><br><span class="line"><span class="keyword">select</span> instr(<span class="string">&#x27;habchabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">1</span>,<span class="number">2</span>) <span class="keyword">from</span> dual; 	<span class="comment">--结果是6</span></span><br><span class="line"><span class="comment">--从右侧第一个字符开始搜索，第二次出现abc的位置</span></span><br><span class="line"><span class="keyword">select</span> instr(<span class="string">&#x27;habchabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">-1</span>,<span class="number">2</span>) <span class="keyword">from</span> dual; 	<span class="comment">--结果是6</span></span><br><span class="line"><span class="keyword">select</span> instr(<span class="string">&#x27;habchabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>,<span class="number">-1</span>,<span class="number">2</span>) <span class="keyword">from</span> dual; 	<span class="comment">--结果是6</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**<code>trim([leading][trailing][both] char FROM source)</code> **：Trim返回<code>varchar2 </code>类型的字符串</p>
+<p>​			其中前导的、尾随的字符char被从source中剪裁。</p>
+<p>​			如果指定leading 则与char匹配的前导字符被剪裁。</p>
+<p>​			如果指定trailing,则与char匹配的尾随字符被剪裁。</p>
+<p>​			指定both,则字符串的首尾都被剪裁。如果没有给出char则默认为空白。</p>
+<p>​			只指定source参数，则将从source参数中删除尾随和前导的空白</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span>(<span class="string">&#x27; abc &#x27;</span>) <span class="keyword">from</span> dual;							<span class="comment">--去除字符串两端的空白</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span>(<span class="string">&#x27;a&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;aaaAAAaaa&#x27;</span>) <span class="keyword">from</span> dual;			<span class="comment">--结果是AAA</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span>(<span class="keyword">leading</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;aaaAAAaaa&#x27;</span>) <span class="keyword">from</span> dual;	<span class="comment">--结果是AAAaaa</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span>(<span class="keyword">both</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;aaaAAAaaa&#x27;</span>) <span class="keyword">from</span> dual;		<span class="comment">--默认操作方式AAA</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">trim</span>(<span class="keyword">trailing</span> <span class="string">&#x27;a&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;aaaAAAaaa&#x27;</span>) <span class="keyword">from</span> dual;	<span class="comment">--结果是aaaAAA</span></span><br><span class="line"><span class="keyword">select</span> ltrim(<span class="string">&#x27;  abc  &#x27;</span>) <span class="keyword">from</span> dual;						<span class="comment">--去除左边的空白</span></span><br><span class="line"><span class="keyword">select</span> ltrim(<span class="string">&#x27;aabbcc&#x27;</span>,<span class="string">&#x27;aa&#x27;</span>) <span class="keyword">from</span> dual;					<span class="comment">--结果为cc</span></span><br><span class="line"><span class="keyword">select</span> rtrim(<span class="string">&#x27; abc &#x27;</span>) <span class="keyword">from</span> dual;						<span class="comment">--去除右边的空白</span></span><br><span class="line"><span class="keyword">select</span> rtrim(<span class="string">&#x27;abcabc&#x27;</span>,<span class="string">&#x27;abc&#x27;</span>) <span class="keyword">from</span> dual;					<span class="comment">--结果为null</span></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>数值</p>
+<p><strong>abs()</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">abs</span>(<span class="number">-21.45</span>) <span class="keyword">from</span> dual; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>**round(原数值[, 小数位数])**：四舍五入</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> round(<span class="number">3.14</span>) <span class="keyword">from</span> dual;		<span class="comment">--结果为3,</span></span><br><span class="line"><span class="keyword">select</span> round(<span class="number">3.15</span>,<span class="number">1</span>) <span class="keyword">from</span> dual;		<span class="comment">--结果为3.2,小数点位数为正，表示精确到小数点之后的位数</span></span><br><span class="line"><span class="keyword">select</span> round(<span class="number">23.54</span>,<span class="number">-1</span>) <span class="keyword">from</span> dual;	<span class="comment">--结果为20，小数点位数为负，表示精确到小数点之前的位数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**ceil()**：向上取整</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">ceil</span>(<span class="number">3.14</span>) <span class="keyword">from</span> dual;		<span class="comment">--结果为4</span></span><br><span class="line"><span class="keyword">select</span> <span class="built_in">ceil</span>(<span class="number">-3.14</span>) <span class="keyword">from</span> dual;		<span class="comment">--结果为 -3</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**floor()**：向下取整</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">floor</span>(<span class="number">23.45</span>) <span class="keyword">result</span> <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> <span class="built_in">floor</span>(<span class="number">-23.45</span>) <span class="keyword">result</span> <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**trunc()**：截取部分数字，直接舍去</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> trunc(<span class="number">3.99</span>) <span class="keyword">from</span> dual;		<span class="comment">--3</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="number">3.99</span>,<span class="number">1</span>) <span class="keyword">from</span> dual;		<span class="comment">--3.9</span></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="number">19.99</span>,<span class="number">-1</span>) <span class="keyword">from</span> dual;	<span class="comment">--19</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**to_char()**：将数值进行格式化，并返回格式化后的字符串</p>
+<p>​		（1）逗号（，）：分组符号。常见的千位分隔符；<br>​		（2）<code>FM：</code> <code>Format Mask</code>屏蔽所有不必要的空格和0；<br>​		（3）$：美元符号<br>​		（4）C：与系统环境相关的国际货币符号。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--0，代表一个数字位。当原数值没有数字位与之匹配时，强制添加0.</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">12.78</span>,<span class="string">&#x27;000.000&#x27;</span>) <span class="keyword">from</span> dual;#<span class="number">012.78</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--9，代表一个数字位。当元数值中的整数部分没有数字位与之匹配时，不填充任何字符。</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">12.78</span>,<span class="string">&#x27;999.999&#x27;</span>) <span class="keyword">from</span> dual;#<span class="number">12.780</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--逗号(，)【一定要是英文半角逗号】，分组符号。常见的应用为千位分隔符。</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">4560000</span>, <span class="string">&#x27;99,999,999.00&#x27;</span>) <span class="keyword">result</span> <span class="keyword">from</span> dual;#<span class="number">4</span>,<span class="number">560</span>,<span class="number">000.00</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--为了标识货币，通常在数值之前添加“$”</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">4560000</span>, <span class="string">&#x27;$99,999,999.00&#x27;</span>) <span class="keyword">result</span> <span class="keyword">from</span> dual;#<span class="number">4</span>,<span class="number">560</span>,<span class="number">000.00</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--屏蔽不必要的空格和0</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">12.78</span>,<span class="string">&#x27;999.999&#x27;</span>) <span class="keyword">result</span>,</span><br><span class="line">to_char(<span class="number">12.78</span>,<span class="string">&#x27;FM999.999&#x27;</span>) fm_result <span class="keyword">from</span> dual;#<span class="number">12.780</span>,<span class="number">12.78</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--“C”字符返回与数据库环境相关的货币种类符号。</span></span><br><span class="line"><span class="keyword">select</span> to_char(<span class="number">12.78</span>,<span class="string">&#x27;FM999.999C&#x27;</span>) <span class="keyword">result</span> <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>日期</p>
+<p><strong>sysdate</strong>：返回当前日期</p>
+<p><strong>systimestamp</strong>：包含时分秒</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> sysdate <span class="keyword">from</span> dual; </span><br><span class="line"><span class="keyword">select</span> systimestamp <span class="keyword">from</span> dual; </span><br></pre></td></tr></table></figure>
+
+
+
+<p>**add_months(d1,n1)**：返回在日期<code>d1</code>上再加<code>n1</code>过后的新日期</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> add_months(sysdate,<span class="number">12</span>) <span class="keyword">from</span> dual;#获取<span class="number">1</span>年后的今天 </span><br></pre></td></tr></table></figure>
+
+
+
+<p>**last_day(d1)**：返回d1日期所在的月份的最后一天</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> last_day(sysdate) <span class="keyword">from</span> dual</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**months_between(d1,d2)**：返回日期d1到日期d2之间的月数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> months_between(sysdate,add_months(sysdate,<span class="number">-12</span>)) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+<p>**round(d,[fmt])**：返回一个以<code>fmt</code>为格式的四舍五入日期值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> round(sysdate,<span class="string">&#x27;yyyy&#x27;</span>) <span class="keyword">from</span> dual;		<span class="comment">--01-1月 -22，明年的1月1日</span></span><br><span class="line"><span class="keyword">select</span> round(sysdate,<span class="string">&#x27;day&#x27;</span>) <span class="keyword">from</span> dual;		<span class="comment">--26-9月 -21 最近的星期日</span></span><br><span class="line"><span class="keyword">select</span> round(sysdate) <span class="keyword">from</span> dual;			<span class="comment">--最近是那天 28-9月 -21</span></span><br><span class="line"><span class="keyword">select</span> round(sysdate,<span class="string">&#x27;month&#x27;</span>) <span class="keyword">from</span> dual;	<span class="comment">--最近的1日是那天</span></span><br><span class="line"><span class="keyword">select</span> round(sysdate,<span class="string">&#x27;ddd&#x27;</span>) <span class="keyword">from</span> dual;		<span class="comment">--最近是那天 28-9月 -21</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>**extract(fmt FROM d)**：提取日期中的特定部分。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">year</span> <span class="keyword">from</span> sysdate),</span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">month</span> <span class="keyword">from</span> sysdate),</span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">day</span> <span class="keyword">from</span> sysdate),</span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">hour</span> <span class="keyword">from</span> systimestamp),</span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">minute</span> <span class="keyword">from</span> systimestamp),</span><br><span class="line">     <span class="built_in">extract</span>(<span class="keyword">second</span> <span class="keyword">from</span> systimestamp)</span><br><span class="line"><span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>**to_char(d1,fmt)**：将日期转换为字符串格式</p>
+<p>**to_date()**： 将日期字符串转为日期</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> to_char(sysdate,<span class="string">&#x27;yyyy-MM-dd HH:mi:ss&#x27;</span>) <span class="keyword">from</span> dual;<span class="comment">--转为指定格式的字符串</span></span><br><span class="line"><span class="keyword">select</span> to_char(sysdate,<span class="string">&#x27;MM&#x27;</span>) <span class="keyword">from</span> dual;					<span class="comment">--获取月份</span></span><br><span class="line"><span class="keyword">select</span> to_char(sysdate,<span class="string">&#x27;day&#x27;</span>) <span class="keyword">from</span> dual;				<span class="comment">--今天是星期几</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> to_date(<span class="string">&#x27;2021-09-27 11:09:33&#x27;</span>,<span class="string">&#x27;yyyy-MM-dd HH:mi:ss&#x27;</span>) <span class="keyword">from</span> dual;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分支函数if-else"><a href="#分支函数if-else" class="headerlink" title="分支函数if-else"></a>分支函数if-else</h2><p><strong>decode函数</strong>：</p>
+<p>语法： <code>DECODE(expr,search1,result1[,search2,result2]....[default])</code></p>
+<ul>
+<li><p>比较参数<code>expr</code>的值，如果匹配到哪一个<code>search</code>条件，就返回对应的result结果</p>
+</li>
+<li><p>可以有多组search和result的对应关系</p>
+</li>
+<li><p>如果任何一个search条件都没有匹配到，则返回最后default的结果</p>
+</li>
+<li><p>default参数是可选的，如果没有提供default的值，当没有匹配到时，将返回null值</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename,sal,job,</span><br><span class="line">decode(job,</span><br><span class="line">    <span class="string">&#x27;MANAGER&#x27;</span>,sal<span class="operator">*</span><span class="number">1.2</span>,</span><br><span class="line">    <span class="string">&#x27;ANALYST&#x27;</span>,sal<span class="operator">*</span><span class="number">1.1</span>,</span><br><span class="line">    <span class="string">&#x27;SALESMAN&#x27;</span>,sal<span class="operator">*</span><span class="number">1.05</span>,</span><br><span class="line">    sal) <span class="keyword">as</span> 奖金 <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>case语句</strong>：</p>
+<p>语法:<br><code>case exp when comexp then returnvalue</code><br>        <code>...</code><br>        <code>when comexp then returnvalue</code><br>        <code>else returnvalue</code><br><code>end</code></p>
+<ul>
+<li>case到end之间相当于一个具体的值，可以做运算，取别名，嵌套case 等。</li>
+<li>把case到end当作一个运算结果的表达式就可以了</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename,job,sal,</span><br><span class="line"><span class="keyword">case</span> job  <span class="keyword">when</span> <span class="string">&#x27;MANAGER&#x27;</span> <span class="keyword">then</span> sal<span class="operator">*</span><span class="number">1.2</span></span><br><span class="line">     <span class="keyword">when</span> <span class="string">&#x27;ANALYST&#x27;</span> <span class="keyword">then</span> sal<span class="operator">*</span><span class="number">1.1</span></span><br><span class="line">     <span class="keyword">when</span> <span class="string">&#x27;SALESMAN&#x27;</span> <span class="keyword">then</span> sal<span class="operator">*</span><span class="number">1.05</span></span><br><span class="line">     <span class="keyword">else</span> sal </span><br><span class="line">     <span class="keyword">end</span> 奖金</span><br><span class="line">     <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="排序函数"><a href="#排序函数" class="headerlink" title="排序函数"></a>排序函数</h2><p><strong>row_number</strong>：</p>
+<p>语法：<code>row_number() over(partition by col order by col2)</code></p>
+<ul>
+<li><p>表示根据<code>col</code>分组，在分组内部根据<code>col2</code>排序</p>
+</li>
+<li><p>此函数计算的值就表示每组内部排序后的顺序序号，组内连续且唯一</p>
+</li>
+<li><p><code>rownum</code>是伪列，<code>row_number</code>功能更强， 可以直接从结果集中取出子集</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename,deptno,sal,</span><br><span class="line"><span class="built_in">row_number</span>()</span><br><span class="line"><span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> deptno <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span>) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>rank</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--按照部门分组，组内按照sal排序</span></span><br><span class="line"><span class="keyword">select</span> ename,deptno,sal,</span><br><span class="line"><span class="built_in">rank</span>()</span><br><span class="line"><span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> deptno <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span>) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>dens_rank</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--按照部门分组，组内按照sal排序</span></span><br><span class="line"><span class="keyword">select</span> ename,deptno,sal,</span><br><span class="line"><span class="built_in">dense_rank</span>()</span><br><span class="line"><span class="keyword">over</span>(<span class="keyword">partition</span> <span class="keyword">by</span> deptno <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">desc</span>) <span class="keyword">from</span> emp</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="集合操作"><a href="#集合操作" class="headerlink" title="集合操作"></a>集合操作</h2><ul>
+<li><p>合并多个select语句的结果</p>
+</li>
+<li><p>实现集合的并，交，差</p>
+</li>
+<li><p>集合操作符包括union，union all，intersect 和 minus（联合&#x2F;完全联合&#x2F;相交&#x2F;相减）</p>
+</li>
+<li><p>select语句的列的个数和数据类型必须匹配</p>
+</li>
+<li><p>order by 子句只能放在最后一个查询语句中</p>
+</li>
+</ul>
+<p>语法如下：<br><code>select statement1</code><br><code>[union|union all | intersect | minus]</code><br><code>select statement2;</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--并集</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> job<span class="operator">=</span><span class="string">&#x27;MANAGER&#x27;</span></span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> emp <span class="keyword">where</span> sal<span class="operator">&gt;=</span><span class="number">2500</span>;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/b1ed4171/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -269,6 +1109,365 @@
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/293bc84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/293bc84/" class="post-title-link" itemprop="url">Oracle3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-16T00:00:00+08:00">2022-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-18 11:10:58" itemprop="dateModified" datetime="2022-06-18T11:10:58+08:00">2022-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
+<ul>
+<li>本身并不包含任何数据</li>
+<li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
+<li>当基表数据发生变化，视图数据也随之变化</li>
+</ul>
+<p><strong>作用</strong>：</p>
+<ul>
+<li>简化复杂查询</li>
+<li>限制数据访问</li>
+</ul>
+<p><strong>分类</strong>：简单（单表，无运算）、复杂（单表，有运算）、连接（多表）</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace  视图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 </span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,hirdate <span class="keyword">from</span> emp;<span class="comment">--简单</span></span><br><span class="line">#查询视图上的数据,与操作表一致</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v_emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="operator">*</span>) count,<span class="built_in">min</span>(sal) min <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno; <span class="comment">--复杂</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>修改</strong>：简单（update、delete语句，影响基表数据）、复杂（不允许）</p>
+<p>​			只读视图：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> 试图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 <span class="keyword">with</span> read <span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> 视图名</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h2><p><strong>特点</strong>：oracle提供的用于产生一系列唯一数字值的数据库对象</p>
+<p><strong>作用</strong>：oracle数据库中主要用序列来实现主键自增的功能</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> SEQUENCE sequence #创建序列名称</span><br><span class="line">[INCREMENT <span class="keyword">BY</span> n] #递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默认是 <span class="number">1</span></span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> n] #开始的值,递增默认是 minvalue 递减是 maxvalue</span><br><span class="line">[&#123;MAXVALUE n <span class="operator">|</span> NOMAXVALUE&#125;] #最大值 </span><br><span class="line">[&#123;MINVALUE n <span class="operator">|</span> NOMINVALUE&#125;] #最小值</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span> <span class="operator">|</span> NOCYCLE&#125;] #循环<span class="operator">/</span>不循环</span><br><span class="line">[&#123;CACHE n <span class="operator">|</span> NOCACHE&#125;];#分配并存入到内存中，默认<span class="number">20</span>个</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> sequence dept_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">100</span></span><br><span class="line">increment <span class="keyword">by</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--使用nextval获取序列的下一个值，currval获取序列的当前值</span></span><br><span class="line"><span class="keyword">select</span> dept_seq.nextval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> dept_seq.currval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(dept_seq.nextval,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> sequence 序列名;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong>特点</strong>：允许直接访问数据表中某一数据行的树型结构</p>
+<ul>
+<li>一旦建立就将被oracle系统自动维护</li>
+<li>查询语句中不用指定使用哪个索引，会自动使用</li>
+<li>I&#x2F;O操作比对表的操作要少很多</li>
+<li>独立于表的对象， 可以存放在与表不同的表空间中</li>
+</ul>
+<p><strong>原则</strong>：</p>
+<ul>
+<li>适合建立索引的列<ul>
+<li>主键列和唯一约束列一定要建立索引，主键列，唯一约束的列，数据库会自动创建索引</li>
+<li>经常查询的数据列</li>
+<li>经常出现在where子句中的列</li>
+</ul>
+</li>
+<li>不适合<ul>
+<li>常修改的，少量数据的，重复值多的</li>
+</ul>
+</li>
+</ul>
+<p><strong>分类</strong>：聚集索引（索引的顺序和表的记录的顺序一致）、非聚集索引、单列索引、多列索引</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index 索引名 <span class="keyword">on</span> 表名(字段)</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> index emp_ename <span class="keyword">on</span> emp(ename);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="约束（constraint）"><a href="#约束（constraint）" class="headerlink" title="约束（constraint）"></a>约束（constraint）</h2><p><strong>特点</strong>：</p>
+<ul>
+<li>在数据表上强制执行的一些数据校验规则，当执行DML语句时，数据必须符合这些规则，如果不符合则无法执行</li>
+<li>可以保证数据表中数据的完整性，保证数据间的商业逻辑</li>
+</ul>
+<p><strong>分类</strong>：</p>
+<ul>
+<li>非空约束（not null）<br>非空约束简称nn，约束列的值不能是空值</li>
+<li>唯一约束(unique)<br>唯一约束简称uk，约束列值必须是唯一的值</li>
+<li>主键约束(primary key)<br>主键约束简称pk，约束列的值必须是非空且唯一的值</li>
+<li>外键约束(foregin key)<br>外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</li>
+<li>检查约束(check)<br>检查约束通过一定的约束条件来限定列的值的范围，比如说限制某列的值只能是男或者女</li>
+</ul>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(</span><br><span class="line">id number(<span class="number">4</span>) <span class="keyword">primary</span> key,</span><br><span class="line">name varchar2(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">email varchar2(<span class="number">30</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="keyword">constraint</span> emial_un <span class="keyword">unique</span>(email),</span><br><span class="line"><span class="keyword">constraint</span> gender_ck <span class="keyword">check</span>(gender<span class="operator">=</span><span class="string">&#x27;M&#x27;</span> <span class="keyword">or</span> gender<span class="operator">=</span><span class="string">&#x27;F&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 约束类型(字段);</span><br><span class="line">#为student表的name列添加唯一约束</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">constraint</span> test1_pk <span class="keyword">unique</span>(name);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp1 (</span><br><span class="line">id number(<span class="number">4</span>),</span><br><span class="line">deptno number(<span class="number">4</span>),</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">40</span>),</span><br><span class="line"><span class="keyword">constraint</span> emp_dept_fk foregin key(deptno) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">add</span> <span class="keyword">constraint</span> emp1_dept_fk <span class="keyword">foreign</span> key(deptno) <span class="keyword">references</span></span><br><span class="line">dept(deptno);</span><br><span class="line"></span><br><span class="line"><span class="comment">--存在主外键关系的表，在删除数据时，需要把有外键关系的所有数据全部删除后，才能删除主表的数据</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">constraint</span> 约束名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">constraint</span> test1_pk;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删主键</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>特点</strong>：工作的逻辑单元,一个事务是由一个或多个完成一组的相关行为的<code>SQL</code>语句组成</p>
+<ul>
+<li>确保数据库的完整性<ul>
+<li>原子性(Atomicity)</li>
+<li>一致性(Consistency)</li>
+<li>隔离性(Isolation)</li>
+<li>持久性(durability)</li>
+</ul>
+</li>
+<li>所有的事务都是隐式开始的</li>
+<li>须显示使用commit和rollback语句结束</li>
+<li>默认未非自动提交事务模式</li>
+</ul>
+<p><strong>控制语句</strong>：</p>
+<ul>
+<li>Set transaction 设置事物属性</li>
+<li>Set constrains 设置事物的约束模式</li>
+<li>约束模式是指：在事务中修改数据时,数据库中的约束立即应用于数据,还是将约束推迟到当前事务结束后应用。</li>
+<li>Savepoint 在事务中建立一个存储的点.当事务处理发生异常而回滚事务时,可指定事务回滚到某存储点.然后从该存储点重新执行。</li>
+<li>Release savepoint 删除存储点</li>
+<li>Rollback 回滚事务 取消对数据库所作的任何操作 rollback to 存储点</li>
+<li>Commit 提交事务 对数据库的操作做持久的保存。</li>
+</ul>
+<p><strong>隔离不当结果</strong>：</p>
+<ul>
+<li>第一类丢失更新———-撤销一个事务时，把其他事务已提交的更新数据也撤销了</li>
+<li>脏读————————–一个事务读到了另一个事务未提交的更新数据</li>
+<li>不可重复读—————–一个事务读到另一个事务已经提交的更改数据</li>
+<li>第二类丢失更新———–一个事务覆盖另一个事务已经提交的更改数据</li>
+<li>幻读—————————一个事务读到另一个事务已经提交的新增或已删除的数据</li>
+</ul>
+<p><strong>操作</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> autocommit;<span class="comment">--查看</span></span><br><span class="line"><span class="keyword">set</span> autocommit <span class="keyword">on</span><span class="operator">|</span>off;更改</span><br><span class="line">#提交和结束事务</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line">#回滚事务</span><br><span class="line"><span class="keyword">rollback</span> [<span class="keyword">to</span> 回滚点];</span><br><span class="line">#设置事务回滚点</span><br><span class="line"><span class="keyword">savepoint</span> 回滚点;</span><br><span class="line">#删除回滚点</span><br><span class="line"><span class="keyword">release</span> 回滚点;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/4592b2fd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/4592b2fd/" class="post-title-link" itemprop="url">shell</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-16T00:00:00+08:00">2022-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-18 11:06:04" itemprop="dateModified" datetime="2022-06-18T11:06:04+08:00">2022-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
+<p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
+
+<p>默认解释器<code>/bin/bash</code>的优点</p>
+<ol>
+<li>tab补全</li>
+<li>历史命令 history [n] n为数字； !n 可以执行指定的n行的命令</li>
+<li>有快捷键，支持管道和重定向</li>
+</ol>
+<h3 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h3><ol>
+<li>声明解释器<code>#!/bin/bash</code></li>
+<li>编写注释, 如<code>#这是一个测试shell脚本</code></li>
+<li>执行指令<code>echo helloWorld</code> ，理论上，执行指令可以写无限条，非交互式的指令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim hello.sh     #注意文件后缀，以下是文件内容</span><br><span class="line">----------------------------------</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这是一脚本</span></span><br><span class="line">echo hellWorld</span><br><span class="line">----------------------------------</span><br><span class="line">:wq				 #退出vim</span><br><span class="line">----------------------------------</span><br><span class="line">chmod +x hello.sh#设置权限，全局</span><br><span class="line">/opt/hello.sh 	 #绝对路径</span><br><span class="line"></span><br><span class="line">bash /opt/hello.sh#直接使用解释器，但会开启新的子进程</span><br><span class="line"></span><br><span class="line">source /opt/hello.sh#实质上使用的默认的解释器 ，不会开启解释器子进程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 搭建yum仓库</span><br><span class="line">1. 挂载光盘文件到/mnt---------------</span><br><span class="line">mount /dev/cdrom /mnt</span><br><span class="line"></span><br><span class="line">2. 先备份yum仓库配置----------------</span><br><span class="line">mkdir /etc/yum.repo.d/bak</span><br><span class="line">mv /etc/yum.repo.d/*/repo</span><br><span class="line"></span><br><span class="line">3. 在/opt下编写脚本yum.sh，内容如下--</span><br><span class="line">#!/bin/bash</span><br><span class="line">#搭建软件仓库</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">echo &quot;[abc]</span><br><span class="line">name=abctest</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">gpgcheck=0&quot; &gt;&gt; abc.repo</span><br><span class="line"></span><br><span class="line">4. 执行脚本</span><br><span class="line">chmod +x /opt/yum.sh</span><br><span class="line">/opt/yum.sh</span><br><span class="line"></span><br><span class="line">5. 执行成功，验证域名仓库是否搭建成功</span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li>不能以数字开头</li>
+<li>等号左右不留空格</li>
+<li>双引号括起来的内容<code>“$”</code>，<code>“(” </code>和反引号都拥有特殊含义，而单引号括起来的内容都是普通字符</li>
+<li>需要增加变量的值,用双引号包含<code>&quot;$变量名&quot;</code>或用<code>$&#123;变量名&#125;</code>包含变量名</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调用</span></span><br><span class="line">[root@localhost ~]# name=zhangsan</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">调用变量来使用,语法：$变量名</span></span><br><span class="line">[root@localhost ~]# echo $name</span><br><span class="line">zhangsan</span><br><span class="line">[root@localhost ~]# a=10</span><br><span class="line">[root@localhost ~]# echo $&#123;a&#125;RMB</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 设置</span><br><span class="line">命令 set[选项]</span><br><span class="line"></span><br><span class="line">-u: 如果设定此选项，调用未声明的选项时会报错，默认无任何提示</span><br><span class="line">-x: 如果设定此选项，在命令执行之前，会把命令先输出一次</span><br><span class="line">+参数: 取消某个set曾启动的参数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除</span><br><span class="line">unset [变量名]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">USER			当前用户名</span><br><span class="line">HOME			当前用户的家目录</span><br><span class="line">UID				当前用户的id号</span><br><span class="line">SHELL			当前用户的解释器</span><br><span class="line">PWD				当前位置</span><br><span class="line">PS1				一级提示符</span><br><span class="line">PS2				二级提示符</span><br><span class="line">PATH			存储执行指令的目录</span><br><span class="line">env 			查看所有环境变量</span><br><span class="line"></span><br><span class="line">RANDOM 			可以产生随机数</span><br></pre></td></tr></table></figure>
+
+<h3 id="预定义变量与位置变量"><a href="#预定义变量与位置变量" class="headerlink" title="预定义变量与位置变量"></a>预定义变量与位置变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$n			n为数字，$0表示当前 Shell 脚本程序的名称，$1-9 代 表 第 一 到 第 九个 参 数 , 十 以上 的 参 数 需 要 用 大 括 号 包 含 ， 如 9代表第一到第九个参数,十以上的参数需要用大括号包含，如9代表第一到第九个参数,十以上的参数需要用大括号包含，如&#123;10&#125;</span><br><span class="line"></span><br><span class="line">$* 			这个变量代表命令行中所有的参数，$把所有的参数看成一个整体</span><br><span class="line">$@ 			这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待</span><br><span class="line">$# 			这个变量代表命令行中所有参数的个数</span><br><span class="line">$$ 			随机进程号</span><br><span class="line">$? 			判断上一个任务是否成功，0表示成功，非0表示失败</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="单双引号"><a href="#单双引号" class="headerlink" title="单双引号"></a>单双引号</h4><p>单引号：可以屏蔽特殊符号，直接当成字符串来处理</p>
+<p>双引号：界定范围，不可屏蔽特殊字符</p>
+<h4 id="反撇号-96-与"><a href="#反撇号-96-与" class="headerlink" title="反撇号&#96;与$()"></a>反撇号&#96;与$()</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=date</span><br><span class="line">echo $a #输出结果 date</span><br><span class="line"></span><br><span class="line">a=`date`</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br><span class="line"></span><br><span class="line">a=$(date)</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="read交互式指令"><a href="#read交互式指令" class="headerlink" title="read交互式指令"></a>read交互式指令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">read -p “提示的信息” 变量名</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="屏蔽输入"><a href="#屏蔽输入" class="headerlink" title="屏蔽输入"></a>屏蔽输入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">接上例</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">stty -echo						#屏蔽输入信息</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">stty echo						#显示输入信息</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export b=20 			#定义变量的同时，并发布为全局效果</span><br><span class="line">a=200 					#定义普通变量</span><br><span class="line">export a 				#将已有的变量发布为全局变量</span><br><span class="line">export -n a 			#取消全局效果，恢复局部效果</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># expr可以在运算的同时将结果输出</span><br><span class="line">expr 3 – 1  		减法</span><br><span class="line">expr 2 + 2  		加法</span><br><span class="line">expr 2 &#x27;*&#x27; 2  		乘法</span><br><span class="line">expr 2 \* 2   		使用乘法时，这里使用\代表转义符号，可以屏蔽之后1个字符的特殊效果</span><br><span class="line">expr 4 / 2  		除法</span><br><span class="line">expr 10 % 3  		取余数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 用$[ ]结构，配合echo输出，同样可以实现加 减 乘 除 取余</span><br><span class="line">echo $[1+1]</span><br><span class="line">echo $[2-1]</span><br><span class="line">echo $[2*2]</span><br><span class="line">echo $[4/2]</span><br><span class="line">echo $[5%3]</span><br><span class="line"></span><br><span class="line">$(())与$[]效果一致</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># let指令，不输出计算结果，专用于创建变量，或者对变量进行自增减</span><br><span class="line">let a=1+1</span><br><span class="line">let a++</span><br><span class="line">let a*=10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># bc指令可以处理小数的结果 ，参数scale=n可以指定小数保留的位数,quit退出bc模式</span><br><span class="line">echo &quot;10/3&quot; | bc</span><br><span class="line">echo &quot;scal=3;10/3&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 关系运算符只支持数字，不支持字符串，除非字符串的值是数字</span><br><span class="line">-eq</span><br><span class="line">equal</span><br><span class="line">检测两个数是否相等，相等返回true。</span><br><span class="line">[ $a -eq $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-ne</span><br><span class="line">not equal</span><br><span class="line">检测两个数是否相等，不相等返回true。</span><br><span class="line">[ $a -ne $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-gt </span><br><span class="line">great than</span><br><span class="line">检测左边的数是否大于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -gt $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-lt </span><br><span class="line">less than</span><br><span class="line">检测左边的数是否小于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -lt $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-ge</span><br><span class="line">great than or equal</span><br><span class="line">检测左边的数是否大于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -ge $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-le</span><br><span class="line">less than or equal</span><br><span class="line">检测左边的数是否小于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -le $b ] 返回 true。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">！</span><br><span class="line">非运算，表达式为 true 则返回 false，否则返回 true</span><br><span class="line">[ ! false ] 返回 true。</span><br><span class="line"></span><br><span class="line">-o</span><br><span class="line">或（或者）运算，有一个表达式为 true则返回 true。</span><br><span class="line">[ $a -lt 20 -o $b -gt 100 ] 返回 true。</span><br><span class="line"></span><br><span class="line">-a</span><br><span class="line">与（并且）运算，两个表达式都为 true才返回 true。</span><br><span class="line">[ $a -lt 20 -a $b -gt 100 ] 返回 false。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 字符串运算</span><br><span class="line">!=</span><br><span class="line">检测两个字符串是否相等，不相等返回true。</span><br><span class="line">[ $a != $b ] 返回true。</span><br><span class="line"></span><br><span class="line">=</span><br><span class="line">检测两个字符串是否相等，相等返回true。</span><br><span class="line">[ $a = $b ] 返回false。</span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">检测字符串长度是否为0，为0返回 true。 </span><br><span class="line">[ -z $a ] 返回 false。</span><br><span class="line"></span><br><span class="line">-n</span><br><span class="line">检测字符串长度是否为0，不为0返回true。</span><br><span class="line">[ -n $a ] 返回 true。</span><br><span class="line"></span><br><span class="line">str </span><br><span class="line">检测字符串是否为空，不为空返回 true。 </span><br><span class="line">[ $a ] 返回 true。</span><br><span class="line">------------------------------------------------------</span><br><span class="line">[ a == a ] 判断字符串a是否等于a，如果相等，返回值就是0</span><br><span class="line">[ root == $USER ] 判断当前用户名是否叫root，如果是，返回值就是0</span><br><span class="line">[ root != $USER ] 判断当前用户名是否不叫root，如果不叫root，返回值就是0</span><br><span class="line">[ -z $a ] 判断变量a是否为空，如果是，返回值是0</span><br><span class="line">[ ! -z $a ] 判断变量a是否不为空，如果是，返回true，0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># 文件测试运算符</span><br><span class="line">-b [file]</span><br><span class="line">检测文件是否是块设备文件，如果是，则返回 true。</span><br><span class="line">[ -b $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-c [file]</span><br><span class="line">检测文件是否是字符设备文件，如果是，则返回true。</span><br><span class="line">[ -c $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-d [file]</span><br><span class="line">检测文件是否是目录，如果是，则返回 true。</span><br><span class="line">[ -d $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-f [file]</span><br><span class="line">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</span><br><span class="line">[ -f $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-g [file]</span><br><span class="line">检测文件是否设置了 SGID 位，如果是，则返回true。</span><br><span class="line">[ -g $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-k [file]</span><br><span class="line">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</span><br><span class="line">[ -k $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-p [file]</span><br><span class="line">检测文件是否是有名管道，如果是，则返回 true。</span><br><span class="line">[ -p $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-u [file]</span><br><span class="line">检测文件是否设置了 SUID 位，如果是，则返回true。</span><br><span class="line">[ -u $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-r [file]</span><br><span class="line">检测文件是否可读，如果是，则返回 true。</span><br><span class="line">[ -r $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-w [file]</span><br><span class="line">检测文件是否可写，如果是，则返回 true。</span><br><span class="line">[ -w $file ] 返回 true</span><br><span class="line"></span><br><span class="line">-x [file]</span><br><span class="line">检测文件是否可执行，如果是，则返回 true。</span><br><span class="line">[ -x $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-s [file]</span><br><span class="line">检测文件是否为空（文件大小是否大于0），不为空返回 true。</span><br><span class="line">[ -s $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-e [file]</span><br><span class="line">检测文件（包括目录）是否存在，如果是，则返回true。</span><br><span class="line">[ -e $file ] 返回 true。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">if 条件测试 ;then </span><br><span class="line">	执行指令 </span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试 ;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br><span class="line">---------------------------------------</span><br><span class="line">for i in &#123;1..10&#125; 使用常量循环十次</span><br><span class="line"></span><br><span class="line">a=10</span><br><span class="line">for i in $(seq $a)  使用seq命令可以调用变量</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 条件测试</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -432,20 +1631,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

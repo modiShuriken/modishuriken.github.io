@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon3.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://www.modishuriken.top"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"modishuriken.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":320,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+  <meta name="description" content="shell编程基础了解c语言编写  分类默认为&#x2F;bin&#x2F;bash， 其他ash, bash, ksh, csh, zsh等 1234567#查看有哪些解释器cat &#x2F;etc&#x2F;shells #切换，直接输入相应的解释器名称如ash# 可以直接安装相应的shell解释器  默认解释器&#x2F;bin&#x2F;bash的优点  tab补全 历史命令 history [n] n为数字； !n 可以执行指定的n行的命令 有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell">
+<meta property="og:url" content="https://modishuriken.github.io/posts/4592b2fd/index.html">
+<meta property="og:site_name" content="Keeping">
+<meta property="og:description" content="shell编程基础了解c语言编写  分类默认为&#x2F;bin&#x2F;bash， 其他ash, bash, ksh, csh, zsh等 1234567#查看有哪些解释器cat &#x2F;etc&#x2F;shells #切换，直接输入相应的解释器名称如ash# 可以直接安装相应的shell解释器  默认解释器&#x2F;bin&#x2F;bash的优点  tab补全 历史命令 history [n] n为数字； !n 可以执行指定的n行的命令 有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png">
+<meta property="article:published_time" content="2022-06-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-18T03:06:04.684Z">
+<meta property="article:author" content="modiShuriken">
+<meta property="article:tag" content="linux-centOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png">
+
+<link rel="canonical" href="https://modishuriken.github.io/posts/4592b2fd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>shell | Keeping</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Keeping" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Keeping</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Personal Weblog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/4592b2fd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          shell
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-16T00:00:00+08:00">2022-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-18 11:06:04" itemprop="dateModified" datetime="2022-06-18T11:06:04+08:00">2022-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
+<p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
+
+<p>默认解释器<code>/bin/bash</code>的优点</p>
+<ol>
+<li>tab补全</li>
+<li>历史命令 history [n] n为数字； !n 可以执行指定的n行的命令</li>
+<li>有快捷键，支持管道和重定向</li>
+</ol>
+<h3 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h3><ol>
+<li>声明解释器<code>#!/bin/bash</code></li>
+<li>编写注释, 如<code>#这是一个测试shell脚本</code></li>
+<li>执行指令<code>echo helloWorld</code> ，理论上，执行指令可以写无限条，非交互式的指令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim hello.sh     #注意文件后缀，以下是文件内容</span><br><span class="line">----------------------------------</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这是一脚本</span></span><br><span class="line">echo hellWorld</span><br><span class="line">----------------------------------</span><br><span class="line">:wq				 #退出vim</span><br><span class="line">----------------------------------</span><br><span class="line">chmod +x hello.sh#设置权限，全局</span><br><span class="line">/opt/hello.sh 	 #绝对路径</span><br><span class="line"></span><br><span class="line">bash /opt/hello.sh#直接使用解释器，但会开启新的子进程</span><br><span class="line"></span><br><span class="line">source /opt/hello.sh#实质上使用的默认的解释器 ，不会开启解释器子进程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 搭建yum仓库</span><br><span class="line">1. 挂载光盘文件到/mnt---------------</span><br><span class="line">mount /dev/cdrom /mnt</span><br><span class="line"></span><br><span class="line">2. 先备份yum仓库配置----------------</span><br><span class="line">mkdir /etc/yum.repo.d/bak</span><br><span class="line">mv /etc/yum.repo.d/*/repo</span><br><span class="line"></span><br><span class="line">3. 在/opt下编写脚本yum.sh，内容如下--</span><br><span class="line">#!/bin/bash</span><br><span class="line">#搭建软件仓库</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">echo &quot;[abc]</span><br><span class="line">name=abctest</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">gpgcheck=0&quot; &gt;&gt; abc.repo</span><br><span class="line"></span><br><span class="line">4. 执行脚本</span><br><span class="line">chmod +x /opt/yum.sh</span><br><span class="line">/opt/yum.sh</span><br><span class="line"></span><br><span class="line">5. 执行成功，验证域名仓库是否搭建成功</span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li>不能以数字开头</li>
+<li>等号左右不留空格</li>
+<li>双引号括起来的内容<code>“$”</code>，<code>“(” </code>和反引号都拥有特殊含义，而单引号括起来的内容都是普通字符</li>
+<li>需要增加变量的值,用双引号包含<code>&quot;$变量名&quot;</code>或用<code>$&#123;变量名&#125;</code>包含变量名</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调用</span></span><br><span class="line">[root@localhost ~]# name=zhangsan</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">调用变量来使用,语法：$变量名</span></span><br><span class="line">[root@localhost ~]# echo $name</span><br><span class="line">zhangsan</span><br><span class="line">[root@localhost ~]# a=10</span><br><span class="line">[root@localhost ~]# echo $&#123;a&#125;RMB</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 设置</span><br><span class="line">命令 set[选项]</span><br><span class="line"></span><br><span class="line">-u: 如果设定此选项，调用未声明的选项时会报错，默认无任何提示</span><br><span class="line">-x: 如果设定此选项，在命令执行之前，会把命令先输出一次</span><br><span class="line">+参数: 取消某个set曾启动的参数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 删除</span><br><span class="line">unset [变量名]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">USER			当前用户名</span><br><span class="line">HOME			当前用户的家目录</span><br><span class="line">UID				当前用户的id号</span><br><span class="line">SHELL			当前用户的解释器</span><br><span class="line">PWD				当前位置</span><br><span class="line">PS1				一级提示符</span><br><span class="line">PS2				二级提示符</span><br><span class="line">PATH			存储执行指令的目录</span><br><span class="line">env 			查看所有环境变量</span><br><span class="line"></span><br><span class="line">RANDOM 			可以产生随机数</span><br></pre></td></tr></table></figure>
+
+<h3 id="预定义变量与位置变量"><a href="#预定义变量与位置变量" class="headerlink" title="预定义变量与位置变量"></a>预定义变量与位置变量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$n			n为数字，$0表示当前 Shell 脚本程序的名称，$1-9 代 表 第 一 到 第 九个 参 数 , 十 以上 的 参 数 需 要 用 大 括 号 包 含 ， 如 9代表第一到第九个参数,十以上的参数需要用大括号包含，如9代表第一到第九个参数,十以上的参数需要用大括号包含，如&#123;10&#125;</span><br><span class="line"></span><br><span class="line">$* 			这个变量代表命令行中所有的参数，$把所有的参数看成一个整体</span><br><span class="line">$@ 			这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待</span><br><span class="line">$# 			这个变量代表命令行中所有参数的个数</span><br><span class="line">$$ 			随机进程号</span><br><span class="line">$? 			判断上一个任务是否成功，0表示成功，非0表示失败</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="单双引号"><a href="#单双引号" class="headerlink" title="单双引号"></a>单双引号</h4><p>单引号：可以屏蔽特殊符号，直接当成字符串来处理</p>
+<p>双引号：界定范围，不可屏蔽特殊字符</p>
+<h4 id="反撇号-96-与"><a href="#反撇号-96-与" class="headerlink" title="反撇号&#96;与$()"></a>反撇号&#96;与$()</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a=date</span><br><span class="line">echo $a #输出结果 date</span><br><span class="line"></span><br><span class="line">a=`date`</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br><span class="line"></span><br><span class="line">a=$(date)</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="read交互式指令"><a href="#read交互式指令" class="headerlink" title="read交互式指令"></a>read交互式指令</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">read -p “提示的信息” 变量名</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="屏蔽输入"><a href="#屏蔽输入" class="headerlink" title="屏蔽输入"></a>屏蔽输入</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">接上例</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">stty -echo						#屏蔽输入信息</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">stty echo						#显示输入信息</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export b=20 			#定义变量的同时，并发布为全局效果</span><br><span class="line">a=200 					#定义普通变量</span><br><span class="line">export a 				#将已有的变量发布为全局变量</span><br><span class="line">export -n a 			#取消全局效果，恢复局部效果</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># expr可以在运算的同时将结果输出</span><br><span class="line">expr 3 – 1  		减法</span><br><span class="line">expr 2 + 2  		加法</span><br><span class="line">expr 2 &#x27;*&#x27; 2  		乘法</span><br><span class="line">expr 2 \* 2   		使用乘法时，这里使用\代表转义符号，可以屏蔽之后1个字符的特殊效果</span><br><span class="line">expr 4 / 2  		除法</span><br><span class="line">expr 10 % 3  		取余数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 用$[ ]结构，配合echo输出，同样可以实现加 减 乘 除 取余</span><br><span class="line">echo $[1+1]</span><br><span class="line">echo $[2-1]</span><br><span class="line">echo $[2*2]</span><br><span class="line">echo $[4/2]</span><br><span class="line">echo $[5%3]</span><br><span class="line"></span><br><span class="line">$(())与$[]效果一致</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># let指令，不输出计算结果，专用于创建变量，或者对变量进行自增减</span><br><span class="line">let a=1+1</span><br><span class="line">let a++</span><br><span class="line">let a*=10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># bc指令可以处理小数的结果 ，参数scale=n可以指定小数保留的位数,quit退出bc模式</span><br><span class="line">echo &quot;10/3&quot; | bc</span><br><span class="line">echo &quot;scal=3;10/3&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 关系运算符只支持数字，不支持字符串，除非字符串的值是数字</span><br><span class="line">-eq</span><br><span class="line">equal</span><br><span class="line">检测两个数是否相等，相等返回true。</span><br><span class="line">[ $a -eq $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-ne</span><br><span class="line">not equal</span><br><span class="line">检测两个数是否相等，不相等返回true。</span><br><span class="line">[ $a -ne $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-gt </span><br><span class="line">great than</span><br><span class="line">检测左边的数是否大于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -gt $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-lt </span><br><span class="line">less than</span><br><span class="line">检测左边的数是否小于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -lt $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-ge</span><br><span class="line">great than or equal</span><br><span class="line">检测左边的数是否大于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -ge $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-le</span><br><span class="line">less than or equal</span><br><span class="line">检测左边的数是否小于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -le $b ] 返回 true。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">！</span><br><span class="line">非运算，表达式为 true 则返回 false，否则返回 true</span><br><span class="line">[ ! false ] 返回 true。</span><br><span class="line"></span><br><span class="line">-o</span><br><span class="line">或（或者）运算，有一个表达式为 true则返回 true。</span><br><span class="line">[ $a -lt 20 -o $b -gt 100 ] 返回 true。</span><br><span class="line"></span><br><span class="line">-a</span><br><span class="line">与（并且）运算，两个表达式都为 true才返回 true。</span><br><span class="line">[ $a -lt 20 -a $b -gt 100 ] 返回 false。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 字符串运算</span><br><span class="line">!=</span><br><span class="line">检测两个字符串是否相等，不相等返回true。</span><br><span class="line">[ $a != $b ] 返回true。</span><br><span class="line"></span><br><span class="line">=</span><br><span class="line">检测两个字符串是否相等，相等返回true。</span><br><span class="line">[ $a = $b ] 返回false。</span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">检测字符串长度是否为0，为0返回 true。 </span><br><span class="line">[ -z $a ] 返回 false。</span><br><span class="line"></span><br><span class="line">-n</span><br><span class="line">检测字符串长度是否为0，不为0返回true。</span><br><span class="line">[ -n $a ] 返回 true。</span><br><span class="line"></span><br><span class="line">str </span><br><span class="line">检测字符串是否为空，不为空返回 true。 </span><br><span class="line">[ $a ] 返回 true。</span><br><span class="line">------------------------------------------------------</span><br><span class="line">[ a == a ] 判断字符串a是否等于a，如果相等，返回值就是0</span><br><span class="line">[ root == $USER ] 判断当前用户名是否叫root，如果是，返回值就是0</span><br><span class="line">[ root != $USER ] 判断当前用户名是否不叫root，如果不叫root，返回值就是0</span><br><span class="line">[ -z $a ] 判断变量a是否为空，如果是，返回值是0</span><br><span class="line">[ ! -z $a ] 判断变量a是否不为空，如果是，返回true，0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># 文件测试运算符</span><br><span class="line">-b [file]</span><br><span class="line">检测文件是否是块设备文件，如果是，则返回 true。</span><br><span class="line">[ -b $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-c [file]</span><br><span class="line">检测文件是否是字符设备文件，如果是，则返回true。</span><br><span class="line">[ -c $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-d [file]</span><br><span class="line">检测文件是否是目录，如果是，则返回 true。</span><br><span class="line">[ -d $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-f [file]</span><br><span class="line">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</span><br><span class="line">[ -f $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-g [file]</span><br><span class="line">检测文件是否设置了 SGID 位，如果是，则返回true。</span><br><span class="line">[ -g $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-k [file]</span><br><span class="line">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</span><br><span class="line">[ -k $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-p [file]</span><br><span class="line">检测文件是否是有名管道，如果是，则返回 true。</span><br><span class="line">[ -p $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-u [file]</span><br><span class="line">检测文件是否设置了 SUID 位，如果是，则返回true。</span><br><span class="line">[ -u $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-r [file]</span><br><span class="line">检测文件是否可读，如果是，则返回 true。</span><br><span class="line">[ -r $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-w [file]</span><br><span class="line">检测文件是否可写，如果是，则返回 true。</span><br><span class="line">[ -w $file ] 返回 true</span><br><span class="line"></span><br><span class="line">-x [file]</span><br><span class="line">检测文件是否可执行，如果是，则返回 true。</span><br><span class="line">[ -x $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-s [file]</span><br><span class="line">检测文件是否为空（文件大小是否大于0），不为空返回 true。</span><br><span class="line">[ -s $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-e [file]</span><br><span class="line">检测文件（包括目录）是否存在，如果是，则返回true。</span><br><span class="line">[ -e $file ] 返回 true。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">if 条件测试 ;then </span><br><span class="line">	执行指令 </span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试 ;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">for 变量名 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br><span class="line">---------------------------------------</span><br><span class="line">for i in &#123;1..10&#125; 使用常量循环十次</span><br><span class="line"></span><br><span class="line">a=10</span><br><span class="line">for i in $(seq $a)  使用seq命令可以调用变量</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 条件测试</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux-centOS/" rel="tag"># linux-centOS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/78ed23a3/" rel="prev" title="个人博客的建立">
+      <i class="fa fa-chevron-left"></i> 个人博客的建立
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/293bc84/" rel="next" title="Oracle3">
+      Oracle3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shell%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">shell编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BA%86%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">基础了解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">简单入门</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E4%B8%8E%E4%BD%8D%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">预定义变量与位置变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95"><span class="nav-number">1.2.3.</span> <span class="nav-text">扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">单双引号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E6%92%87%E5%8F%B7-96-%E4%B8%8E"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">反撇号&#96;与$()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%8C%87%E4%BB%A4"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">read交互式指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%8F%E8%94%BD%E8%BE%93%E5%85%A5"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">屏蔽输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">定义全局变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97"><span class="nav-number">1.3.</span> <span class="nav-text">运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">1.4.</span> <span class="nav-text">分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.5.</span> <span class="nav-text">循环</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="modiShuriken"
+      src="/images/lin.png">
+  <p class="site-author-name" itemprop="name">modiShuriken</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:1559935374@qq.com" title="E-Mail → mailto:1559935374@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">modiShuriken</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
