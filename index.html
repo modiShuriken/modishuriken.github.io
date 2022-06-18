@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：11:08:15" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：12:24:05" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -254,7 +254,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Oracle1"><a href="#Oracle1" class="headerlink" title="Oracle1"></a>Oracle1</h1><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
+          <span id="more"></span>
+
+<h1 id="Oracle1"><a href="#Oracle1" class="headerlink" title="Oracle1"></a>Oracle1</h1><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
 <h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
 <li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
 <li>网页客服端端口，会与tomcat的8080端口冲突</li>
@@ -325,7 +327,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/53d0684b/">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/293bc84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/lin.png">
@@ -339,7 +341,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/53d0684b/" class="post-title-link" itemprop="url">Linux</a>
+            <a href="/posts/293bc84/" class="post-title-link" itemprop="url">Oracle3</a>
         </h2>
 
         <div class="post-meta">
@@ -350,7 +352,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：10:58:32" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：12:24:09" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -358,7 +360,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
                 </span>
             </span>
 
@@ -373,169 +375,136 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Linux-CentOS-基础"><a href="#Linux-CentOS-基础" class="headerlink" title="Linux(CentOS)基础"></a>Linux(CentOS)基础</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>人们规定1970-1-1是UNIX诞生的日期</p>
-<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="Bridged-桥接"><a href="#Bridged-桥接" class="headerlink" title="Bridged-桥接"></a>Bridged-桥接</h3><p>主机网卡与虚拟机虚拟的网卡利用虚拟网桥进行通信。</p>
-<blockquote>
-<p>类似于把物理主机虚拟为一个交换机， 虚拟机和物理主机一起连接到这个交换机上（网卡是交换模式，即相互访问而互不干扰）</p>
-<p>同一网段</p>
-</blockquote>
-<p>特点： </p>
-<p>1· 容易和局域网中的其他主机ip地址冲突</p>
-<p>2· ip资源紧张不建议使用该模式</p>
-<h3 id="NAT-地址转换"><a href="#NAT-地址转换" class="headerlink" title="NAT- 地址转换"></a>NAT- 地址转换</h3><p>解决上述的ip问题， 但局域网中的其他主机无法访问</p>
-<h3 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h3><p>只与主机相互通讯，虚拟机为独立的系统</p>
-<h3 id="常用网络设置命令"><a href="#常用网络设置命令" class="headerlink" title="常用网络设置命令"></a>常用网络设置命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">reboot #重启主机</span><br><span class="line"></span><br><span class="line">systemctl restart network.service #重启网卡</span><br><span class="line"></span><br><span class="line">ip addr ifconfig #查看IP地址</span><br><span class="line"></span><br><span class="line">ping #检测网络是否通畅</span><br><span class="line"></span><br><span class="line">ctrl+c #结束ping命令</span><br><span class="line"></span><br><span class="line">clear,clear+l #清屏</span><br></pre></td></tr></table></figure>
+          <span id="more"></span>
 
-
-
-<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>根目录(利用 &#x2F; 表示)：Linux系统的起点（所有的数据都在此目录下)</p>
-<p><strong>文件名颜色的含义</strong>:<br>默认色代表普通文件。例：install.log<br>绿色代表可执行文件。例：rc.news<br>红色代表tar包文件。    例：vim-7.1.tar.bz2<br>蓝色代表目录文件。   例：aa<br>水红代表图象文件。   例：Sunset.jpg<br>青色代表链接文件。   例：rc4.d  （此类文件相当于快捷方式）<br>黄色代表设备文件。   例：fd0</p>
-<h2 id="基础命令操作"><a href="#基础命令操作" class="headerlink" title="基础命令操作"></a>基础命令操作</h2><p><strong>唤出快捷键</strong>：</p>
-<p>虚拟控制台切换(Ctrl+Alt+Fn组合键)<br>ctrl+alt+F1:图形桌面<br>ctrl+alt+F2~F6:字符控制台</p>
-<p><strong>命令行</strong> ：</p>
-<p>提示行：[root@localhost ~]#<br>[当前登录的用户@主机名 当前所在的位置] #</p>
+<h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
 <ul>
-<li><p>以#结尾：超级管理员root</p>
+<li>本身并不包含任何数据</li>
+<li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
+<li>当基表数据发生变化，视图数据也随之变化</li>
+</ul>
+<p><strong>作用</strong>：</p>
+<ul>
+<li>简化复杂查询</li>
+<li>限制数据访问</li>
+</ul>
+<p><strong>分类</strong>：简单（单表，无运算）、复杂（单表，有运算）、连接（多表）</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace  视图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 </span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,hirdate <span class="keyword">from</span> emp;<span class="comment">--简单</span></span><br><span class="line">#查询视图上的数据,与操作表一致</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v_emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="operator">*</span>) count,<span class="built_in">min</span>(sal) min <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno; <span class="comment">--复杂</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>修改</strong>：简单（update、delete语句，影响基表数据）、复杂（不允许）</p>
+<p>​			只读视图：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> 试图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 <span class="keyword">with</span> read <span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> 视图名</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h2><p><strong>特点</strong>：oracle提供的用于产生一系列唯一数字值的数据库对象</p>
+<p><strong>作用</strong>：oracle数据库中主要用序列来实现主键自增的功能</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> SEQUENCE sequence #创建序列名称</span><br><span class="line">[INCREMENT <span class="keyword">BY</span> n] #递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默认是 <span class="number">1</span></span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> n] #开始的值,递增默认是 minvalue 递减是 maxvalue</span><br><span class="line">[&#123;MAXVALUE n <span class="operator">|</span> NOMAXVALUE&#125;] #最大值 </span><br><span class="line">[&#123;MINVALUE n <span class="operator">|</span> NOMINVALUE&#125;] #最小值</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span> <span class="operator">|</span> NOCYCLE&#125;] #循环<span class="operator">/</span>不循环</span><br><span class="line">[&#123;CACHE n <span class="operator">|</span> NOCACHE&#125;];#分配并存入到内存中，默认<span class="number">20</span>个</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> sequence dept_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">100</span></span><br><span class="line">increment <span class="keyword">by</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--使用nextval获取序列的下一个值，currval获取序列的当前值</span></span><br><span class="line"><span class="keyword">select</span> dept_seq.nextval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> dept_seq.currval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(dept_seq.nextval,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> sequence 序列名;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong>特点</strong>：允许直接访问数据表中某一数据行的树型结构</p>
+<ul>
+<li>一旦建立就将被oracle系统自动维护</li>
+<li>查询语句中不用指定使用哪个索引，会自动使用</li>
+<li>I&#x2F;O操作比对表的操作要少很多</li>
+<li>独立于表的对象， 可以存放在与表不同的表空间中</li>
+</ul>
+<p><strong>原则</strong>：</p>
+<ul>
+<li>适合建立索引的列<ul>
+<li>主键列和唯一约束列一定要建立索引，主键列，唯一约束的列，数据库会自动创建索引</li>
+<li>经常查询的数据列</li>
+<li>经常出现在where子句中的列</li>
+</ul>
 </li>
-<li><p>以$结尾：普通用户</p>
+<li>不适合<ul>
+<li>常修改的，少量数据的，重复值多的</li>
+</ul>
 </li>
 </ul>
-<p><strong>切换用户</strong>（CentOS）：<br>su [用户名]<br>su - [用户名]</p>
-<p><strong>基础命令</strong> ：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command [-option][parameter1,parameter...]</span><br><span class="line">命令【选项】【参数】</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-option是命令的选项，分为长选项和短选项， - 是短选项, -- 是长选项，例</span><br><span class="line">如： -S,-h,--size,--help</span><br></pre></td></tr></table></figure>
+<p><strong>分类</strong>：聚集索引（索引的顺序和表的记录的顺序一致）、非聚集索引、单列索引、多列索引</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index 索引名 <span class="keyword">on</span> 表名(字段)</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> index emp_ename <span class="keyword">on</span> emp(ename);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd [目标·的位置]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">/ 切换到根目录</span><br><span class="line">.. 回到上一级目录</span><br><span class="line">. 当前目录</span><br><span class="line">- 显示并打开到上一次操作的目录</span><br><span class="line">~ 当前用户的宿主目录（eg:# cd ~用户名 进入某个用户的家目录）</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls [目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-a(all) 显示所有文件和目录，包括隐藏文件，隐藏文件是文件名</span><br><span class="line">以 &quot;.&quot; 开始的文件</span><br><span class="line">-l (long ) 显示详细信息</span><br><span class="line">-R（recursive） 递归显示当前目录下所有目录</span><br><span class="line">-r (reverse) 逆序排序</span><br><span class="line">-t（time） 按修改时间排序（降序）</span><br><span class="line">ll 相当于 ls –l</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-L 显示链接路径，当前路径，默认使用的是这个</span><br><span class="line">-P 物理路径</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat [filename]</span><br><span class="line">cat &gt;[filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-A 显示所有内容，包括隐藏的字符</span><br><span class="line">-n 显示行号</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">less [filename]</span><br><span class="line">more [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">空格或b:显示下一页，enter键 显示下一行，q或Q退出</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">head [filename]</span><br><span class="line">tail [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-n 指定行数</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch </span><br><span class="line">---------------------------------------------------------</span><br><span class="line">touch  a.txt  b.txt  </span><br><span class="line">touch &#123;a.txt，b.txt&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir [directories_name]</span><br><span class="line">rmdir [directories_name]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-p -p 父目录不存在情况下先生成父目录 （parents）</span><br><span class="line">-p 递归删除子目录</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cp</span><br><span class="line">cp 1.txt 2.txt 3.txt /home/wushun/test2/</span><br><span class="line">cp test2 -r test3</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-r -R recursive 递归处理，复制目录</span><br><span class="line">-p 保留文件属性 （原文件的时间不变）</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mv</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件test.log重命名为test1.txt</span></span><br><span class="line">mv test.log test1.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将test1.txt文件移到目录test3中</span></span><br><span class="line">mv test1.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件log1.txt,log2.txt,log3.txt移动到目录test3中。</span></span><br><span class="line">mv log1.txt log2.txt log3.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</span></span><br><span class="line">mv -i log1.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，即使file2存在，也是直接覆盖掉</span></span><br><span class="line">mv -f log3.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果目录dir2不存在，将目录dir1改名为dir2；否则，将dir1移动到dir2中。</span></span><br><span class="line">mv dir1 dir2</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用</span></span><br><span class="line">rm -rf [filname]</span><br></pre></td></tr></table></figure>
-
-<h2 id="VIM基本操作"><a href="#VIM基本操作" class="headerlink" title="VIM基本操作"></a>VIM基本操作</h2><p><strong>命令模式</strong> ：esc键退出</p>
-<p><strong>输入模式</strong> ： 输入命令i、附加命令a、打开命令o、修改命令c、取代命令r或替换命令s</p>
-<p><strong>编辑模式（末行模式）</strong>： “：”键即可进</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">set</span> <span class="keyword">nu</span> 				设置行号</span><br><span class="line">:<span class="keyword">set</span> nonu 				取消行号</span><br><span class="line">ggG 					到第一行到最后一行</span><br><span class="line">nG 						到第n行</span><br><span class="line">:n 						到第n行</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">:<span class="keyword">w</span> 						保存修改</span><br><span class="line">new_filename			另存为指定文件</span><br><span class="line">:<span class="keyword">w</span> &gt;&gt; <span class="keyword">a</span>.txt 			内容追加到<span class="keyword">a</span>.txt文件中 文件需存在</span><br><span class="line">:<span class="keyword">wq</span> 					保存修改并退出</span><br><span class="line">shift+zz（ZZ） 			快捷键，保存修改并退出</span><br><span class="line">:q! 					不保存修改退出</span><br><span class="line">:wq!					保存修改并退出（文件所有者可忽略文件的只读属性）</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">yy、Y 					复制当前行</span><br><span class="line">nyy、nY 					复制当前行以下n行</span><br><span class="line">dd 						 剪切当前行</span><br><span class="line">ndd 					 剪切当前行以下n行</span><br><span class="line"><span class="keyword">p</span>、<span class="keyword">P</span>     			    粘贴在当前光标所在行下 或行上</span><br></pre></td></tr></table></figure>
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="文档归档与解压缩"><a href="#文档归档与解压缩" class="headerlink" title="文档归档与解压缩"></a>文档归档与解压缩</h2><h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gzip[参数][文件或者目录]</span><br><span class="line"></span><br><span class="line">多出&quot;.gz&quot;的扩展名。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 将压缩数据输出到标准输出中，保留源文件</span><br><span class="line">-d 对压缩文件进行解压缩。</span><br><span class="line">-r 递归压缩指定目录下以及子目录下的所有文件。</span><br><span class="line">-v 对于每个压缩和解压缩的文件，显示相应的文件名和压缩比。</span><br><span class="line">-n(n表示数字)</span><br><span class="line">	用于指定压缩等级，-1 压缩等级最低，压缩比最差；-9 压缩比</span><br><span class="line">最高。默认压缩比是 -6。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#不保留原文件的压缩</span><br><span class="line">gzip 1.txt</span><br><span class="line">#保留原文件的压缩</span><br><span class="line">gzip -c 1.txt&gt;1.txt.gz</span><br><span class="line">#不保留源文件的解压</span><br><span class="line">gunzip 1.txt.gz</span><br><span class="line">gzip -d 345.txt.gz</span><br><span class="line">#保留源文件的解压</span><br><span class="line">gunzip -c 1.txt.gz&gt;4.txt</span><br></pre></td></tr></table></figure>
-
-<h3 id="bzip"><a href="#bzip" class="headerlink" title="bzip"></a>bzip</h3><p>略</p>
-<h3 id="tar-打包"><a href="#tar-打包" class="headerlink" title="tar-打包"></a>tar-打包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">tar[参数][文件或者目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 建立一个压缩文件的参数指令（create），后缀是.tar</span><br><span class="line">-x 解开一个压缩文件的参数指令（extract）</span><br><span class="line">-z 以gzip命令压缩/解压缩</span><br><span class="line">-j 以bzip2命令压缩/解压缩</span><br><span class="line">-v 压缩的过程中显示文件（verbose）</span><br><span class="line">-f 指定文件名,必选项</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#打包</span><br><span class="line">tar -cf test.tar 1.txt 2.txt 3.txt</span><br><span class="line">#解包，f参数必须放在后面</span><br><span class="line">tar -xzf test.tar</span><br><span class="line">#解压缩并解包</span><br><span class="line">tar -zcvf test.tar.gz *.txt</span><br><span class="line">tar -zxvf test.tar.gz</span><br><span class="line">#解压至指定路径，路径需存在</span><br><span class="line">tar -zxvf test.tar.gz test </span><br></pre></td></tr></table></figure>
 
 
+<h2 id="约束（constraint）"><a href="#约束（constraint）" class="headerlink" title="约束（constraint）"></a>约束（constraint）</h2><p><strong>特点</strong>：</p>
+<ul>
+<li>在数据表上强制执行的一些数据校验规则，当执行DML语句时，数据必须符合这些规则，如果不符合则无法执行</li>
+<li>可以保证数据表中数据的完整性，保证数据间的商业逻辑</li>
+</ul>
+<p><strong>分类</strong>：</p>
+<ul>
+<li>非空约束（not null）<br>非空约束简称nn，约束列的值不能是空值</li>
+<li>唯一约束(unique)<br>唯一约束简称uk，约束列值必须是唯一的值</li>
+<li>主键约束(primary key)<br>主键约束简称pk，约束列的值必须是非空且唯一的值</li>
+<li>外键约束(foregin key)<br>外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</li>
+<li>检查约束(check)<br>检查约束通过一定的约束条件来限定列的值的范围，比如说限制某列的值只能是男或者女</li>
+</ul>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(</span><br><span class="line">id number(<span class="number">4</span>) <span class="keyword">primary</span> key,</span><br><span class="line">name varchar2(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">email varchar2(<span class="number">30</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="keyword">constraint</span> emial_un <span class="keyword">unique</span>(email),</span><br><span class="line"><span class="keyword">constraint</span> gender_ck <span class="keyword">check</span>(gender<span class="operator">=</span><span class="string">&#x27;M&#x27;</span> <span class="keyword">or</span> gender<span class="operator">=</span><span class="string">&#x27;F&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 约束类型(字段);</span><br><span class="line">#为student表的name列添加唯一约束</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">constraint</span> test1_pk <span class="keyword">unique</span>(name);</span><br></pre></td></tr></table></figure>
 
-<h2 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h2><h3 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="(&gt;, &gt;&gt;)"></a>(&gt;, &gt;&gt;)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 覆盖重定向</span><br><span class="line">&gt;&gt; 追加重定向</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp1 (</span><br><span class="line">id number(<span class="number">4</span>),</span><br><span class="line">deptno number(<span class="number">4</span>),</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">40</span>),</span><br><span class="line"><span class="keyword">constraint</span> emp_dept_fk foregin key(deptno) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">add</span> <span class="keyword">constraint</span> emp1_dept_fk <span class="keyword">foreign</span> key(deptno) <span class="keyword">references</span></span><br><span class="line">dept(deptno);</span><br><span class="line"></span><br><span class="line"><span class="comment">--存在主外键关系的表，在删除数据时，需要把有外键关系的所有数据全部删除后，才能删除主表的数据</span></span><br></pre></td></tr></table></figure>
 
-<h3 id=""><a href="#" class="headerlink" title="(  |  )"></a>(  |  )</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12行</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12内容,打印行号</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5 | cat -n</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="文本查找与搜索"><a href="#文本查找与搜索" class="headerlink" title="文本查找与搜索"></a>文本查找与搜索</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>过滤文本文件内容</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-n 输出行数</span><br><span class="line">-w 精确匹配</span><br><span class="line">-i 忽略大小写</span><br><span class="line">-v 反向选择</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/password 包含‘root’的信息</span></span><br><span class="line">grep root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/services 这个文件是是否包含 <span class="string">&#x27;init&#x27;</span>这个字符串，并输出行号</span></span><br><span class="line">grep init -n /etc/services</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">输出不包含root的行</span></span><br><span class="line">grep  -v root /etc/passwd </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">忽略大小写</span></span><br><span class="line">grep -i man /etc/man_db.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">^word 以字符串word开头</span></span><br><span class="line">grep ^root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">–word$ 以字符串word结尾</span></span><br><span class="line">grep bash$ /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤掉注释</span> </span><br><span class="line">grep -v ^# /etc/inittab</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤文件信息</span> </span><br><span class="line">ll /etc | grep yum</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">里的|是一个管道符，意思就是把我们前面命令的结果当做后面命令的输入</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示配置文件中的有效配置(去除空行与注释行)</span></span><br><span class="line">grep ^# /etc/default/useradd | grep -v ^$</span><br></pre></td></tr></table></figure>
-
-<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">find [目录][条件1...]</span><br><span class="line"></span><br><span class="line">-type(f,d,l) 按类型 f:文本文件，d:目录，l:快捷方式</span><br><span class="line">-name 按名称</span><br><span class="line">-size(k、M、G) 按文件的大小来查找</span><br><span class="line">-user 按用户名来查找</span><br><span class="line">-mtime 按修改时间,都是过去的时间，单位是天</span><br><span class="line"></span><br><span class="line">#高级操作</span><br><span class="line">– find [范围] [条件] -exec 处理命令 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"> -exec：额外操作的开始，传递参数一次传递一个</span><br><span class="line">– &#123;&#125;：代表find查询的每一个结果</span><br><span class="line">– \; : 额外操作的结束</span><br><span class="line"></span><br><span class="line">#查找student用的所有文件及目录，并拷贝到/opt目录下</span><br><span class="line">find / -user student -exec cp &#123;&#125; /opt \;</span><br><span class="line">#查找boot目录中大于10M的文件，并拷贝到/optm</span><br><span class="line">find /boot/ -size  +10M  -exec  cp  &#123;&#125;   /opt   \;</span><br></pre></td></tr></table></figure>
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">constraint</span> 约束名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">constraint</span> test1_pk;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删主键</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="RPM"><a href="#RPM" class="headerlink" title="RPM"></a>RPM</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol>
-<li><p>软件包   </p>
-<p>&#x2F;dev&#x2F;sr0   #实际名字</p>
-<p>&#x2F;dev&#x2F;cdrom  #快捷方式</p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>特点</strong>：工作的逻辑单元,一个事务是由一个或多个完成一组的相关行为的<code>SQL</code>语句组成</p>
+<ul>
+<li>确保数据库的完整性<ul>
+<li>原子性(Atomicity)</li>
+<li>一致性(Consistency)</li>
+<li>隔离性(Isolation)</li>
+<li>持久性(durability)</li>
+</ul>
 </li>
-<li><p>mount命令进行挂载</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">建立挂载目录/dvd</span><br><span class="line">mount  /dev/cdrom   /dvd</span><br><span class="line">umount /dvd </span><br><span class="line"></span><br><span class="line">专门挂载目录/mnt</span><br><span class="line">mount /dev/cdrom /mnt</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">命令格式：rpm -q[子选项] [软件名称]</span><br><span class="line">命令选项：</span><br><span class="line">-a： 列出已安装的所有软件包</span><br><span class="line">-i： 查看指定软件的详细信息</span><br><span class="line">-l： 查看指定软件的文件安装清单</span><br><span class="line">-p： 用于查询未安装的包</span><br><span class="line">-f： 查询指定的文件是由那个程序包安装生成的</span><br><span class="line"></span><br><span class="line"># 常用</span><br><span class="line">rpm -q vsftpd</span><br><span class="line"></span><br><span class="line"># 已安装</span><br><span class="line">rpm -qa | grep vim</span><br><span class="line">rpm -ql firefox  #显示软件的安装清单</span><br><span class="line">rpm -qi firefox  #显示软件的信息</span><br><span class="line"></span><br><span class="line"># 文件属于哪个软件</span><br><span class="line">rpm -qf /etc/passwd</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="常见的软件包"><a href="#常见的软件包" class="headerlink" title="常见的软件包"></a>常见的软件包</h3><p>源码包:</p>
-<p>​	通常以.tar.gz,tar.bz2格式的压缩包提供包含程序的原始代码文件</p>
-<p>deb软件包:</p>
-<p>​	扩展名为.deb，适用于debian系列的linux</p>
-<p>rpm软件包( 区别于Windows的分散安装):</p>
-<p>​	扩展名为.rpm，适用于RedHat系列</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">软件名-版本信息.操作系统.硬件架构.rpm</span><br><span class="line">firefox-52.7.0-1.el7.centos.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装和卸载-rpm软件包"><a href="#安装和卸载-rpm软件包" class="headerlink" title="安装和卸载-rpm软件包"></a>安装和卸载-rpm软件包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">格式：rpm -i RPM包文件...</span><br><span class="line">辅助选项：</span><br><span class="line">-v： 显示细节信息</span><br><span class="line">-h： 以#号显示安装进度</span><br><span class="line">--force： 强制安装、覆盖安装</span><br><span class="line">--test： 测试安装，不做真实安装动作</span><br><span class="line"></span><br><span class="line">格式：rpm -e 软件包</span><br><span class="line">常用选项：</span><br><span class="line">--alimatches 卸载匹配所有指定名称的软件包的所有版本</span><br><span class="line">--nodeps 忽略依赖关系</span><br><span class="line">--test 测试卸载，不做真实卸载动作</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><p>解决依赖关系问题</p>
-<p>服务端：</p>
-<p>​	显示光盘的内容，挂载光驱设备</p>
-<p>客户端：</p>
-<p>​	书写客户端配置文件，指定服务器位置 &#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">配置固定格式：</span><br><span class="line">[仓库名称] ：自定义名称，具有唯一性</span><br><span class="line">配置项=值</span><br><span class="line">示例1：</span><br><span class="line">baseurl=file:///file</span><br><span class="line">[iweb028]name=hahaxixi</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0 #不检测红帽签名</span><br><span class="line"></span><br><span class="line">示例2：</span><br><span class="line">[iweb028]name=centos7</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1gpg</span><br><span class="line">check=1</span><br><span class="line">gpgkey=file:///mnt/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">验证是否配置成功</span><br><span class="line">[root@localhost ~]# yum repolist #列出仓库的信息 </span><br></pre></td></tr></table></figure>
-
-<p>流程：</p>
-<pre><code>yum命令--&gt;/etc/yum.repos.d/*.repo--&gt;得到服务器的baseurl=file:///file
-</code></pre>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装 yum install</span><br><span class="line">常用选项：</span><br><span class="line">-y： 自动安装 ，无需确认</span><br><span class="line">yum -y install  gcc</span><br><span class="line"></span><br><span class="line">卸载yum remove</span><br><span class="line">yum remove mariadb-server</span><br><span class="line"></span><br><span class="line">查询 yum list</span><br><span class="line">yum list bash</span><br><span class="line">yum search ftp   #模糊查询包含ftp即可</span><br><span class="line"></span><br><span class="line">清空yum的缓存</span><br><span class="line"> yum clean all </span><br><span class="line"> </span><br><span class="line">在你不知道具体包名时</span><br><span class="line">yum provides 想安装的软件名称 是由那个软件包提供，再安装这软件包即可</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户账户"><a href="#用户账户" class="headerlink" title="用户账户"></a>用户账户</h3><p>唯一标识：UID(编号从0开始，默认最大值60000)，例如：zhangsan（UID1200）</p>
-<ul>
-<li>管理员root的UID:永远为0</li>
-<li>普通用户的UID:默认从1000开始</li>
+<li>所有的事务都是隐式开始的</li>
+<li>须显示使用commit和rollback语句结束</li>
+<li>默认未非自动提交事务模式</li>
 </ul>
-<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建： 命令useradd</span><br><span class="line">	– 格式：useradd [选项]... 用户名</span><br><span class="line">	•常用命令选项</span><br><span class="line">	-u： 指定 UID 标记号</span><br><span class="line">	-d： 指定宿主目录（家目录），缺省为 /home/用户名</span><br><span class="line">	-G： 指定所属的附加组,前提要存在</span><br><span class="line">	-s： 指定用户的登录解释器</span><br><span class="line"></span><br><span class="line">useradd -u 1400 iweb028</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">修改： 命令格式：usermod [选项]... 用户名</span><br><span class="line">	常用命令选项：</span><br><span class="line">	-l： 更改用户帐号的登录名称</span><br><span class="line">	-u： 用户id</span><br><span class="line">	-d： 家目录路径</span><br><span class="line">	-s： 登录解释器</span><br><span class="line">	-G： 附加组 //重置附加组</span><br><span class="line">	</span><br><span class="line">usermod -u 1600 abc3</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置密码：passwd [选项]... 用户名</span><br><span class="line">	</span><br><span class="line">passwd abc3</span><br><span class="line">echo 123  |  passwd --stdin abc3 #非交互式设置密码</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除： 格式：userdel [-r] 用户名</span><br><span class="line">添加 -r 选项，宿主目录/用户邮件也一并删除</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询id： id 用户名</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="组账户"><a href="#组账户" class="headerlink" title="组账户"></a>组账户</h3><p>统一管理用户账户</p>
+<p><strong>控制语句</strong>：</p>
 <ul>
-<li>唯一标识：GID（编号从0开始，默认最大值60000），例如：sg(1500)</li>
-<li>原则：linux一个用户必须至少属于一个组</li>
+<li>Set transaction 设置事物属性</li>
+<li>Set constrains 设置事物的约束模式</li>
+<li>约束模式是指：在事务中修改数据时,数据库中的约束立即应用于数据,还是将约束推迟到当前事务结束后应用。</li>
+<li>Savepoint 在事务中建立一个存储的点.当事务处理发生异常而回滚事务时,可指定事务回滚到某存储点.然后从该存储点重新执行。</li>
+<li>Release savepoint 删除存储点</li>
+<li>Rollback 回滚事务 取消对数据库所作的任何操作 rollback to 存储点</li>
+<li>Commit 提交事务 对数据库的操作做持久的保存。</li>
 </ul>
-<p>分类： </p>
+<p><strong>隔离不当结果</strong>：</p>
 <ul>
-<li>基本组：由系统创建，与用户同名的组</li>
-<li>附加组(从属组)：由管理员创建，由管理员管理组的成员</li>
+<li>第一类丢失更新———-撤销一个事务时，把其他事务已提交的更新数据也撤销了</li>
+<li>脏读————————–一个事务读到了另一个事务未提交的更新数据</li>
+<li>不可重复读—————–一个事务读到另一个事务已经提交的更改数据</li>
+<li>第二类丢失更新———–一个事务覆盖另一个事务已经提交的更改数据</li>
+<li>幻读—————————一个事务读到另一个事务已经提交的新增或已删除的数据</li>
 </ul>
-<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">新建：groupadd iweb</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">管理：gpasswd [选项]... 组名</span><br><span class="line">-a： 添加组成员，每次只能加一个,追加组成员</span><br><span class="line">-d： 删除组成员，每次只能删一个</span><br><span class="line">-M： 定义组成员用户列表，可设置多个，会覆盖掉原有的组成员</span><br><span class="line">-A： 定义组管理员列表</span><br><span class="line"></span><br><span class="line">#将nb用户添加到stugrp</span><br><span class="line">gpasswd -a nb stugrp</span><br><span class="line">#批量添加组成员，会覆盖原来的成员</span><br><span class="line">gpasswd -M ‘jack,kenji’ stugrp  #定义组成员列表</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">删除： groupdel stugrp</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="本地账户的数据文件"><a href="#本地账户的数据文件" class="headerlink" title="本地账户的数据文件"></a>本地账户的数据文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd #存放用户基本信息配置文件</span><br><span class="line">/etc/shadow #用户的密码信息</span><br><span class="line">/etc/group #存放用户组信息配置文件</span><br><span class="line">/etc/gshadow #组管理信息，组密码信息</span><br></pre></td></tr></table></figure>
-
-<p>其中：基本信息配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# head -1 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">用户名:密码占位符：uid：基本组gid:用户描述信息：家目录：解释器</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@192 bak]# grep abc3 /etc/shadow</span><br><span class="line">abc3:$6$BP6SlU52$NsojEjJUfkaBGkv9Cvr1mEAfW8ASrKWYaIlvwDPwRMl0PC</span><br><span class="line">ecvcLYoZVo0HoipFW2vlNxV2GiV1kUow3fdJ5QD1:18891:0:99999:7:::</span><br><span class="line">#18891 上一次修改密码的时间：自1970-1-1到达上一次修改密码的时间，所经历的天数</span><br><span class="line"></span><br><span class="line">字段1：用户帐号的名称</span><br><span class="line">字段2：加密后的密码字符串</span><br><span class="line">字段3：上次修改密码的时间</span><br><span class="line">字段4：密码的最短有效天数，默认0</span><br><span class="line">字段5：密码的最长有效天数，默认99999</span><br><span class="line">字段6：密码过期前的警告天数，默认7</span><br><span class="line">字段7：密码过期后多少天禁用此用户账号</span><br><span class="line">字段8：帐号失效时间，默认值为空</span><br><span class="line">字段9：保留字段（未使用）</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/group</span><br><span class="line">stugrp:x:1504:nsd06</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/gshadow</span><br><span class="line">stugrp:!:root:</span><br><span class="line">组名:密码加密字符串:组的管理员列表:组成员列表</span><br></pre></td></tr></table></figure>
+<p><strong>操作</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> autocommit;<span class="comment">--查看</span></span><br><span class="line"><span class="keyword">set</span> autocommit <span class="keyword">on</span><span class="operator">|</span>off;更改</span><br><span class="line">#提交和结束事务</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line">#回滚事务</span><br><span class="line"><span class="keyword">rollback</span> [<span class="keyword">to</span> 回滚点];</span><br><span class="line">#设置事务回滚点</span><br><span class="line"><span class="keyword">savepoint</span> 回滚点;</span><br><span class="line">#删除回滚点</span><br><span class="line"><span class="keyword">release</span> 回滚点;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -581,7 +550,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：11:09:31" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：12:24:08" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -604,7 +573,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>结构化查询语言，<code>SQL92</code>标准</p>
+          <span id="more"></span>
+
+<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>结构化查询语言，<code>SQL92</code>标准</p>
 <p>不同数据库厂商又在标准的基础上进行了<strong>个性的扩充</strong></p>
 <p>如：Oracle中字符串使用<code>varchar2</code>，而<code>mysql</code>中使用<code>varchar</code></p>
 <p>​		Oracle习惯全大写：USER_NAME，<code>mysql</code>习惯全小写：user_name</p>
@@ -1046,7 +1017,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/b1ed4171/">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/53d0684b/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/lin.png">
@@ -1060,7 +1031,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/b1ed4171/" class="post-title-link" itemprop="url">博客的优化</a>
+            <a href="/posts/53d0684b/" class="post-title-link" itemprop="url">Linux</a>
         </h2>
 
         <div class="post-meta">
@@ -1077,7 +1048,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-17 15:45:03" itemprop="dateModified" datetime="2022-06-17T15:45:03+08:00">2022-06-17</time>
+                <time title="修改时间：2022-06-18 12:24:22" itemprop="dateModified" datetime="2022-06-18T12:24:22+08:00">2022-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1085,7 +1056,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA%E5%89%8D%E7%AB%AF%E5%8F%8A%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">JAVA前端及前端</span></a>
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a>
                 </span>
             </span>
 
@@ -1100,215 +1071,171 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="hexo-优化"><a href="#hexo-优化" class="headerlink" title="hexo 优化"></a>hexo 优化</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/b1ed4171/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
+          <span id="more"></span>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+<h1 id="Linux-CentOS-基础"><a href="#Linux-CentOS-基础" class="headerlink" title="Linux(CentOS)基础"></a>Linux(CentOS)基础</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>人们规定1970-1-1是UNIX诞生的日期</p>
+<h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="Bridged-桥接"><a href="#Bridged-桥接" class="headerlink" title="Bridged-桥接"></a>Bridged-桥接</h3><p>主机网卡与虚拟机虚拟的网卡利用虚拟网桥进行通信。</p>
+<blockquote>
+<p>类似于把物理主机虚拟为一个交换机， 虚拟机和物理主机一起连接到这个交换机上（网卡是交换模式，即相互访问而互不干扰）</p>
+<p>同一网段</p>
+</blockquote>
+<p>特点： </p>
+<p>1· 容易和局域网中的其他主机ip地址冲突</p>
+<p>2· ip资源紧张不建议使用该模式</p>
+<h3 id="NAT-地址转换"><a href="#NAT-地址转换" class="headerlink" title="NAT- 地址转换"></a>NAT- 地址转换</h3><p>解决上述的ip问题， 但局域网中的其他主机无法访问</p>
+<h3 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h3><p>只与主机相互通讯，虚拟机为独立的系统</p>
+<h3 id="常用网络设置命令"><a href="#常用网络设置命令" class="headerlink" title="常用网络设置命令"></a>常用网络设置命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">reboot #重启主机</span><br><span class="line"></span><br><span class="line">systemctl restart network.service #重启网卡</span><br><span class="line"></span><br><span class="line">ip addr ifconfig #查看IP地址</span><br><span class="line"></span><br><span class="line">ping #检测网络是否通畅</span><br><span class="line"></span><br><span class="line">ctrl+c #结束ping命令</span><br><span class="line"></span><br><span class="line">clear,clear+l #清屏</span><br></pre></td></tr></table></figure>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/293bc84/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/lin.png">
-      <meta itemprop="name" content="modiShuriken">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Keeping">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/293bc84/" class="post-title-link" itemprop="url">Oracle3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-06-16 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-16T00:00:00+08:00">2022-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-18 11:10:58" itemprop="dateModified" datetime="2022-06-18T11:10:58+08:00">2022-06-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>根目录(利用 &#x2F; 表示)：Linux系统的起点（所有的数据都在此目录下)</p>
+<p><strong>文件名颜色的含义</strong>:<br>默认色代表普通文件。例：install.log<br>绿色代表可执行文件。例：rc.news<br>红色代表tar包文件。    例：vim-7.1.tar.bz2<br>蓝色代表目录文件。   例：aa<br>水红代表图象文件。   例：Sunset.jpg<br>青色代表链接文件。   例：rc4.d  （此类文件相当于快捷方式）<br>黄色代表设备文件。   例：fd0</p>
+<h2 id="基础命令操作"><a href="#基础命令操作" class="headerlink" title="基础命令操作"></a>基础命令操作</h2><p><strong>唤出快捷键</strong>：</p>
+<p>虚拟控制台切换(Ctrl+Alt+Fn组合键)<br>ctrl+alt+F1:图形桌面<br>ctrl+alt+F2~F6:字符控制台</p>
+<p><strong>命令行</strong> ：</p>
+<p>提示行：[root@localhost ~]#<br>[当前登录的用户@主机名 当前所在的位置] #</p>
 <ul>
-<li>本身并不包含任何数据</li>
-<li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
-<li>当基表数据发生变化，视图数据也随之变化</li>
-</ul>
-<p><strong>作用</strong>：</p>
-<ul>
-<li>简化复杂查询</li>
-<li>限制数据访问</li>
-</ul>
-<p><strong>分类</strong>：简单（单表，无运算）、复杂（单表，有运算）、连接（多表）</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace  视图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 </span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,hirdate <span class="keyword">from</span> emp;<span class="comment">--简单</span></span><br><span class="line">#查询视图上的数据,与操作表一致</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v_emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="operator">*</span>) count,<span class="built_in">min</span>(sal) min <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno; <span class="comment">--复杂</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>修改</strong>：简单（update、delete语句，影响基表数据）、复杂（不允许）</p>
-<p>​			只读视图：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> 试图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 <span class="keyword">with</span> read <span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> 视图名</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h2><p><strong>特点</strong>：oracle提供的用于产生一系列唯一数字值的数据库对象</p>
-<p><strong>作用</strong>：oracle数据库中主要用序列来实现主键自增的功能</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> SEQUENCE sequence #创建序列名称</span><br><span class="line">[INCREMENT <span class="keyword">BY</span> n] #递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默认是 <span class="number">1</span></span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> n] #开始的值,递增默认是 minvalue 递减是 maxvalue</span><br><span class="line">[&#123;MAXVALUE n <span class="operator">|</span> NOMAXVALUE&#125;] #最大值 </span><br><span class="line">[&#123;MINVALUE n <span class="operator">|</span> NOMINVALUE&#125;] #最小值</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span> <span class="operator">|</span> NOCYCLE&#125;] #循环<span class="operator">/</span>不循环</span><br><span class="line">[&#123;CACHE n <span class="operator">|</span> NOCACHE&#125;];#分配并存入到内存中，默认<span class="number">20</span>个</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> sequence dept_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">100</span></span><br><span class="line">increment <span class="keyword">by</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>使用</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--使用nextval获取序列的下一个值，currval获取序列的当前值</span></span><br><span class="line"><span class="keyword">select</span> dept_seq.nextval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> dept_seq.currval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(dept_seq.nextval,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> sequence 序列名;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong>特点</strong>：允许直接访问数据表中某一数据行的树型结构</p>
-<ul>
-<li>一旦建立就将被oracle系统自动维护</li>
-<li>查询语句中不用指定使用哪个索引，会自动使用</li>
-<li>I&#x2F;O操作比对表的操作要少很多</li>
-<li>独立于表的对象， 可以存放在与表不同的表空间中</li>
-</ul>
-<p><strong>原则</strong>：</p>
-<ul>
-<li>适合建立索引的列<ul>
-<li>主键列和唯一约束列一定要建立索引，主键列，唯一约束的列，数据库会自动创建索引</li>
-<li>经常查询的数据列</li>
-<li>经常出现在where子句中的列</li>
-</ul>
+<li><p>以#结尾：超级管理员root</p>
 </li>
-<li>不适合<ul>
-<li>常修改的，少量数据的，重复值多的</li>
-</ul>
+<li><p>以$结尾：普通用户</p>
 </li>
 </ul>
-<p><strong>分类</strong>：聚集索引（索引的顺序和表的记录的顺序一致）、非聚集索引、单列索引、多列索引</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> index 索引名 <span class="keyword">on</span> 表名(字段)</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> index emp_ename <span class="keyword">on</span> emp(ename);</span><br></pre></td></tr></table></figure>
+<p><strong>切换用户</strong>（CentOS）：<br>su [用户名]<br>su - [用户名]</p>
+<p><strong>基础命令</strong> ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">command [-option][parameter1,parameter...]</span><br><span class="line">命令【选项】【参数】</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-option是命令的选项，分为长选项和短选项， - 是短选项, -- 是长选项，例</span><br><span class="line">如： -S,-h,--size,--help</span><br></pre></td></tr></table></figure>
 
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd [目标·的位置]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">/ 切换到根目录</span><br><span class="line">.. 回到上一级目录</span><br><span class="line">. 当前目录</span><br><span class="line">- 显示并打开到上一次操作的目录</span><br><span class="line">~ 当前用户的宿主目录（eg:# cd ~用户名 进入某个用户的家目录）</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls [目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-a(all) 显示所有文件和目录，包括隐藏文件，隐藏文件是文件名</span><br><span class="line">以 &quot;.&quot; 开始的文件</span><br><span class="line">-l (long ) 显示详细信息</span><br><span class="line">-R（recursive） 递归显示当前目录下所有目录</span><br><span class="line">-r (reverse) 逆序排序</span><br><span class="line">-t（time） 按修改时间排序（降序）</span><br><span class="line">ll 相当于 ls –l</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-L 显示链接路径，当前路径，默认使用的是这个</span><br><span class="line">-P 物理路径</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat [filename]</span><br><span class="line">cat &gt;[filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-A 显示所有内容，包括隐藏的字符</span><br><span class="line">-n 显示行号</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">less [filename]</span><br><span class="line">more [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">空格或b:显示下一页，enter键 显示下一行，q或Q退出</span><br></pre></td></tr></table></figure>
 
-<h2 id="约束（constraint）"><a href="#约束（constraint）" class="headerlink" title="约束（constraint）"></a>约束（constraint）</h2><p><strong>特点</strong>：</p>
-<ul>
-<li>在数据表上强制执行的一些数据校验规则，当执行DML语句时，数据必须符合这些规则，如果不符合则无法执行</li>
-<li>可以保证数据表中数据的完整性，保证数据间的商业逻辑</li>
-</ul>
-<p><strong>分类</strong>：</p>
-<ul>
-<li>非空约束（not null）<br>非空约束简称nn，约束列的值不能是空值</li>
-<li>唯一约束(unique)<br>唯一约束简称uk，约束列值必须是唯一的值</li>
-<li>主键约束(primary key)<br>主键约束简称pk，约束列的值必须是非空且唯一的值</li>
-<li>外键约束(foregin key)<br>外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</li>
-<li>检查约束(check)<br>检查约束通过一定的约束条件来限定列的值的范围，比如说限制某列的值只能是男或者女</li>
-</ul>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(</span><br><span class="line">id number(<span class="number">4</span>) <span class="keyword">primary</span> key,</span><br><span class="line">name varchar2(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">email varchar2(<span class="number">30</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="keyword">constraint</span> emial_un <span class="keyword">unique</span>(email),</span><br><span class="line"><span class="keyword">constraint</span> gender_ck <span class="keyword">check</span>(gender<span class="operator">=</span><span class="string">&#x27;M&#x27;</span> <span class="keyword">or</span> gender<span class="operator">=</span><span class="string">&#x27;F&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 约束类型(字段);</span><br><span class="line">#为student表的name列添加唯一约束</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">constraint</span> test1_pk <span class="keyword">unique</span>(name);</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">head [filename]</span><br><span class="line">tail [filename]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-n 指定行数</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp1 (</span><br><span class="line">id number(<span class="number">4</span>),</span><br><span class="line">deptno number(<span class="number">4</span>),</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">40</span>),</span><br><span class="line"><span class="keyword">constraint</span> emp_dept_fk foregin key(deptno) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">add</span> <span class="keyword">constraint</span> emp1_dept_fk <span class="keyword">foreign</span> key(deptno) <span class="keyword">references</span></span><br><span class="line">dept(deptno);</span><br><span class="line"></span><br><span class="line"><span class="comment">--存在主外键关系的表，在删除数据时，需要把有外键关系的所有数据全部删除后，才能删除主表的数据</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">touch </span><br><span class="line">---------------------------------------------------------</span><br><span class="line">touch  a.txt  b.txt  </span><br><span class="line">touch &#123;a.txt，b.txt&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">constraint</span> 约束名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">constraint</span> test1_pk;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删主键</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir [directories_name]</span><br><span class="line">rmdir [directories_name]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-p -p 父目录不存在情况下先生成父目录 （parents）</span><br><span class="line">-p 递归删除子目录</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cp</span><br><span class="line">cp 1.txt 2.txt 3.txt /home/wushun/test2/</span><br><span class="line">cp test2 -r test3</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-r -R recursive 递归处理，复制目录</span><br><span class="line">-p 保留文件属性 （原文件的时间不变）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mv</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件test.log重命名为test1.txt</span></span><br><span class="line">mv test.log test1.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将test1.txt文件移到目录test3中</span></span><br><span class="line">mv test1.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件log1.txt,log2.txt,log3.txt移动到目录test3中。</span></span><br><span class="line">mv log1.txt log2.txt log3.txt test3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，如果file2已经存在，则询问是否覆盖</span></span><br><span class="line">mv -i log1.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">将文件file1改名为file2，即使file2存在，也是直接覆盖掉</span></span><br><span class="line">mv -f log3.txt log2.txt</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">如果目录dir2不存在，将目录dir1改名为dir2；否则，将dir1移动到dir2中。</span></span><br><span class="line">mv dir1 dir2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">常用</span></span><br><span class="line">rm -rf [filname]</span><br></pre></td></tr></table></figure>
+
+<h2 id="VIM基本操作"><a href="#VIM基本操作" class="headerlink" title="VIM基本操作"></a>VIM基本操作</h2><p><strong>命令模式</strong> ：esc键退出</p>
+<p><strong>输入模式</strong> ： 输入命令i、附加命令a、打开命令o、修改命令c、取代命令r或替换命令s</p>
+<p><strong>编辑模式（末行模式）</strong>： “：”键即可进</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">set</span> <span class="keyword">nu</span> 				设置行号</span><br><span class="line">:<span class="keyword">set</span> nonu 				取消行号</span><br><span class="line">ggG 					到第一行到最后一行</span><br><span class="line">nG 						到第n行</span><br><span class="line">:n 						到第n行</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">:<span class="keyword">w</span> 						保存修改</span><br><span class="line">new_filename			另存为指定文件</span><br><span class="line">:<span class="keyword">w</span> &gt;&gt; <span class="keyword">a</span>.txt 			内容追加到<span class="keyword">a</span>.txt文件中 文件需存在</span><br><span class="line">:<span class="keyword">wq</span> 					保存修改并退出</span><br><span class="line">shift+zz（ZZ） 			快捷键，保存修改并退出</span><br><span class="line">:q! 					不保存修改退出</span><br><span class="line">:wq!					保存修改并退出（文件所有者可忽略文件的只读属性）</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">yy、Y 					复制当前行</span><br><span class="line">nyy、nY 					复制当前行以下n行</span><br><span class="line">dd 						 剪切当前行</span><br><span class="line">ndd 					 剪切当前行以下n行</span><br><span class="line"><span class="keyword">p</span>、<span class="keyword">P</span>     			    粘贴在当前光标所在行下 或行上</span><br></pre></td></tr></table></figure>
 
 
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>特点</strong>：工作的逻辑单元,一个事务是由一个或多个完成一组的相关行为的<code>SQL</code>语句组成</p>
-<ul>
-<li>确保数据库的完整性<ul>
-<li>原子性(Atomicity)</li>
-<li>一致性(Consistency)</li>
-<li>隔离性(Isolation)</li>
-<li>持久性(durability)</li>
-</ul>
+
+<h2 id="文档归档与解压缩"><a href="#文档归档与解压缩" class="headerlink" title="文档归档与解压缩"></a>文档归档与解压缩</h2><h3 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">gzip[参数][文件或者目录]</span><br><span class="line"></span><br><span class="line">多出&quot;.gz&quot;的扩展名。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 将压缩数据输出到标准输出中，保留源文件</span><br><span class="line">-d 对压缩文件进行解压缩。</span><br><span class="line">-r 递归压缩指定目录下以及子目录下的所有文件。</span><br><span class="line">-v 对于每个压缩和解压缩的文件，显示相应的文件名和压缩比。</span><br><span class="line">-n(n表示数字)</span><br><span class="line">	用于指定压缩等级，-1 压缩等级最低，压缩比最差；-9 压缩比</span><br><span class="line">最高。默认压缩比是 -6。</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#不保留原文件的压缩</span><br><span class="line">gzip 1.txt</span><br><span class="line">#保留原文件的压缩</span><br><span class="line">gzip -c 1.txt&gt;1.txt.gz</span><br><span class="line">#不保留源文件的解压</span><br><span class="line">gunzip 1.txt.gz</span><br><span class="line">gzip -d 345.txt.gz</span><br><span class="line">#保留源文件的解压</span><br><span class="line">gunzip -c 1.txt.gz&gt;4.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="bzip"><a href="#bzip" class="headerlink" title="bzip"></a>bzip</h3><p>略</p>
+<h3 id="tar-打包"><a href="#tar-打包" class="headerlink" title="tar-打包"></a>tar-打包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">tar[参数][文件或者目录]</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">-c 建立一个压缩文件的参数指令（create），后缀是.tar</span><br><span class="line">-x 解开一个压缩文件的参数指令（extract）</span><br><span class="line">-z 以gzip命令压缩/解压缩</span><br><span class="line">-j 以bzip2命令压缩/解压缩</span><br><span class="line">-v 压缩的过程中显示文件（verbose）</span><br><span class="line">-f 指定文件名,必选项</span><br><span class="line">---------------------------------------------------------</span><br><span class="line">#打包</span><br><span class="line">tar -cf test.tar 1.txt 2.txt 3.txt</span><br><span class="line">#解包，f参数必须放在后面</span><br><span class="line">tar -xzf test.tar</span><br><span class="line">#解压缩并解包</span><br><span class="line">tar -zcvf test.tar.gz *.txt</span><br><span class="line">tar -zxvf test.tar.gz</span><br><span class="line">#解压至指定路径，路径需存在</span><br><span class="line">tar -zxvf test.tar.gz test </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h2><h3 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="(&gt;, &gt;&gt;)"></a>(&gt;, &gt;&gt;)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 覆盖重定向</span><br><span class="line">&gt;&gt; 追加重定向</span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title="(  |  )"></a>(  |  )</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12行</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示/etc/passwd文件内容的8到12内容,打印行号</span></span><br><span class="line">head -n 12 /et/passwd | tail -n 5 | cat -n</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文本查找与搜索"><a href="#文本查找与搜索" class="headerlink" title="文本查找与搜索"></a>文本查找与搜索</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>过滤文本文件内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-n 输出行数</span><br><span class="line">-w 精确匹配</span><br><span class="line">-i 忽略大小写</span><br><span class="line">-v 反向选择</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/password 包含‘root’的信息</span></span><br><span class="line">grep root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看/etc/services 这个文件是是否包含 <span class="string">&#x27;init&#x27;</span>这个字符串，并输出行号</span></span><br><span class="line">grep init -n /etc/services</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">输出不包含root的行</span></span><br><span class="line">grep  -v root /etc/passwd </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">忽略大小写</span></span><br><span class="line">grep -i man /etc/man_db.conf</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">^word 以字符串word开头</span></span><br><span class="line">grep ^root /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">–word$ 以字符串word结尾</span></span><br><span class="line">grep bash$ /etc/password</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤掉注释</span> </span><br><span class="line">grep -v ^# /etc/inittab</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">过滤文件信息</span> </span><br><span class="line">ll /etc | grep yum</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">里的|是一个管道符，意思就是把我们前面命令的结果当做后面命令的输入</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">显示配置文件中的有效配置(去除空行与注释行)</span></span><br><span class="line">grep ^# /etc/default/useradd | grep -v ^$</span><br></pre></td></tr></table></figure>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">find [目录][条件1...]</span><br><span class="line"></span><br><span class="line">-type(f,d,l) 按类型 f:文本文件，d:目录，l:快捷方式</span><br><span class="line">-name 按名称</span><br><span class="line">-size(k、M、G) 按文件的大小来查找</span><br><span class="line">-user 按用户名来查找</span><br><span class="line">-mtime 按修改时间,都是过去的时间，单位是天</span><br><span class="line"></span><br><span class="line">#高级操作</span><br><span class="line">– find [范围] [条件] -exec 处理命令 &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"> -exec：额外操作的开始，传递参数一次传递一个</span><br><span class="line">– &#123;&#125;：代表find查询的每一个结果</span><br><span class="line">– \; : 额外操作的结束</span><br><span class="line"></span><br><span class="line">#查找student用的所有文件及目录，并拷贝到/opt目录下</span><br><span class="line">find / -user student -exec cp &#123;&#125; /opt \;</span><br><span class="line">#查找boot目录中大于10M的文件，并拷贝到/optm</span><br><span class="line">find /boot/ -size  +10M  -exec  cp  &#123;&#125;   /opt   \;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="RPM"><a href="#RPM" class="headerlink" title="RPM"></a>RPM</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ol>
+<li><p>软件包   </p>
+<p>&#x2F;dev&#x2F;sr0   #实际名字</p>
+<p>&#x2F;dev&#x2F;cdrom  #快捷方式</p>
 </li>
-<li>所有的事务都是隐式开始的</li>
-<li>须显示使用commit和rollback语句结束</li>
-<li>默认未非自动提交事务模式</li>
-</ul>
-<p><strong>控制语句</strong>：</p>
+<li><p>mount命令进行挂载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">建立挂载目录/dvd</span><br><span class="line">mount  /dev/cdrom   /dvd</span><br><span class="line">umount /dvd </span><br><span class="line"></span><br><span class="line">专门挂载目录/mnt</span><br><span class="line">mount /dev/cdrom /mnt</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">命令格式：rpm -q[子选项] [软件名称]</span><br><span class="line">命令选项：</span><br><span class="line">-a： 列出已安装的所有软件包</span><br><span class="line">-i： 查看指定软件的详细信息</span><br><span class="line">-l： 查看指定软件的文件安装清单</span><br><span class="line">-p： 用于查询未安装的包</span><br><span class="line">-f： 查询指定的文件是由那个程序包安装生成的</span><br><span class="line"></span><br><span class="line"># 常用</span><br><span class="line">rpm -q vsftpd</span><br><span class="line"></span><br><span class="line"># 已安装</span><br><span class="line">rpm -qa | grep vim</span><br><span class="line">rpm -ql firefox  #显示软件的安装清单</span><br><span class="line">rpm -qi firefox  #显示软件的信息</span><br><span class="line"></span><br><span class="line"># 文件属于哪个软件</span><br><span class="line">rpm -qf /etc/passwd</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="常见的软件包"><a href="#常见的软件包" class="headerlink" title="常见的软件包"></a>常见的软件包</h3><p>源码包:</p>
+<p>​	通常以.tar.gz,tar.bz2格式的压缩包提供包含程序的原始代码文件</p>
+<p>deb软件包:</p>
+<p>​	扩展名为.deb，适用于debian系列的linux</p>
+<p>rpm软件包( 区别于Windows的分散安装):</p>
+<p>​	扩展名为.rpm，适用于RedHat系列</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">软件名-版本信息.操作系统.硬件架构.rpm</span><br><span class="line">firefox-52.7.0-1.el7.centos.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装和卸载-rpm软件包"><a href="#安装和卸载-rpm软件包" class="headerlink" title="安装和卸载-rpm软件包"></a>安装和卸载-rpm软件包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">格式：rpm -i RPM包文件...</span><br><span class="line">辅助选项：</span><br><span class="line">-v： 显示细节信息</span><br><span class="line">-h： 以#号显示安装进度</span><br><span class="line">--force： 强制安装、覆盖安装</span><br><span class="line">--test： 测试安装，不做真实安装动作</span><br><span class="line"></span><br><span class="line">格式：rpm -e 软件包</span><br><span class="line">常用选项：</span><br><span class="line">--alimatches 卸载匹配所有指定名称的软件包的所有版本</span><br><span class="line">--nodeps 忽略依赖关系</span><br><span class="line">--test 测试卸载，不做真实卸载动作</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><p>解决依赖关系问题</p>
+<p>服务端：</p>
+<p>​	显示光盘的内容，挂载光驱设备</p>
+<p>客户端：</p>
+<p>​	书写客户端配置文件，指定服务器位置 &#x2F;etc&#x2F;yum.repos.d&#x2F;*.repo</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">配置固定格式：</span><br><span class="line">[仓库名称] ：自定义名称，具有唯一性</span><br><span class="line">配置项=值</span><br><span class="line">示例1：</span><br><span class="line">baseurl=file:///file</span><br><span class="line">[iweb028]name=hahaxixi</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=0 #不检测红帽签名</span><br><span class="line"></span><br><span class="line">示例2：</span><br><span class="line">[iweb028]name=centos7</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">enabled=1gpg</span><br><span class="line">check=1</span><br><span class="line">gpgkey=file:///mnt/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">验证是否配置成功</span><br><span class="line">[root@localhost ~]# yum repolist #列出仓库的信息 </span><br></pre></td></tr></table></figure>
+
+<p>流程：</p>
+<pre><code>yum命令--&gt;/etc/yum.repos.d/*.repo--&gt;得到服务器的baseurl=file:///file
+</code></pre>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装 yum install</span><br><span class="line">常用选项：</span><br><span class="line">-y： 自动安装 ，无需确认</span><br><span class="line">yum -y install  gcc</span><br><span class="line"></span><br><span class="line">卸载yum remove</span><br><span class="line">yum remove mariadb-server</span><br><span class="line"></span><br><span class="line">查询 yum list</span><br><span class="line">yum list bash</span><br><span class="line">yum search ftp   #模糊查询包含ftp即可</span><br><span class="line"></span><br><span class="line">清空yum的缓存</span><br><span class="line"> yum clean all </span><br><span class="line"> </span><br><span class="line">在你不知道具体包名时</span><br><span class="line">yum provides 想安装的软件名称 是由那个软件包提供，再安装这软件包即可</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><h3 id="用户账户"><a href="#用户账户" class="headerlink" title="用户账户"></a>用户账户</h3><p>唯一标识：UID(编号从0开始，默认最大值60000)，例如：zhangsan（UID1200）</p>
 <ul>
-<li>Set transaction 设置事物属性</li>
-<li>Set constrains 设置事物的约束模式</li>
-<li>约束模式是指：在事务中修改数据时,数据库中的约束立即应用于数据,还是将约束推迟到当前事务结束后应用。</li>
-<li>Savepoint 在事务中建立一个存储的点.当事务处理发生异常而回滚事务时,可指定事务回滚到某存储点.然后从该存储点重新执行。</li>
-<li>Release savepoint 删除存储点</li>
-<li>Rollback 回滚事务 取消对数据库所作的任何操作 rollback to 存储点</li>
-<li>Commit 提交事务 对数据库的操作做持久的保存。</li>
+<li>管理员root的UID:永远为0</li>
+<li>普通用户的UID:默认从1000开始</li>
 </ul>
-<p><strong>隔离不当结果</strong>：</p>
+<h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建： 命令useradd</span><br><span class="line">	– 格式：useradd [选项]... 用户名</span><br><span class="line">	•常用命令选项</span><br><span class="line">	-u： 指定 UID 标记号</span><br><span class="line">	-d： 指定宿主目录（家目录），缺省为 /home/用户名</span><br><span class="line">	-G： 指定所属的附加组,前提要存在</span><br><span class="line">	-s： 指定用户的登录解释器</span><br><span class="line"></span><br><span class="line">useradd -u 1400 iweb028</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">修改： 命令格式：usermod [选项]... 用户名</span><br><span class="line">	常用命令选项：</span><br><span class="line">	-l： 更改用户帐号的登录名称</span><br><span class="line">	-u： 用户id</span><br><span class="line">	-d： 家目录路径</span><br><span class="line">	-s： 登录解释器</span><br><span class="line">	-G： 附加组 //重置附加组</span><br><span class="line">	</span><br><span class="line">usermod -u 1600 abc3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置密码：passwd [选项]... 用户名</span><br><span class="line">	</span><br><span class="line">passwd abc3</span><br><span class="line">echo 123  |  passwd --stdin abc3 #非交互式设置密码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除： 格式：userdel [-r] 用户名</span><br><span class="line">添加 -r 选项，宿主目录/用户邮件也一并删除</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询id： id 用户名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="组账户"><a href="#组账户" class="headerlink" title="组账户"></a>组账户</h3><p>统一管理用户账户</p>
 <ul>
-<li>第一类丢失更新———-撤销一个事务时，把其他事务已提交的更新数据也撤销了</li>
-<li>脏读————————–一个事务读到了另一个事务未提交的更新数据</li>
-<li>不可重复读—————–一个事务读到另一个事务已经提交的更改数据</li>
-<li>第二类丢失更新———–一个事务覆盖另一个事务已经提交的更改数据</li>
-<li>幻读—————————一个事务读到另一个事务已经提交的新增或已删除的数据</li>
+<li>唯一标识：GID（编号从0开始，默认最大值60000），例如：sg(1500)</li>
+<li>原则：linux一个用户必须至少属于一个组</li>
 </ul>
-<p><strong>操作</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> autocommit;<span class="comment">--查看</span></span><br><span class="line"><span class="keyword">set</span> autocommit <span class="keyword">on</span><span class="operator">|</span>off;更改</span><br><span class="line">#提交和结束事务</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line">#回滚事务</span><br><span class="line"><span class="keyword">rollback</span> [<span class="keyword">to</span> 回滚点];</span><br><span class="line">#设置事务回滚点</span><br><span class="line"><span class="keyword">savepoint</span> 回滚点;</span><br><span class="line">#删除回滚点</span><br><span class="line"><span class="keyword">release</span> 回滚点;</span><br></pre></td></tr></table></figure>
+<p>分类： </p>
+<ul>
+<li>基本组：由系统创建，与用户同名的组</li>
+<li>附加组(从属组)：由管理员创建，由管理员管理组的成员</li>
+</ul>
+<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">新建：groupadd iweb</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">管理：gpasswd [选项]... 组名</span><br><span class="line">-a： 添加组成员，每次只能加一个,追加组成员</span><br><span class="line">-d： 删除组成员，每次只能删一个</span><br><span class="line">-M： 定义组成员用户列表，可设置多个，会覆盖掉原有的组成员</span><br><span class="line">-A： 定义组管理员列表</span><br><span class="line"></span><br><span class="line">#将nb用户添加到stugrp</span><br><span class="line">gpasswd -a nb stugrp</span><br><span class="line">#批量添加组成员，会覆盖原来的成员</span><br><span class="line">gpasswd -M ‘jack,kenji’ stugrp  #定义组成员列表</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">删除： groupdel stugrp</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="本地账户的数据文件"><a href="#本地账户的数据文件" class="headerlink" title="本地账户的数据文件"></a>本地账户的数据文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/passwd #存放用户基本信息配置文件</span><br><span class="line">/etc/shadow #用户的密码信息</span><br><span class="line">/etc/group #存放用户组信息配置文件</span><br><span class="line">/etc/gshadow #组管理信息，组密码信息</span><br></pre></td></tr></table></figure>
+
+<p>其中：基本信息配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# head -1 /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">用户名:密码占位符：uid：基本组gid:用户描述信息：家目录：解释器</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@192 bak]# grep abc3 /etc/shadow</span><br><span class="line">abc3:$6$BP6SlU52$NsojEjJUfkaBGkv9Cvr1mEAfW8ASrKWYaIlvwDPwRMl0PC</span><br><span class="line">ecvcLYoZVo0HoipFW2vlNxV2GiV1kUow3fdJ5QD1:18891:0:99999:7:::</span><br><span class="line">#18891 上一次修改密码的时间：自1970-1-1到达上一次修改密码的时间，所经历的天数</span><br><span class="line"></span><br><span class="line">字段1：用户帐号的名称</span><br><span class="line">字段2：加密后的密码字符串</span><br><span class="line">字段3：上次修改密码的时间</span><br><span class="line">字段4：密码的最短有效天数，默认0</span><br><span class="line">字段5：密码的最长有效天数，默认99999</span><br><span class="line">字段6：密码过期前的警告天数，默认7</span><br><span class="line">字段7：密码过期后多少天禁用此用户账号</span><br><span class="line">字段8：帐号失效时间，默认值为空</span><br><span class="line">字段9：保留字段（未使用）</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/group</span><br><span class="line">stugrp:x:1504:nsd06</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# grep stugrp /etc/gshadow</span><br><span class="line">stugrp:!:root:</span><br><span class="line">组名:密码加密字符串:组的管理员列表:组成员列表</span><br></pre></td></tr></table></figure>
 
 
       
@@ -1360,7 +1287,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-06-18 11:06:04" itemprop="dateModified" datetime="2022-06-18T11:06:04+08:00">2022-06-18</time>
+                <time title="修改时间：2022-06-18 12:24:16" itemprop="dateModified" datetime="2022-06-18T12:24:16+08:00">2022-06-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1383,7 +1310,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
+          <span id="more"></span>
+
+<h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
 <p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
 <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
@@ -1468,6 +1397,87 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 条件测试</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/b1ed4171/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Keeping">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/b1ed4171/" class="post-title-link" itemprop="url">博客的优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-15T00:00:00+08:00">2022-06-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-18 12:22:48" itemprop="dateModified" datetime="2022-06-18T12:22:48+08:00">2022-06-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA%E5%89%8D%E7%AB%AF%E5%8F%8A%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">JAVA前端及前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hexo-优化"><a href="#hexo-优化" class="headerlink" title="hexo 优化"></a>hexo 优化</h1>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/b1ed4171/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
