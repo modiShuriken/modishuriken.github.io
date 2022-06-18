@@ -367,11 +367,11 @@
       </tags>
   </entry>
   <entry>
-    <title>Oracle</title>
+    <title>Oracle1</title>
     <url>/posts/f145fed6/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h1 id="Oracle1"><a href="#Oracle1" class="headerlink" title="Oracle1"></a>Oracle1</h1><span id="more"></span>
 
-<h1 id="Oracle1"><a href="#Oracle1" class="headerlink" title="Oracle1"></a>Oracle1</h1><h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
 <h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
 <li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
 <li>网页客服端端口，会与tomcat的8080端口冲突</li>
@@ -434,9 +434,9 @@
   <entry>
     <title>Linux</title>
     <url>/posts/53d0684b/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h1 id="Linux-CentOS-基础"><a href="#Linux-CentOS-基础" class="headerlink" title="Linux(CentOS)基础"></a>Linux(CentOS)基础</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>人们规定1970-1-1是UNIX诞生的日期</p>
+<span id="more"></span>
 
-<h1 id="Linux-CentOS-基础"><a href="#Linux-CentOS-基础" class="headerlink" title="Linux(CentOS)基础"></a>Linux(CentOS)基础</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>人们规定1970-1-1是UNIX诞生的日期</p>
 <h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><h3 id="Bridged-桥接"><a href="#Bridged-桥接" class="headerlink" title="Bridged-桥接"></a>Bridged-桥接</h3><p>主机网卡与虚拟机虚拟的网卡利用虚拟网桥进行通信。</p>
 <blockquote>
 <p>类似于把物理主机虚拟为一个交换机， 虚拟机和物理主机一起连接到这个交换机上（网卡是交换模式，即相互访问而互不干扰）</p>
@@ -611,9 +611,9 @@
   <entry>
     <title>Oracle3</title>
     <url>/posts/293bc84/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><span id="more"></span>
 
-<h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
+<p><strong>特点</strong>：</p>
 <ul>
 <li>本身并不包含任何数据</li>
 <li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
@@ -753,13 +753,13 @@
   <entry>
     <title>Oracle2</title>
     <url>/posts/75948c12/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>结构化查询语言，<code>SQL92</code>标准</p>
+    <content><![CDATA[<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>结构化查询语言，<code>SQL92</code>标准</p>
 <p>不同数据库厂商又在标准的基础上进行了<strong>个性的扩充</strong></p>
 <p>如：Oracle中字符串使用<code>varchar2</code>，而<code>mysql</code>中使用<code>varchar</code></p>
 <p>​		Oracle习惯全大写：USER_NAME，<code>mysql</code>习惯全小写：user_name</p>
 <p>​		Oracle区分字符串大小写，<code>Mysql</code>不区分字符串大小写</p>
+<span id="more"></span>
+
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
 <li><p>DQL-数据查询语言</p>
 <blockquote>
@@ -1189,9 +1189,9 @@
   <entry>
     <title>shell</title>
     <url>/posts/4592b2fd/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><span id="more"></span>
 
-<h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
+<h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
 <p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
 <h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
@@ -1286,11 +1286,11 @@
   <entry>
     <title>Oracle4</title>
     <url>/posts/9cf72927/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h1 id="PL-x2F-SQL"><a href="#PL-x2F-SQL" class="headerlink" title="PL&#x2F;SQL"></a>PL&#x2F;SQL</h1><p>procedure language &amp; Structured Query Language </p>
+    <content><![CDATA[<h1 id="PL-x2F-SQL"><a href="#PL-x2F-SQL" class="headerlink" title="PL&#x2F;SQL"></a>PL&#x2F;SQL</h1><p>procedure language &amp; Structured Query Language </p>
 <p>过程化编程语言，运行于服务端的编程语言</p>
 <p>对<code>sql</code>语言的扩展，<code>pl/sql</code>不仅允许嵌入<code>sql</code>语言，还可以完成定义变量和常量，允许使用条件语句和循环语句，允许使用例外处理各种错误</p>
+<span id="more"></span>
+
 <h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
 <li><p>有利于客户&#x2F;服务器环境应用的运行：</p>
 <p>​			大量数据处理的应用放在服务器端来执行</p>
