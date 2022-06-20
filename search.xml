@@ -1,440 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>博客个性化</title>
-    <url>/posts/b1ed4171/</url>
-    <content><![CDATA[<p><strong>概述：</strong>个性化定制hexo博客</p>
-<span id="more"></span>
-
-<h2 id="文章内部"><a href="#文章内部" class="headerlink" title="文章内部"></a>文章内部</h2><ul>
-<li>实现博客主页只显示部分文章内容，只需要在<code>md</code>文件某一行插入<code>&lt;!--more--&gt;</code>。首页只会显示标记以前的内容，标记后的内容可以通过阅读更多查阅，也可以设置自动摘录。</li>
-<li>或者自动摘录</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">melody.yml</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
-
-<p>注意：使用自动摘录可能会导致代码区出错。所以如果你想在索引页中显示代码，那么你最好不要使用这个功能！</p>
-<ul>
-<li><p>文件开头设置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: post title</span><br><span class="line">date: 2021-12-31 22:07:24</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">password: </span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="hexo设置"><a href="#hexo设置" class="headerlink" title="hexo设置"></a>hexo设置</h2><h3 id="创建标签页和分类页"><a href="#创建标签页和分类页" class="headerlink" title="创建标签页和分类页"></a>创建标签页和分类页</h3><p>在网站根目录下执行以下代码。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories     #或者tags</span><br></pre></td></tr></table></figure>
-
-<p>Hexo\source 目录中会生成一个 categories 文件夹，文件夹内有一个 index.md 文件，打开此文件，将其中的 type 修改为 categories 即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2021-08-16 10:27:28</span><br><span class="line">type: &quot;categories&quot;           #或者tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="修改文章的链接"><a href="#修改文章的链接" class="headerlink" title="修改文章的链接"></a>修改文章的链接</h3><p>生成简洁且唯一的URL</p>
-<p>安装插件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
-
-<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   #算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     #进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line"></span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line"></span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="网站信息设置"><a href="#网站信息设置" class="headerlink" title="网站信息设置"></a>网站信息设置</h3><ul>
-<li>编辑 <strong>站点配置文件</strong>， 设置 <code>author</code> 为你的昵称。</li>
-<li>编辑 <strong>站点配置文件</strong>， 设置 <code>description</code> 字段为你的站点描述。站点描述可以是你喜欢的一句签名:)</li>
-</ul>
-<h2 id="nextT主题设置"><a href="#nextT主题设置" class="headerlink" title="nextT主题设置"></a>nextT主题设置</h2><p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Link1</a></p>
-<p><a href="https://blog.csdn.net/u012294515/article/details/83094693">Link2</a></p>
-<h3 id="隐藏底部”强力驱动“内容"><a href="#隐藏底部”强力驱动“内容" class="headerlink" title="隐藏底部”强力驱动“内容"></a>隐藏底部”强力驱动“内容</h3><p>打开 themes&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;footer.swig，</p>
-<p>找到下面内容，把这段代码首尾分别加上：<code>&lt;!--</code> 和<code>--&gt;</code>，或者直接删除。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.powered.enable %&#125;</span><br><span class="line">&lt;div class=&quot;powered-by&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.powered&#x27;, &#x27;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#x27; + nofollow + &#x27; href=&quot;https://hexo.io&quot;&gt;Hexo&lt;/a&gt;&#x27;) &#125;&#125;&#123;% if theme.footer.powered.version %&#125; v&#123;&#123; hexo_env(&#x27;version&#x27;) &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.powered.enable and theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;div class=&quot;theme-info&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.theme&#x27;) &#125;&#125; – &#123;#</span><br><span class="line">#&#125;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#123;&#123; nofollow &#125;&#125; href=&quot;https://theme-next.org&quot;&gt;&#123;#</span><br><span class="line">#&#125;NexT.&#123;&#123; theme.scheme &#125;&#125;&#123;#</span><br><span class="line">#&#125;&lt;/a&gt;&#123;% if theme.footer.theme.version %&#125; v&#123;&#123; version &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="移动端显示回顶部按钮"><a href="#移动端显示回顶部按钮" class="headerlink" title="移动端显示回顶部按钮"></a>移动端显示回顶部按钮</h3><p>主题的设计模版是 Muse 或 Mist，就可以直接在主题配置文件中配置：</p>
-<p>修改主题配置<code>themes/next/_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Enable sidebar on narrow view</span><br><span class="line">onmobile: true</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>安装插件<code>hexo-generator-searchdb</code>,执行以下命令:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-
-<p>修改<code>hexo/_config.yml</code>站点配置文件,末尾新增以下代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
-
-<p>修改<code>themes/next/_config.yml</code>主题配置文件，搜索关键字<code>local_search</code>找到如下代码，将<code>enable</code>设置为<code>true</code>，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设置网站图标"><a href="#设置网站图标" class="headerlink" title="设置网站图标"></a>设置网站图标</h3><p>找一张（32 * 32）（16*16）的 ico 图标，或者去别的网站下载或者制作，并将图标名称改为 favicon.ico，然后把图标放在 <code>/themes/next/source/images</code> 里，并且修改主题配置文件：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Put your favicon.ico into `hexo-site/source/` directory.</span><br><span class="line">favicon: /favicon.ico</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="代码块复制选项"><a href="#代码块复制选项" class="headerlink" title="代码块复制选项"></a>代码块复制选项</h3><p>Next6 中自带了复制代码按钮， 在next的配置文件中找到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">border_radius: 8   # 按钮圆滑度</span><br><span class="line">copy_button:  # 设置是否开启代码块复制按钮</span><br><span class="line">	enable: true</span><br><span class="line">	show_result: true  # 是否显示复制成功信息</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="文章加密访问"><a href="#文章加密访问" class="headerlink" title="文章加密访问"></a>文章加密访问</h3><p>打开<code>themes-&gt;next-&gt;layout-&gt;_partials-&gt;head.swig</code>文件,找到这样一段代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;&#123;&#123; pace_js_uri &#125;&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;link href=&quot;&#123;&#123; pace_css_uri &#125;&#125;&quot; rel=&quot;stylesheet&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>然后在下面插入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  &lt;script&gt;</span><br><span class="line">    (function () &#123;</span><br><span class="line">        if (&#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">            if (prompt(&#x27;请输入文章密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">                alert(&#x27;密码错误！&#x27;);</span><br><span class="line">                if (history.length === 1) &#123;</span><br><span class="line">                    location.replace(&quot;http://zxiaoxuan.cn&quot;); // 这里替换成你的首页</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    history.back();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<p>文章内部的开头就要添加password</p>
-<h3 id="修改加载特效"><a href="#修改加载特效" class="headerlink" title="修改加载特效"></a>修改加载特效</h3><p>由于网页不可能一直都秒进，总会等待一段时间的，所以可以设置顶部加载条。</p>
-<p>在主题的配置文件中搜索<code>pace</code>，找到如下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line">  # Themes list:</span><br><span class="line">  # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span><br><span class="line">  # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="更改Google字体库"><a href="#更改Google字体库" class="headerlink" title="更改Google字体库"></a>更改Google字体库</h3><p>改为Google国内的字体库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">host: https://fonts.geekzu.org</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="博客背景图片（未）"><a href="#博客背景图片（未）" class="headerlink" title="博客背景图片（未）"></a>博客背景图片（未）</h3><p>在<code>themes/next/source/css/_custom/custom.styl</code>中添加CSS样式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 背景图片</span><br><span class="line">body::before &#123;</span><br><span class="line">    background-image: url(https://背景图.jpg);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-size: cover;</span><br><span class="line">    background-position: 50% 50%;</span><br><span class="line">    content: &quot; &quot;;</span><br><span class="line">    position: fixed;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    top: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    z-index: -2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="归档页优化（未）"><a href="#归档页优化（未）" class="headerlink" title="归档页优化（未）"></a>归档页优化（未）</h3><p>修改&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post-collapse.swig后的代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% macro render(post) %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;article class=&quot;post post-type-&#123;&#123; post.type | default(&#x27;normal&#x27;) &#125;&#125;&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;</span><br><span class="line">    &lt;header class=&quot;post-header&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125; class=&quot;post-title&quot;&gt;</span><br><span class="line">        &#123;% if post.link %&#125;&#123;# Link posts #&#125;</span><br><span class="line">          &lt;a class=&quot;post-title-link post-title-link-external&quot; target=&quot;_blank&quot; href=&quot;&#123;&#123; url_for(post.link) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">            &#123;&#123; post.title or post.link &#125;&#125;</span><br><span class="line">            &lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">            &lt;a class=&quot;post-title-link&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">              &#123;% if post.type === &#x27;picture&#x27; %&#125;</span><br><span class="line">                &#123;&#123; post.content &#125;&#125;</span><br><span class="line">              &#123;% else %&#125;</span><br><span class="line">                &lt;span itemprop=&quot;name&quot;&gt;&#123;&#123; post.title | default(__(&#x27;post.untitled&#x27;)) &#125;&#125;&lt;/span&gt;</span><br><span class="line">              &#123;% endif %&#125;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">      &lt;/&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;post-meta&quot;&gt;</span><br><span class="line">        &lt;time class=&quot;post-time&quot; itemprop=&quot;dateCreated&quot;</span><br><span class="line">              datetime=&quot;&#123;&#123; moment(post.date).format() &#125;&#125;&quot;</span><br><span class="line">              content=&quot;&#123;&#123; date(post.date, config.date_format) &#125;&#125;&quot; &gt;</span><br><span class="line">          &#123;&#123; date(post.date, &#x27;MM-DD&#x27;) &#125;&#125;</span><br><span class="line">        &lt;/time&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  &lt;/article&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endmacro %&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="追加版权信息（未）"><a href="#追加版权信息（未）" class="headerlink" title="追加版权信息（未）"></a>追加版权信息（未）</h3><ol>
-<li>修改主题<code>配置文件</code>,搜索<code>post_copyright</code></li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_copyright:</span><br><span class="line">- enable: false</span><br><span class="line">+ enable: true</span><br><span class="line">  license: CC BY-NC-SA 3.0</span><br><span class="line">  license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>如果觉得默认不好看,则可以自定义样式,找到<code>themes/next/layout/_macro/post.swig</code>，在<code>footer</code>之前添加如下代码(添加之前确保已添加样式)：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">	  &lt;p id=&quot;div-border-left-red&quot;&gt;</span><br><span class="line">	   &lt;b&gt;本文基于&lt;a target=&quot;_blank&quot; title=&quot;Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)&quot; href=&quot;http://creativecommons.org/licenses/by-sa/4.0/&quot;&gt; 知识共享署名-相同方式共享 4.0 &lt;/a&gt;国际许可协议发布&lt;/b&gt;&lt;br/&gt;</span><br><span class="line">	    &lt;span&gt;</span><br><span class="line">	    &lt;b&gt;本文地址：&lt;/b&gt;&lt;a href=&quot;&#123;&#123; url_for(page.path) &#125;&#125;&quot; title=&quot;&#123;&#123; page.title &#125;&#125;&quot;&gt;&#123;&#123; page.permalink &#125;&#125;&lt;/a&gt;&lt;br/&gt;&lt;b&gt;转载请注明出处，谢谢！&lt;/b&gt;</span><br><span class="line">	    &lt;/span&gt;</span><br><span class="line">	  &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="动态title（未）"><a href="#动态title（未）" class="headerlink" title="动态title（未）"></a>动态title（未）</h3><p><code>themes/next/source/js/src</code>下创建<code>dytitle.js</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var OriginTitile = document.title;</span><br><span class="line">var titleTime;</span><br><span class="line">document.addEventListener(&#x27;visibilitychange&#x27;, function () &#123;</span><br><span class="line">    if (document.hidden) &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/TEP.png&quot;);</span><br><span class="line">        document.title = &#x27;w(ﾟДﾟ)w 出BUG啦！！！！&#x27;;</span><br><span class="line">        clearTimeout(titleTime);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/favicon.png&quot;);</span><br><span class="line">        document.title = &#x27;♪(^∇^*)又好了。。。 &#x27; + OriginTitile;</span><br><span class="line">        titleTime = setTimeout(function () &#123;</span><br><span class="line">            document.title = OriginTitile;</span><br><span class="line">        &#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>修改字段 <code>avatar</code>， 值设置成头像的链接地址。</p>
-<p>地址可以是URI，也可以是主题<code>source/images/</code>目录下</p>
-<h3 id="设置“订阅”"><a href="#设置“订阅”" class="headerlink" title="设置“订阅”"></a>设置“订阅”</h3><p>在主题配置文件中，找到<code>follow_me</code>下面可以设置RSS</p>
-<p>切换到根目录下，然后运行如下代码，安装<code>hexo-generator-feed</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install --save hexo-generator-feed</span><br></pre></td></tr></table></figure>
-
-<p>在<code>hexo</code>的<code>_config.yml</code>中，在最后添加如下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">plugins: hexo-generate-feed</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="添加自定义菜单"><a href="#添加自定义菜单" class="headerlink" title="添加自定义菜单"></a>添加自定义菜单</h3><p>以新建「相册」菜单为例：在博客目录下的 source 文件夹下新建名为 photo 文件夹，然后在 photo 文件夹下新建一个 <a href="https://link.juejin.im/?target=http://index.md">index.md</a> 文件，然后在该文件填写：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 相册</span><br><span class="line">date: 2018-04-16 22:14:07</span><br><span class="line">type: &quot;photo&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<p>然后打开主题配置文件 <code>_config.yml</code>，在 menu 中添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  archives: /archives || archive</span><br><span class="line">  categories: /categories || th</span><br><span class="line">  tags: /tags || tags</span><br><span class="line">  #添加了「相册」菜单</span><br><span class="line">  相册: /photo || camera</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><em>解释下：这里的「相册」是博客中显示的菜单名称，紧跟的 photo 要和前面 index.md 文件的 type 值一致，|| 后面的菜单的图标，图标名称来自于 FontAwesome icon，若没有配置图标，默认会使用问号图标。</em></p>
-</blockquote>
-<h3 id="设置文章封面"><a href="#设置文章封面" class="headerlink" title="设置文章封面"></a>设置文章封面</h3><p>如果只是插入本地图片作为文章封面，即在博客首页的时候会显示文章的封面图片，进入这篇文章的详细页面后，将不显示这张图片。</p>
-<p>按如下方式操作：</p>
-<p>1）修改 <code>\themes\next\layout\_macro\post.swing</code> 文件。将如下代码复制：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if post.summary_img  %&#125;</span><br><span class="line">  &lt;div class=&quot;out-img-topic&quot;&gt;</span><br><span class="line">    &lt;img src=&#123;&#123; post.summary_img &#125;&#125; class=&quot;img-topic&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>2）在新建的文章添加一个字段属性：<code>summary_img</code>。<code>summary_img</code> 的值是图片的路径，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: CSS 各种Hack手段</span><br><span class="line">date: 2017-06-25 03:25:24</span><br><span class="line">categories: 前端</span><br><span class="line">tags: [CSS]</span><br><span class="line">comments: false</span><br><span class="line">summary_img: /images/css-hack-1.png</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>图片存放的文件夹只能新建在 <code>source</code> 目录下。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>JAVA前端及前端</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客建立</title>
-    <url>/posts/78ed23a3/</url>
-    <content><![CDATA[<p><strong>概述：</strong>基于于hexo和GitHub的个人博客</p>
-<span id="more"></span>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用命令</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><ol>
-<li>准备安装包</li>
-<li>next到默认编辑器，我先有notepad3，所以选择它为默认编辑器（有全局path）</li>
-<li>next到<code>Let Git decide</code>，可以默认，也可以选mian</li>
-<li>一直next到实验项，有<code>NEW</code>字样的，都不选</li>
-<li>安装结束</li>
-</ol>
-<h3 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h3><ol>
-<li>安装一直next即可，注意换安装路径</li>
-<li>设置环境变量</li>
-<li>打开安装目录，新建<code>node_global</code>和<code>node_cache</code> 两个文件夹</li>
-<li>输入“cmd”，点击“以管理员身份运行”</li>
-<li>在命令提示符窗口输入<code>npm config set prefix &quot;安装路径\node_global&quot;</code></li>
-<li>接着输入<code>npm config set cache &quot;安装路径\node_cache&quot;</code></li>
-<li>环境变量中设置：<ul>
-<li>系统中：变量名为<code>NODE_PATH</code> ，变量值为<code>安装路径\node_global\node_modules</code> </li>
-<li>用户Path中：更改<code>../Roaming/npm</code>为<code>安装路径\node_global</code></li>
-<li>系统Path中：新建，输入<code>%NODE_PATH%</code></li>
-</ul>
-</li>
-<li>下面的操作都需管理员身份：可在nodejs文件属性-&gt;安全-&gt;编辑-&gt;选择Users-&gt;完全控制-&gt;确定后退出</li>
-<li>管理员cmd输入：<code>npm install -g npm-windows-upgrade</code></li>
-<li>管理员Windows powershell输入：<code>set-ExecutionPolicy RemoteSigned</code>-&gt;Y，确定-&gt;选默认最高</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><ol>
-<li>本地建立一个Hexo文件夹</li>
-<li>在文件夹中，右键-&gt;<code>Git Bash</code></li>
-<li>命令框中安装Hexo</li>
-<li>输入<code>npm install -g hexo</code></li>
-<li>初始化<code>hexoinit</code></li>
-<li>npm install</li>
-<li>hexo server，到此测试基本完成</li>
-<li>下面是重新部署命令，可以不输入</li>
-<li>hexo clean</li>
-<li>hexo generate</li>
-<li>hexo deploy</li>
-<li>以上为本地测试</li>
-</ol>
-<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><ol>
-<li>准备一个仓库<code>modishuriken.github.io</code></li>
-<li>仓库名字后缀一定是<code>github.io</code></li>
-<li>公开的</li>
-<li>用cmd：ping <code>modishuriken.github.io</code></li>
-<li>记住IP地址</li>
-</ol>
-<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h3><ol>
-<li>注册域名</li>
-<li>使用DNS解析服务</li>
-<li>选择域名-&gt;解析设置</li>
-<li>设置两个记录类型<ul>
-<li>记录类型：A、 主机记录：@、 解析路线：默认、记录值：IP地址、TTL：10min</li>
-<li>记录类型：CNAME、 主机记录：www、 解析路线：默认、记录值：<code>modishuriken.github.io</code>、TTL：10min</li>
-</ul>
-</li>
-</ol>
-<h2 id="设置IP解析的地方"><a href="#设置IP解析的地方" class="headerlink" title="设置IP解析的地方"></a>设置IP解析的地方</h2><ol>
-<li>阿里云的DNS解析</li>
-<li>在本地创建的Hexo文件夹下的source文件夹中创建<ul>
-<li>右键新建txt文本-&gt;输入你购买的域名<a href="http://www.modishuriken.top/">www.modishuriken.top</a>  -&gt;保存关闭</li>
-<li>右键该文本重命名-&gt;将.txt后缀去掉-&gt;会提示文件不可用继续确定即可</li>
-</ul>
-</li>
-<li>在GitHub上：<ul>
-<li>进入setting-&gt;Repositories-&gt;选择modishuriken.github.io</li>
-<li>choose Settings</li>
-<li>find GitHub Page</li>
-<li>choose theme and wait a moment</li>
-<li>flash Github Page</li>
-<li>Custom domain -&gt; input: <a href="http://www.modishuriken.top/">www.modishuriken.top</a> -&gt; save</li>
-</ul>
-</li>
-<li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
-<li>deploy: </li>
-<li>type:  git </li>
-<li>repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#111;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#99;&#111;&#109;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
-<li>branch: main</li>
-<li>注意有空格</li>
-<li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
-</ul>
-</li>
-</ol>
-<h2 id="搞定上面的后，进入bash"><a href="#搞定上面的后，进入bash" class="headerlink" title="搞定上面的后，进入bash"></a>搞定上面的后，进入bash</h2><p>git部署至Hexo</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="依次输入"><a href="#依次输入" class="headerlink" title="依次输入"></a>依次输入</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">	生成静态文件</span><br><span class="line">hexo d</span><br><span class="line">	部署到服务器，这一步需要保证Github上拥有本机的公钥</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean 		</span><br><span class="line">		清除缓存文件 (db.json) 和已生成的静态文件 (public)</span><br><span class="line">		在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</span><br><span class="line">		</span><br><span class="line">hexo generate</span><br><span class="line">		生成静态文件</span><br><span class="line">		</span><br><span class="line">hexo deploy</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="日常上传"><a href="#日常上传" class="headerlink" title="日常上传"></a>日常上传</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean //清除缓存</span><br><span class="line">$ hexo g  //生成静态文件</span><br><span class="line">$ hexo d  //上传Github</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="关于使用hexo"><a href="#关于使用hexo" class="headerlink" title="关于使用hexo"></a>关于使用hexo</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">详情</a></p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="网站配置"><a href="#网站配置" class="headerlink" title="网站配置"></a>网站配置</h4><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>title</code></td>
-<td align="left">网站标题</td>
-</tr>
-<tr>
-<td align="left"><code>subtitle</code></td>
-<td align="left">网站副标题</td>
-</tr>
-<tr>
-<td align="left"><code>description</code></td>
-<td align="left">网站描述</td>
-</tr>
-<tr>
-<td align="left"><code>keywords</code></td>
-<td align="left">网站的关键词。支持多个关键词。</td>
-</tr>
-<tr>
-<td align="left"><code>author</code></td>
-<td align="left">您的名字</td>
-</tr>
-<tr>
-<td align="left"><code>language</code></td>
-<td align="left">网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 <code>zh-Hans</code>和 <code>zh-CN</code>。</td>
-</tr>
-<tr>
-<td align="left"><code>timezone</code></td>
-<td align="left">网站时区。Hexo 默认使用您电脑的时区。请参考 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a> 进行设置，如 <code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。一般的，对于中国大陆地区可以使用 <code>Asia/Shanghai</code>。</td>
-</tr>
-</tbody></table>
-<p>其中，<code>description</code>主要用于SEO，告诉搜索引擎一个关于您站点的简单描述，通常建议在其中包含您网站的关键词。<code>author</code>参数用于主题显示文章的作者。</p>
-<h4 id="网址配置"><a href="#网址配置" class="headerlink" title="网址配置"></a>网址配置</h4><table>
-<thead>
-<tr>
-<th align="left">参数</th>
-<th align="left">描述</th>
-<th align="left">默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><code>url</code></td>
-<td align="left">网址, 必须以 <code>http://</code> 或 <code>https://</code> 开头</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>root</code></td>
-<td align="left">网站根目录</td>
-<td align="left"><code>url&#39;s pathname</code></td>
-</tr>
-<tr>
-<td align="left"><code>permalink</code></td>
-<td align="left">文章的 <a href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式</td>
-<td align="left"><code>:year/:month/:day/:title/</code></td>
-</tr>
-<tr>
-<td align="left"><code>permalink_defaults</code></td>
-<td align="left">永久链接中各部分的默认值</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls</code></td>
-<td align="left">改写 <a href="https://hexo.io/zh-cn/docs/variables"><code>permalink</code></a> 的值来美化 URL</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls.trailing_index</code></td>
-<td align="left">是否在永久链接中保留尾部的 <code>index.html</code>，设置为 <code>false</code> 时去除</td>
-<td align="left"><code>true</code></td>
-</tr>
-<tr>
-<td align="left"><code>pretty_urls.trailing_html</code></td>
-<td align="left">是否在永久链接中保留尾部的 <code>.html</code>, 设置为 <code>false</code> 时去除 (<em>对尾部的 <code>index.html</code>无效</em>)</td>
-<td align="left"><code>true</code></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>网站存放在子目录</p>
-<p>如果您的网站存放在子目录中，例如 <code>http://example.com/blog</code>，则请将您的 <code>url</code> 设为 <code>http://example.com/blog</code> 并把 <code>root</code> 设为 <code>/blog/</code>。</p>
-</blockquote>
-<p>例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: false</span><br><span class="line"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>JAVA前端及前端</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>git</tag>
-        <tag>nodejs</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle1</title>
-    <url>/posts/f145fed6/</url>
-    <content><![CDATA[<p><strong>概述：</strong>Oracle数据库的基础安装和用户使用的注意事项</p>
-<span id="more"></span>
-
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
-<h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
-<li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
-<li>网页客服端端口，会与tomcat的8080端口冲突</li>
-<li>如果安装失败，先停掉侦听服务，再停掉Service服务，然后运行安装包，进行卸载</li>
-</ol>
-<h2 id="用户说明"><a href="#用户说明" class="headerlink" title="用户说明"></a>用户说明</h2><ol>
-<li><p>Sys：超级用户，最高限权，具有sysdba角色，<strong>建立数据库</strong></p>
-<blockquote>
-<p>登录语句：sql&gt; conn sys&#x2F;sys as sysdba;</p>
-</blockquote>
-</li>
-<li><p>System：管理员，具有sysoper角色</p>
-<blockquote>
-<p>登录语句：sql&gt; conn system&#x2F;manager;</p>
-</blockquote>
-</li>
-<li><p>scott：普通用户，默认未解锁</p>
-</li>
-</ol>
-<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建</span><br><span class="line">sql&gt; create user 用户名 identified by 密码;</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">sql&gt; alter user 用户名 identified by 密码;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>注意：oralce对权限管理比较严谨，普通用户之间也是默认不能互相访问的，需要互相授权。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sql&gt; grant create session to 用户名;		授予用户创建session的权限，即登陆权限。</span><br><span class="line">sql&gt; alter user 用户名 quota unlimited on USERS;	授予用户使用表空间的权限。</span><br><span class="line">sql&gt; grant create table to 用户名;			授予创建表的权限。</span><br><span class="line">sql&gt; grant drop any table to 用户名;		授予删除任意表的权限</span><br><span class="line">sql&gt; grant insert any table to 用户名;		授予向任意表中插入行的权限</span><br><span class="line">sql&gt; grant update any table to 用户名;		修改任意表中行的权限</span><br><span class="line"></span><br><span class="line">sql&gt; grant select on emp  to 用户名;		授予用户查看指定表的权限</span><br><span class="line">sql&gt; conn 用户名/密码;</span><br><span class="line">sql&gt; select * from scott.emp;				用户可以查看用户scott中的表emp;</span><br><span class="line">sql&gt; revoke select on emp from 用户名;		收回用户的查询权限</span><br><span class="line">sql&gt; revoke all on emp from 用户名;		收回用户的所有权限</span><br><span class="line"></span><br><span class="line">或者管理员登陆</span><br><span class="line">GRANT SELECT,DELETE,UPDATE,INSERT ON scott.emp TO wangcao ;</span><br><span class="line">GRANT ALL PRIVILEGES ON scott.emp to wangcao;</span><br></pre></td></tr></table></figure>
-
-<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>三类：系统权限、角色、对象权限</p>
-<ul>
-<li><p>系统权限：在11g中系统权限有200个,比如create table，UNLIMITED TABLESPACE等</p>
-<blockquote>
-<p>查询当前用户拥有的系统权限：select * from user_sys_privs; </p>
-</blockquote>
-</li>
-<li><p>角色：一类权限的分组，不是很严格的系统可以授予开发用户CONNECT、RESOURCE角色权限</p>
-<blockquote>
-<p>DBA:该角色具有数据库所有的权限。<br>CONNECT:该角色具有连接数据库的权限，和create session的权限一样。<br>RESOURCE:该角色是应用程序开发角色，具有如下权限:</p>
-<p>​					select * from dba_sys_privs where GRANTEE&#x3D;’RESOURCE’; </p>
-</blockquote>
-<blockquote>
-<p>查询当前用户的角色：SELECT * FROM USER_ROLE_PRIVS; </p>
-</blockquote>
-</li>
-<li><p>对象权限：其它拥有用户的对象的权限，包括：<br>SELECT,DELETE,UPDATE,ALTER,INSERT,INDEX,REFERENCES,FLASHBACK,DEBUG,QUERY REWRITE,</p>
-<p>ON COMMIT REFRESH；</p>
-<p>不包括：<strong>drop</strong></p>
-<blockquote>
-<p>查询当前用户拥有的对象权限：SELECT * FROM USER_TAB_PRIVS;</p>
-<p>​														select * from session_privs;</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Oracle</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux(CentOS)基础</title>
     <url>/posts/53d0684b/</url>
     <content><![CDATA[<p><strong>概述：</strong>Linux-CentOS基础操作</p>
@@ -610,149 +176,6 @@
       </categories>
       <tags>
         <tag>linux-centOS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Oracle3</title>
-    <url>/posts/293bc84/</url>
-    <content><![CDATA[<p><strong>概述</strong>：Oracle数据库中的视图、序列、索引、约束、事务</p>
-<span id="more"></span>
-
-<h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
-<ul>
-<li>本身并不包含任何数据</li>
-<li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
-<li>当基表数据发生变化，视图数据也随之变化</li>
-</ul>
-<p><strong>作用</strong>：</p>
-<ul>
-<li>简化复杂查询</li>
-<li>限制数据访问</li>
-</ul>
-<p><strong>分类</strong>：简单（单表，无运算）、复杂（单表，有运算）、连接（多表）</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace  视图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 </span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,hirdate <span class="keyword">from</span> emp;<span class="comment">--简单</span></span><br><span class="line">#查询视图上的数据,与操作表一致</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v_emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="operator">*</span>) count,<span class="built_in">min</span>(sal) min <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno; <span class="comment">--复杂</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>修改</strong>：简单（update、delete语句，影响基表数据）、复杂（不允许）</p>
-<p>​			只读视图：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> 试图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 <span class="keyword">with</span> read <span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> 视图名</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h2><p><strong>特点</strong>：oracle提供的用于产生一系列唯一数字值的数据库对象</p>
-<p><strong>作用</strong>：oracle数据库中主要用序列来实现主键自增的功能</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> SEQUENCE sequence #创建序列名称</span><br><span class="line">[INCREMENT <span class="keyword">BY</span> n] #递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默认是 <span class="number">1</span></span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> n] #开始的值,递增默认是 minvalue 递减是 maxvalue</span><br><span class="line">[&#123;MAXVALUE n <span class="operator">|</span> NOMAXVALUE&#125;] #最大值 </span><br><span class="line">[&#123;MINVALUE n <span class="operator">|</span> NOMINVALUE&#125;] #最小值</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span> <span class="operator">|</span> NOCYCLE&#125;] #循环<span class="operator">/</span>不循环</span><br><span class="line">[&#123;CACHE n <span class="operator">|</span> NOCACHE&#125;];#分配并存入到内存中，默认<span class="number">20</span>个</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> sequence dept_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">100</span></span><br><span class="line">increment <span class="keyword">by</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>使用</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--使用nextval获取序列的下一个值，currval获取序列的当前值</span></span><br><span class="line"><span class="keyword">select</span> dept_seq.nextval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> dept_seq.currval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(dept_seq.nextval,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> sequence 序列名;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong>特点</strong>：允许直接访问数据表中某一数据行的树型结构</p>
-<ul>
-<li>一旦建立就将被oracle系统自动维护</li>
-<li>查询语句中不用指定使用哪个索引，会自动使用</li>
-<li>I&#x2F;O操作比对表的操作要少很多</li>
-<li>独立于表的对象， 可以存放在与表不同的表空间中</li>
-</ul>
-<p><strong>原则</strong>：</p>
-<ul>
-<li>适合建立索引的列<ul>
-<li>主键列和唯一约束列一定要建立索引，主键列，唯一约束的列，数据库会自动创建索引</li>
-<li>经常查询的数据列</li>
-<li>经常出现在where子句中的列</li>
-</ul>
-</li>
-<li>不适合<ul>
-<li>常修改的，少量数据的，重复值多的</li>
-</ul>
-</li>
-</ul>
-<p><strong>分类</strong>：聚集索引（索引的顺序和表的记录的顺序一致）、非聚集索引、单列索引、多列索引</p>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> index 索引名 <span class="keyword">on</span> 表名(字段)</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> index emp_ename <span class="keyword">on</span> emp(ename);</span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="约束（constraint）"><a href="#约束（constraint）" class="headerlink" title="约束（constraint）"></a>约束（constraint）</h2><p><strong>特点</strong>：</p>
-<ul>
-<li>在数据表上强制执行的一些数据校验规则，当执行DML语句时，数据必须符合这些规则，如果不符合则无法执行</li>
-<li>可以保证数据表中数据的完整性，保证数据间的商业逻辑</li>
-</ul>
-<p><strong>分类</strong>：</p>
-<ul>
-<li>非空约束（not null）<br>非空约束简称nn，约束列的值不能是空值</li>
-<li>唯一约束(unique)<br>唯一约束简称uk，约束列值必须是唯一的值</li>
-<li>主键约束(primary key)<br>主键约束简称pk，约束列的值必须是非空且唯一的值</li>
-<li>外键约束(foregin key)<br>外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</li>
-<li>检查约束(check)<br>检查约束通过一定的约束条件来限定列的值的范围，比如说限制某列的值只能是男或者女</li>
-</ul>
-<p><strong>建立</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(</span><br><span class="line">id number(<span class="number">4</span>) <span class="keyword">primary</span> key,</span><br><span class="line">name varchar2(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">email varchar2(<span class="number">30</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="keyword">constraint</span> emial_un <span class="keyword">unique</span>(email),</span><br><span class="line"><span class="keyword">constraint</span> gender_ck <span class="keyword">check</span>(gender<span class="operator">=</span><span class="string">&#x27;M&#x27;</span> <span class="keyword">or</span> gender<span class="operator">=</span><span class="string">&#x27;F&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 约束类型(字段);</span><br><span class="line">#为student表的name列添加唯一约束</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">constraint</span> test1_pk <span class="keyword">unique</span>(name);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp1 (</span><br><span class="line">id number(<span class="number">4</span>),</span><br><span class="line">deptno number(<span class="number">4</span>),</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">40</span>),</span><br><span class="line"><span class="keyword">constraint</span> emp_dept_fk foregin key(deptno) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">add</span> <span class="keyword">constraint</span> emp1_dept_fk <span class="keyword">foreign</span> key(deptno) <span class="keyword">references</span></span><br><span class="line">dept(deptno);</span><br><span class="line"></span><br><span class="line"><span class="comment">--存在主外键关系的表，在删除数据时，需要把有外键关系的所有数据全部删除后，才能删除主表的数据</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>删除</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">constraint</span> 约束名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">constraint</span> test1_pk;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删主键</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>特点</strong>：工作的逻辑单元,一个事务是由一个或多个完成一组的相关行为的<code>SQL</code>语句组成</p>
-<ul>
-<li>确保数据库的完整性<ul>
-<li>原子性(Atomicity)</li>
-<li>一致性(Consistency)</li>
-<li>隔离性(Isolation)</li>
-<li>持久性(durability)</li>
-</ul>
-</li>
-<li>所有的事务都是隐式开始的</li>
-<li>须显示使用commit和rollback语句结束</li>
-<li>默认未非自动提交事务模式</li>
-</ul>
-<p><strong>控制语句</strong>：</p>
-<ul>
-<li>Set transaction 设置事物属性</li>
-<li>Set constrains 设置事物的约束模式</li>
-<li>约束模式是指：在事务中修改数据时,数据库中的约束立即应用于数据,还是将约束推迟到当前事务结束后应用。</li>
-<li>Savepoint 在事务中建立一个存储的点.当事务处理发生异常而回滚事务时,可指定事务回滚到某存储点.然后从该存储点重新执行。</li>
-<li>Release savepoint 删除存储点</li>
-<li>Rollback 回滚事务 取消对数据库所作的任何操作 rollback to 存储点</li>
-<li>Commit 提交事务 对数据库的操作做持久的保存。</li>
-</ul>
-<p><strong>隔离不当结果</strong>：</p>
-<ul>
-<li>第一类丢失更新———-撤销一个事务时，把其他事务已提交的更新数据也撤销了</li>
-<li>脏读————————–一个事务读到了另一个事务未提交的更新数据</li>
-<li>不可重复读—————–一个事务读到另一个事务已经提交的更改数据</li>
-<li>第二类丢失更新———–一个事务覆盖另一个事务已经提交的更改数据</li>
-<li>幻读—————————一个事务读到另一个事务已经提交的新增或已删除的数据</li>
-</ul>
-<p><strong>操作</strong>：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> autocommit;<span class="comment">--查看</span></span><br><span class="line"><span class="keyword">set</span> autocommit <span class="keyword">on</span><span class="operator">|</span>off;更改</span><br><span class="line">#提交和结束事务</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line">#回滚事务</span><br><span class="line"><span class="keyword">rollback</span> [<span class="keyword">to</span> 回滚点];</span><br><span class="line">#设置事务回滚点</span><br><span class="line"><span class="keyword">savepoint</span> 回滚点;</span><br><span class="line">#删除回滚点</span><br><span class="line"><span class="keyword">release</span> 回滚点;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>数据库</category>
-      </categories>
-      <tags>
-        <tag>Oracle</tag>
       </tags>
   </entry>
   <entry>
@@ -1193,104 +616,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Shell</title>
-    <url>/posts/4592b2fd/</url>
-    <content><![CDATA[<p><strong>概述：</strong>Linux中的shell脚本的编写</p>
-<span id="more"></span>
-
-<h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
-<p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
-
-<p>默认解释器<code>/bin/bash</code>的优点</p>
-<ol>
-<li>tab补全</li>
-<li>历史命令 history [n] n为数字； !n 可以执行指定的n行的命令</li>
-<li>有快捷键，支持管道和重定向</li>
-</ol>
-<h3 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h3><ol>
-<li>声明解释器<code>#!/bin/bash</code></li>
-<li>编写注释, 如<code>#这是一个测试shell脚本</code></li>
-<li>执行指令<code>echo helloWorld</code> ，理论上，执行指令可以写无限条，非交互式的指令</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim hello.sh     #注意文件后缀，以下是文件内容</span><br><span class="line">----------------------------------</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这是一脚本</span></span><br><span class="line">echo hellWorld</span><br><span class="line">----------------------------------</span><br><span class="line">:wq				 #退出vim</span><br><span class="line">----------------------------------</span><br><span class="line">chmod +x hello.sh#设置权限，全局</span><br><span class="line">/opt/hello.sh 	 #绝对路径</span><br><span class="line"></span><br><span class="line">bash /opt/hello.sh#直接使用解释器，但会开启新的子进程</span><br><span class="line"></span><br><span class="line">source /opt/hello.sh#实质上使用的默认的解释器 ，不会开启解释器子进程</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 搭建yum仓库</span><br><span class="line">1. 挂载光盘文件到/mnt---------------</span><br><span class="line">mount /dev/cdrom /mnt</span><br><span class="line"></span><br><span class="line">2. 先备份yum仓库配置----------------</span><br><span class="line">mkdir /etc/yum.repo.d/bak</span><br><span class="line">mv /etc/yum.repo.d/*/repo</span><br><span class="line"></span><br><span class="line">3. 在/opt下编写脚本yum.sh，内容如下--</span><br><span class="line">#!/bin/bash</span><br><span class="line">#搭建软件仓库</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">echo &quot;[abc]</span><br><span class="line">name=abctest</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">gpgcheck=0&quot; &gt;&gt; abc.repo</span><br><span class="line"></span><br><span class="line">4. 执行脚本</span><br><span class="line">chmod +x /opt/yum.sh</span><br><span class="line">/opt/yum.sh</span><br><span class="line"></span><br><span class="line">5. 执行成功，验证域名仓库是否搭建成功</span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
-<li>不能以数字开头</li>
-<li>等号左右不留空格</li>
-<li>双引号括起来的内容<code>“$”</code>，<code>“(” </code>和反引号都拥有特殊含义，而单引号括起来的内容都是普通字符</li>
-<li>需要增加变量的值,用双引号包含<code>&quot;$变量名&quot;</code>或用<code>$&#123;变量名&#125;</code>包含变量名</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调用</span></span><br><span class="line">[root@localhost ~]# name=zhangsan</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">调用变量来使用,语法：$变量名</span></span><br><span class="line">[root@localhost ~]# echo $name</span><br><span class="line">zhangsan</span><br><span class="line">[root@localhost ~]# a=10</span><br><span class="line">[root@localhost ~]# echo $&#123;a&#125;RMB</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 设置</span><br><span class="line">命令 set[选项]</span><br><span class="line"></span><br><span class="line">-u: 如果设定此选项，调用未声明的选项时会报错，默认无任何提示</span><br><span class="line">-x: 如果设定此选项，在命令执行之前，会把命令先输出一次</span><br><span class="line">+参数: 取消某个set曾启动的参数</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除</span><br><span class="line">unset [变量名]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER			当前用户名</span><br><span class="line">HOME			当前用户的家目录</span><br><span class="line">UID				当前用户的id号</span><br><span class="line">SHELL			当前用户的解释器</span><br><span class="line">PWD				当前位置</span><br><span class="line">PS1				一级提示符</span><br><span class="line">PS2				二级提示符</span><br><span class="line">PATH			存储执行指令的目录</span><br><span class="line">env 			查看所有环境变量</span><br><span class="line"></span><br><span class="line">RANDOM 			可以产生随机数</span><br></pre></td></tr></table></figure>
-
-<h3 id="预定义变量与位置变量"><a href="#预定义变量与位置变量" class="headerlink" title="预定义变量与位置变量"></a>预定义变量与位置变量</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$n			n为数字，$0表示当前 Shell 脚本程序的名称，$1-9 代 表 第 一 到 第 九个 参 数 , 十 以上 的 参 数 需 要 用 大 括 号 包 含 ， 如 9代表第一到第九个参数,十以上的参数需要用大括号包含，如9代表第一到第九个参数,十以上的参数需要用大括号包含，如&#123;10&#125;</span><br><span class="line"></span><br><span class="line">$* 			这个变量代表命令行中所有的参数，$把所有的参数看成一个整体</span><br><span class="line">$@ 			这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待</span><br><span class="line">$# 			这个变量代表命令行中所有参数的个数</span><br><span class="line">$$ 			随机进程号</span><br><span class="line">$? 			判断上一个任务是否成功，0表示成功，非0表示失败</span><br></pre></td></tr></table></figure>
-
-<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="单双引号"><a href="#单双引号" class="headerlink" title="单双引号"></a>单双引号</h4><p>单引号：可以屏蔽特殊符号，直接当成字符串来处理</p>
-<p>双引号：界定范围，不可屏蔽特殊字符</p>
-<h4 id="反撇号-96-与"><a href="#反撇号-96-与" class="headerlink" title="反撇号&#96;与$()"></a>反撇号&#96;与$()</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a=date</span><br><span class="line">echo $a #输出结果 date</span><br><span class="line"></span><br><span class="line">a=`date`</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br><span class="line"></span><br><span class="line">a=$(date)</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="read交互式指令"><a href="#read交互式指令" class="headerlink" title="read交互式指令"></a>read交互式指令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">read -p “提示的信息” 变量名</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="屏蔽输入"><a href="#屏蔽输入" class="headerlink" title="屏蔽输入"></a>屏蔽输入</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">接上例</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">stty -echo						#屏蔽输入信息</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">stty echo						#显示输入信息</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export b=20 			#定义变量的同时，并发布为全局效果</span><br><span class="line">a=200 					#定义普通变量</span><br><span class="line">export a 				#将已有的变量发布为全局变量</span><br><span class="line">export -n a 			#取消全局效果，恢复局部效果</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># expr可以在运算的同时将结果输出</span><br><span class="line">expr 3 – 1  		减法</span><br><span class="line">expr 2 + 2  		加法</span><br><span class="line">expr 2 &#x27;*&#x27; 2  		乘法</span><br><span class="line">expr 2 \* 2   		使用乘法时，这里使用\代表转义符号，可以屏蔽之后1个字符的特殊效果</span><br><span class="line">expr 4 / 2  		除法</span><br><span class="line">expr 10 % 3  		取余数</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 用$[ ]结构，配合echo输出，同样可以实现加 减 乘 除 取余</span><br><span class="line">echo $[1+1]</span><br><span class="line">echo $[2-1]</span><br><span class="line">echo $[2*2]</span><br><span class="line">echo $[4/2]</span><br><span class="line">echo $[5%3]</span><br><span class="line"></span><br><span class="line">$(())与$[]效果一致</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># let指令，不输出计算结果，专用于创建变量，或者对变量进行自增减</span><br><span class="line">let a=1+1</span><br><span class="line">let a++</span><br><span class="line">let a*=10</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># bc指令可以处理小数的结果 ，参数scale=n可以指定小数保留的位数,quit退出bc模式</span><br><span class="line">echo &quot;10/3&quot; | bc</span><br><span class="line">echo &quot;scal=3;10/3&quot; | bc</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 关系运算符只支持数字，不支持字符串，除非字符串的值是数字</span><br><span class="line">-eq</span><br><span class="line">equal</span><br><span class="line">检测两个数是否相等，相等返回true。</span><br><span class="line">[ $a -eq $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-ne</span><br><span class="line">not equal</span><br><span class="line">检测两个数是否相等，不相等返回true。</span><br><span class="line">[ $a -ne $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-gt </span><br><span class="line">great than</span><br><span class="line">检测左边的数是否大于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -gt $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-lt </span><br><span class="line">less than</span><br><span class="line">检测左边的数是否小于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -lt $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-ge</span><br><span class="line">great than or equal</span><br><span class="line">检测左边的数是否大于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -ge $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-le</span><br><span class="line">less than or equal</span><br><span class="line">检测左边的数是否小于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -le $b ] 返回 true。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">！</span><br><span class="line">非运算，表达式为 true 则返回 false，否则返回 true</span><br><span class="line">[ ! false ] 返回 true。</span><br><span class="line"></span><br><span class="line">-o</span><br><span class="line">或（或者）运算，有一个表达式为 true则返回 true。</span><br><span class="line">[ $a -lt 20 -o $b -gt 100 ] 返回 true。</span><br><span class="line"></span><br><span class="line">-a</span><br><span class="line">与（并且）运算，两个表达式都为 true才返回 true。</span><br><span class="line">[ $a -lt 20 -a $b -gt 100 ] 返回 false。</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 字符串运算</span><br><span class="line">!=</span><br><span class="line">检测两个字符串是否相等，不相等返回true。</span><br><span class="line">[ $a != $b ] 返回true。</span><br><span class="line"></span><br><span class="line">=</span><br><span class="line">检测两个字符串是否相等，相等返回true。</span><br><span class="line">[ $a = $b ] 返回false。</span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">检测字符串长度是否为0，为0返回 true。 </span><br><span class="line">[ -z $a ] 返回 false。</span><br><span class="line"></span><br><span class="line">-n</span><br><span class="line">检测字符串长度是否为0，不为0返回true。</span><br><span class="line">[ -n $a ] 返回 true。</span><br><span class="line"></span><br><span class="line">str </span><br><span class="line">检测字符串是否为空，不为空返回 true。 </span><br><span class="line">[ $a ] 返回 true。</span><br><span class="line">------------------------------------------------------</span><br><span class="line">[ a == a ] 判断字符串a是否等于a，如果相等，返回值就是0</span><br><span class="line">[ root == $USER ] 判断当前用户名是否叫root，如果是，返回值就是0</span><br><span class="line">[ root != $USER ] 判断当前用户名是否不叫root，如果不叫root，返回值就是0</span><br><span class="line">[ -z $a ] 判断变量a是否为空，如果是，返回值是0</span><br><span class="line">[ ! -z $a ] 判断变量a是否不为空，如果是，返回true，0</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 文件测试运算符</span><br><span class="line">-b [file]</span><br><span class="line">检测文件是否是块设备文件，如果是，则返回 true。</span><br><span class="line">[ -b $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-c [file]</span><br><span class="line">检测文件是否是字符设备文件，如果是，则返回true。</span><br><span class="line">[ -c $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-d [file]</span><br><span class="line">检测文件是否是目录，如果是，则返回 true。</span><br><span class="line">[ -d $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-f [file]</span><br><span class="line">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</span><br><span class="line">[ -f $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-g [file]</span><br><span class="line">检测文件是否设置了 SGID 位，如果是，则返回true。</span><br><span class="line">[ -g $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-k [file]</span><br><span class="line">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</span><br><span class="line">[ -k $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-p [file]</span><br><span class="line">检测文件是否是有名管道，如果是，则返回 true。</span><br><span class="line">[ -p $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-u [file]</span><br><span class="line">检测文件是否设置了 SUID 位，如果是，则返回true。</span><br><span class="line">[ -u $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-r [file]</span><br><span class="line">检测文件是否可读，如果是，则返回 true。</span><br><span class="line">[ -r $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-w [file]</span><br><span class="line">检测文件是否可写，如果是，则返回 true。</span><br><span class="line">[ -w $file ] 返回 true</span><br><span class="line"></span><br><span class="line">-x [file]</span><br><span class="line">检测文件是否可执行，如果是，则返回 true。</span><br><span class="line">[ -x $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-s [file]</span><br><span class="line">检测文件是否为空（文件大小是否大于0），不为空返回 true。</span><br><span class="line">[ -s $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-e [file]</span><br><span class="line">检测文件（包括目录）是否存在，如果是，则返回true。</span><br><span class="line">[ -e $file ] 返回 true。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">if 条件测试 ;then </span><br><span class="line">	执行指令 </span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试 ;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for 变量名 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br><span class="line">---------------------------------------</span><br><span class="line">for i in &#123;1..10&#125; 使用常量循环十次</span><br><span class="line"></span><br><span class="line">a=10</span><br><span class="line">for i in $(seq $a)  使用seq命令可以调用变量</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">while 条件测试</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>linux-centOS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Oracle4</title>
     <url>/posts/9cf72927/</url>
     <content><![CDATA[<p><strong>概述：</strong>PL&#x2F;SQL的使用</p>
@@ -1610,6 +935,692 @@
       </categories>
       <tags>
         <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle1</title>
+    <url>/posts/f145fed6/</url>
+    <content><![CDATA[<p><strong>概述：</strong>Oracle数据库的基础安装和用户使用的注意事项</p>
+<span id="more"></span>
+
+<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
+<h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
+<li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
+<li>网页客服端端口，会与tomcat的8080端口冲突</li>
+<li>如果安装失败，先停掉侦听服务，再停掉Service服务，然后运行安装包，进行卸载</li>
+</ol>
+<h2 id="用户说明"><a href="#用户说明" class="headerlink" title="用户说明"></a>用户说明</h2><ol>
+<li><p>Sys：超级用户，最高限权，具有sysdba角色，<strong>建立数据库</strong></p>
+<blockquote>
+<p>登录语句：sql&gt; conn sys&#x2F;sys as sysdba;</p>
+</blockquote>
+</li>
+<li><p>System：管理员，具有sysoper角色</p>
+<blockquote>
+<p>登录语句：sql&gt; conn system&#x2F;manager;</p>
+</blockquote>
+</li>
+<li><p>scott：普通用户，默认未解锁</p>
+</li>
+</ol>
+<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">创建</span><br><span class="line">sql&gt; create user 用户名 identified by 密码;</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">sql&gt; alter user 用户名 identified by 密码;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>注意：oralce对权限管理比较严谨，普通用户之间也是默认不能互相访问的，需要互相授权。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sql&gt; grant create session to 用户名;		授予用户创建session的权限，即登陆权限。</span><br><span class="line">sql&gt; alter user 用户名 quota unlimited on USERS;	授予用户使用表空间的权限。</span><br><span class="line">sql&gt; grant create table to 用户名;			授予创建表的权限。</span><br><span class="line">sql&gt; grant drop any table to 用户名;		授予删除任意表的权限</span><br><span class="line">sql&gt; grant insert any table to 用户名;		授予向任意表中插入行的权限</span><br><span class="line">sql&gt; grant update any table to 用户名;		修改任意表中行的权限</span><br><span class="line"></span><br><span class="line">sql&gt; grant select on emp  to 用户名;		授予用户查看指定表的权限</span><br><span class="line">sql&gt; conn 用户名/密码;</span><br><span class="line">sql&gt; select * from scott.emp;				用户可以查看用户scott中的表emp;</span><br><span class="line">sql&gt; revoke select on emp from 用户名;		收回用户的查询权限</span><br><span class="line">sql&gt; revoke all on emp from 用户名;		收回用户的所有权限</span><br><span class="line"></span><br><span class="line">或者管理员登陆</span><br><span class="line">GRANT SELECT,DELETE,UPDATE,INSERT ON scott.emp TO wangcao ;</span><br><span class="line">GRANT ALL PRIVILEGES ON scott.emp to wangcao;</span><br></pre></td></tr></table></figure>
+
+<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>三类：系统权限、角色、对象权限</p>
+<ul>
+<li><p>系统权限：在11g中系统权限有200个,比如create table，UNLIMITED TABLESPACE等</p>
+<blockquote>
+<p>查询当前用户拥有的系统权限：select * from user_sys_privs; </p>
+</blockquote>
+</li>
+<li><p>角色：一类权限的分组，不是很严格的系统可以授予开发用户CONNECT、RESOURCE角色权限</p>
+<blockquote>
+<p>DBA:该角色具有数据库所有的权限。<br>CONNECT:该角色具有连接数据库的权限，和create session的权限一样。<br>RESOURCE:该角色是应用程序开发角色，具有如下权限:</p>
+<p>​					select * from dba_sys_privs where GRANTEE&#x3D;’RESOURCE’; </p>
+</blockquote>
+<blockquote>
+<p>查询当前用户的角色：SELECT * FROM USER_ROLE_PRIVS; </p>
+</blockquote>
+</li>
+<li><p>对象权限：其它拥有用户的对象的权限，包括：<br>SELECT,DELETE,UPDATE,ALTER,INSERT,INDEX,REFERENCES,FLASHBACK,DEBUG,QUERY REWRITE,</p>
+<p>ON COMMIT REFRESH；</p>
+<p>不包括：<strong>drop</strong></p>
+<blockquote>
+<p>查询当前用户拥有的对象权限：SELECT * FROM USER_TAB_PRIVS;</p>
+<p>​														select * from session_privs;</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Oracle3</title>
+    <url>/posts/293bc84/</url>
+    <content><![CDATA[<p><strong>概述</strong>：Oracle数据库中的视图、序列、索引、约束、事务</p>
+<span id="more"></span>
+
+<h2 id="视图（view）-虚表"><a href="#视图（view）-虚表" class="headerlink" title="视图（view）-虚表"></a>视图（view）-虚表</h2><p><strong>特点</strong>：</p>
+<ul>
+<li>本身并不包含任何数据</li>
+<li>对应于一条select语句，结果集被赋予一个名字，即视图的名字，</li>
+<li>当基表数据发生变化，视图数据也随之变化</li>
+</ul>
+<p><strong>作用</strong>：</p>
+<ul>
+<li>简化复杂查询</li>
+<li>限制数据访问</li>
+</ul>
+<p><strong>分类</strong>：简单（单表，无运算）、复杂（单表，有运算）、连接（多表）</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace  视图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 </span><br><span class="line"><span class="comment">---------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp <span class="keyword">as</span> <span class="keyword">select</span> ename,hirdate <span class="keyword">from</span> emp;<span class="comment">--简单</span></span><br><span class="line">#查询视图上的数据,与操作表一致</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> v_emp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> v_emp1 <span class="keyword">as</span> <span class="keyword">select</span> deptno,<span class="built_in">count</span>(<span class="operator">*</span>) count,<span class="built_in">min</span>(sal) min <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno; <span class="comment">--复杂</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>修改</strong>：简单（update、delete语句，影响基表数据）、复杂（不允许）</p>
+<p>​			只读视图：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> replace <span class="keyword">view</span> 试图名 <span class="keyword">as</span> <span class="keyword">select</span> 子句 <span class="keyword">with</span> read <span class="keyword">only</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">view</span> 视图名</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h2><p><strong>特点</strong>：oracle提供的用于产生一系列唯一数字值的数据库对象</p>
+<p><strong>作用</strong>：oracle数据库中主要用序列来实现主键自增的功能</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> SEQUENCE sequence #创建序列名称</span><br><span class="line">[INCREMENT <span class="keyword">BY</span> n] #递增的序列值是 n 如果 n 是正数就递增,如果是负数就递减 默认是 <span class="number">1</span></span><br><span class="line">[<span class="keyword">START</span> <span class="keyword">WITH</span> n] #开始的值,递增默认是 minvalue 递减是 maxvalue</span><br><span class="line">[&#123;MAXVALUE n <span class="operator">|</span> NOMAXVALUE&#125;] #最大值 </span><br><span class="line">[&#123;MINVALUE n <span class="operator">|</span> NOMINVALUE&#125;] #最小值</span><br><span class="line">[&#123;<span class="keyword">CYCLE</span> <span class="operator">|</span> NOCYCLE&#125;] #循环<span class="operator">/</span>不循环</span><br><span class="line">[&#123;CACHE n <span class="operator">|</span> NOCACHE&#125;];#分配并存入到内存中，默认<span class="number">20</span>个</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> sequence dept_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">100</span></span><br><span class="line">increment <span class="keyword">by</span> <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>使用</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--使用nextval获取序列的下一个值，currval获取序列的当前值</span></span><br><span class="line"><span class="keyword">select</span> dept_seq.nextval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">select</span> dept_seq.currval <span class="keyword">from</span> dual;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(dept_seq.nextval,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> sequence 序列名;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><p><strong>特点</strong>：允许直接访问数据表中某一数据行的树型结构</p>
+<ul>
+<li>一旦建立就将被oracle系统自动维护</li>
+<li>查询语句中不用指定使用哪个索引，会自动使用</li>
+<li>I&#x2F;O操作比对表的操作要少很多</li>
+<li>独立于表的对象， 可以存放在与表不同的表空间中</li>
+</ul>
+<p><strong>原则</strong>：</p>
+<ul>
+<li>适合建立索引的列<ul>
+<li>主键列和唯一约束列一定要建立索引，主键列，唯一约束的列，数据库会自动创建索引</li>
+<li>经常查询的数据列</li>
+<li>经常出现在where子句中的列</li>
+</ul>
+</li>
+<li>不适合<ul>
+<li>常修改的，少量数据的，重复值多的</li>
+</ul>
+</li>
+</ul>
+<p><strong>分类</strong>：聚集索引（索引的顺序和表的记录的顺序一致）、非聚集索引、单列索引、多列索引</p>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> index 索引名 <span class="keyword">on</span> 表名(字段)</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> index emp_ename <span class="keyword">on</span> emp(ename);</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">drop</span> index 索引名</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="约束（constraint）"><a href="#约束（constraint）" class="headerlink" title="约束（constraint）"></a>约束（constraint）</h2><p><strong>特点</strong>：</p>
+<ul>
+<li>在数据表上强制执行的一些数据校验规则，当执行DML语句时，数据必须符合这些规则，如果不符合则无法执行</li>
+<li>可以保证数据表中数据的完整性，保证数据间的商业逻辑</li>
+</ul>
+<p><strong>分类</strong>：</p>
+<ul>
+<li>非空约束（not null）<br>非空约束简称nn，约束列的值不能是空值</li>
+<li>唯一约束(unique)<br>唯一约束简称uk，约束列值必须是唯一的值</li>
+<li>主键约束(primary key)<br>主键约束简称pk，约束列的值必须是非空且唯一的值</li>
+<li>外键约束(foregin key)<br>外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</li>
+<li>检查约束(check)<br>检查约束通过一定的约束条件来限定列的值的范围，比如说限制某列的值只能是男或者女</li>
+</ul>
+<p><strong>建立</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> test1(</span><br><span class="line">id number(<span class="number">4</span>) <span class="keyword">primary</span> key,</span><br><span class="line">name varchar2(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">email varchar2(<span class="number">30</span>),</span><br><span class="line">gender <span class="type">char</span>(<span class="number">1</span>),</span><br><span class="line"><span class="keyword">constraint</span> emial_un <span class="keyword">unique</span>(email),</span><br><span class="line"><span class="keyword">constraint</span> gender_ck <span class="keyword">check</span>(gender<span class="operator">=</span><span class="string">&#x27;M&#x27;</span> <span class="keyword">or</span> gender<span class="operator">=</span><span class="string">&#x27;F&#x27;</span>)</span><br><span class="line">);</span><br><span class="line"><span class="comment">--------------------------------------------------------------</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">add</span> <span class="keyword">constraint</span> 约束名 约束类型(字段);</span><br><span class="line">#为student表的name列添加唯一约束</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> <span class="keyword">constraint</span> test1_pk <span class="keyword">unique</span>(name);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">--外键约束通常用来表示两个表的关系，通常是主从关系，约束从表中的数据必须参考主表的数据</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp1 (</span><br><span class="line">id number(<span class="number">4</span>),</span><br><span class="line">deptno number(<span class="number">4</span>),</span><br><span class="line">name <span class="type">varchar</span>(<span class="number">40</span>),</span><br><span class="line"><span class="keyword">constraint</span> emp_dept_fk foregin key(deptno) <span class="keyword">references</span> dept(deptno)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">add</span> <span class="keyword">constraint</span> emp1_dept_fk <span class="keyword">foreign</span> key(deptno) <span class="keyword">references</span></span><br><span class="line">dept(deptno);</span><br><span class="line"></span><br><span class="line"><span class="comment">--存在主外键关系的表，在删除数据时，需要把有外键关系的所有数据全部删除后，才能删除主表的数据</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>删除</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">constraint</span> 约束名</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">constraint</span> test1_pk;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删主键</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> 表名 <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">primary</span> key;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>特点</strong>：工作的逻辑单元,一个事务是由一个或多个完成一组的相关行为的<code>SQL</code>语句组成</p>
+<ul>
+<li>确保数据库的完整性<ul>
+<li>原子性(Atomicity)</li>
+<li>一致性(Consistency)</li>
+<li>隔离性(Isolation)</li>
+<li>持久性(durability)</li>
+</ul>
+</li>
+<li>所有的事务都是隐式开始的</li>
+<li>须显示使用commit和rollback语句结束</li>
+<li>默认未非自动提交事务模式</li>
+</ul>
+<p><strong>控制语句</strong>：</p>
+<ul>
+<li>Set transaction 设置事物属性</li>
+<li>Set constrains 设置事物的约束模式</li>
+<li>约束模式是指：在事务中修改数据时,数据库中的约束立即应用于数据,还是将约束推迟到当前事务结束后应用。</li>
+<li>Savepoint 在事务中建立一个存储的点.当事务处理发生异常而回滚事务时,可指定事务回滚到某存储点.然后从该存储点重新执行。</li>
+<li>Release savepoint 删除存储点</li>
+<li>Rollback 回滚事务 取消对数据库所作的任何操作 rollback to 存储点</li>
+<li>Commit 提交事务 对数据库的操作做持久的保存。</li>
+</ul>
+<p><strong>隔离不当结果</strong>：</p>
+<ul>
+<li>第一类丢失更新———-撤销一个事务时，把其他事务已提交的更新数据也撤销了</li>
+<li>脏读————————–一个事务读到了另一个事务未提交的更新数据</li>
+<li>不可重复读—————–一个事务读到另一个事务已经提交的更改数据</li>
+<li>第二类丢失更新———–一个事务覆盖另一个事务已经提交的更改数据</li>
+<li>幻读—————————一个事务读到另一个事务已经提交的新增或已删除的数据</li>
+</ul>
+<p><strong>操作</strong>：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">show</span> autocommit;<span class="comment">--查看</span></span><br><span class="line"><span class="keyword">set</span> autocommit <span class="keyword">on</span><span class="operator">|</span>off;更改</span><br><span class="line">#提交和结束事务</span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line">#回滚事务</span><br><span class="line"><span class="keyword">rollback</span> [<span class="keyword">to</span> 回滚点];</span><br><span class="line">#设置事务回滚点</span><br><span class="line"><span class="keyword">savepoint</span> 回滚点;</span><br><span class="line">#删除回滚点</span><br><span class="line"><span class="keyword">release</span> 回滚点;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>Oracle</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客个性化</title>
+    <url>/posts/b1ed4171/</url>
+    <content><![CDATA[<p><strong>概述：</strong>个性化定制hexo博客</p>
+<span id="more"></span>
+
+<h2 id="文章内部"><a href="#文章内部" class="headerlink" title="文章内部"></a>文章内部</h2><ul>
+<li>实现博客主页只显示部分文章内容，只需要在<code>md</code>文件某一行插入<code>&lt;!--more--&gt;</code>。首页只会显示标记以前的内容，标记后的内容可以通过阅读更多查阅，也可以设置自动摘录。</li>
+<li>或者自动摘录</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">melody.yml</span><br><span class="line">auto_excerpt:</span><br><span class="line">  enable: true</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure>
+
+<p>注意：使用自动摘录可能会导致代码区出错。所以如果你想在索引页中显示代码，那么你最好不要使用这个功能！</p>
+<ul>
+<li><p>文件开头设置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: post title</span><br><span class="line">date: 2021-12-31 22:07:24</span><br><span class="line">tags: </span><br><span class="line">categories: </span><br><span class="line">password: </span><br><span class="line">---</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="hexo设置"><a href="#hexo设置" class="headerlink" title="hexo设置"></a>hexo设置</h2><h3 id="创建标签页和分类页"><a href="#创建标签页和分类页" class="headerlink" title="创建标签页和分类页"></a>创建标签页和分类页</h3><p>在网站根目录下执行以下代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new page categories     #或者tags</span><br></pre></td></tr></table></figure>
+
+<p>Hexo\source 目录中会生成一个 categories 文件夹，文件夹内有一个 index.md 文件，打开此文件，将其中的 type 修改为 categories 即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 2021-08-16 10:27:28</span><br><span class="line">type: &quot;categories&quot;           #或者tags</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="修改文章的链接"><a href="#修改文章的链接" class="headerlink" title="修改文章的链接"></a>修改文章的链接</h3><p>生成简洁且唯一的URL</p>
+<p>安装插件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br></pre></td></tr></table></figure>
+
+<p>修改根目录站点配置文件<code>config.yml</code>，改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">permalink: posts/:abbrlink/</span><br><span class="line">abbrlink:</span><br><span class="line">	alg: crc32   #算法： crc16(default) and crc32</span><br><span class="line">	rep: hex     #进制： dec(default) and hex</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">crc16 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/66c8.html</span><br><span class="line"></span><br><span class="line">crc16 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/65535.html</span><br><span class="line">crc32 &amp; hex</span><br><span class="line">https://post.zz173.com/posts/8ddf18fb.html</span><br><span class="line"></span><br><span class="line">crc32 &amp; dec</span><br><span class="line">https://post.zz173.com/posts/1690090958.html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="网站信息设置"><a href="#网站信息设置" class="headerlink" title="网站信息设置"></a>网站信息设置</h3><ul>
+<li>编辑 <strong>站点配置文件</strong>， 设置 <code>author</code> 为你的昵称。</li>
+<li>编辑 <strong>站点配置文件</strong>， 设置 <code>description</code> 字段为你的站点描述。站点描述可以是你喜欢的一句签名:)</li>
+</ul>
+<h2 id="nextT主题设置"><a href="#nextT主题设置" class="headerlink" title="nextT主题设置"></a>nextT主题设置</h2><p><a href="https://blog.csdn.net/as480133937/article/details/100138838">Link1</a></p>
+<p><a href="https://blog.csdn.net/u012294515/article/details/83094693">Link2</a></p>
+<h3 id="隐藏底部”强力驱动“内容"><a href="#隐藏底部”强力驱动“内容" class="headerlink" title="隐藏底部”强力驱动“内容"></a>隐藏底部”强力驱动“内容</h3><p>打开 themes&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;footer.swig，</p>
+<p>找到下面内容，把这段代码首尾分别加上：<code>&lt;!--</code> 和<code>--&gt;</code>，或者直接删除。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if theme.footer.powered.enable %&#125;</span><br><span class="line">&lt;div class=&quot;powered-by&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.powered&#x27;, &#x27;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#x27; + nofollow + &#x27; href=&quot;https://hexo.io&quot;&gt;Hexo&lt;/a&gt;&#x27;) &#125;&#125;&#123;% if theme.footer.powered.version %&#125; v&#123;&#123; hexo_env(&#x27;version&#x27;) &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.powered.enable and theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;span class=&quot;post-meta-divider&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&#123;% if theme.footer.theme.enable %&#125;</span><br><span class="line">&lt;div class=&quot;theme-info&quot;&gt;&#123;#</span><br><span class="line">#&#125;&#123;&#123; __(&#x27;footer.theme&#x27;) &#125;&#125; – &#123;#</span><br><span class="line">#&#125;&lt;a class=&quot;theme-link&quot; target=&quot;_blank&quot;&#123;&#123; nofollow &#125;&#125; href=&quot;https://theme-next.org&quot;&gt;&#123;#</span><br><span class="line">#&#125;NexT.&#123;&#123; theme.scheme &#125;&#125;&#123;#</span><br><span class="line">#&#125;&lt;/a&gt;&#123;% if theme.footer.theme.version %&#125; v&#123;&#123; version &#125;&#125;&#123;% endif %&#125;&#123;#</span><br><span class="line">#&#125;&lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="移动端显示回顶部按钮"><a href="#移动端显示回顶部按钮" class="headerlink" title="移动端显示回顶部按钮"></a>移动端显示回顶部按钮</h3><p>主题的设计模版是 Muse 或 Mist，就可以直接在主题配置文件中配置：</p>
+<p>修改主题配置<code>themes/next/_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Enable sidebar on narrow view</span><br><span class="line">onmobile: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>安装插件<code>hexo-generator-searchdb</code>,执行以下命令:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>hexo/_config.yml</code>站点配置文件,末尾新增以下代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
+
+<p>修改<code>themes/next/_config.yml</code>主题配置文件，搜索关键字<code>local_search</code>找到如下代码，将<code>enable</code>设置为<code>true</code>，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置网站图标"><a href="#设置网站图标" class="headerlink" title="设置网站图标"></a>设置网站图标</h3><p>找一张（32 * 32）（16*16）的 ico 图标，或者去别的网站下载或者制作，并将图标名称改为 favicon.ico，然后把图标放在 <code>/themes/next/source/images</code> 里，并且修改主题配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Put your favicon.ico into `hexo-site/source/` directory.</span><br><span class="line">favicon: /favicon.ico</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="代码块复制选项"><a href="#代码块复制选项" class="headerlink" title="代码块复制选项"></a>代码块复制选项</h3><p>Next6 中自带了复制代码按钮， 在next的配置文件中找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">border_radius: 8   # 按钮圆滑度</span><br><span class="line">copy_button:  # 设置是否开启代码块复制按钮</span><br><span class="line">	enable: true</span><br><span class="line">	show_result: true  # 是否显示复制成功信息</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文章加密访问"><a href="#文章加密访问" class="headerlink" title="文章加密访问"></a>文章加密访问</h3><p>打开<code>themes-&gt;next-&gt;layout-&gt;_partials-&gt;head.swig</code>文件,找到这样一段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;&#123;&#123; pace_js_uri &#125;&#125;&quot;&gt;&lt;/script&gt;</span><br><span class="line"> &lt;link href=&quot;&#123;&#123; pace_css_uri &#125;&#125;&quot; rel=&quot;stylesheet&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后在下面插入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  &lt;script&gt;</span><br><span class="line">    (function () &#123;</span><br><span class="line">        if (&#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">            if (prompt(&#x27;请输入文章密码&#x27;) !== &#x27;&#123;&#123; page.password &#125;&#125;&#x27;) &#123;</span><br><span class="line">                alert(&#x27;密码错误！&#x27;);</span><br><span class="line">                if (history.length === 1) &#123;</span><br><span class="line">                    location.replace(&quot;http://zxiaoxuan.cn&quot;); // 这里替换成你的首页</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    history.back();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>文章内部的开头就要添加password</p>
+<h3 id="修改加载特效"><a href="#修改加载特效" class="headerlink" title="修改加载特效"></a>修改加载特效</h3><p>由于网页不可能一直都秒进，总会等待一段时间的，所以可以设置顶部加载条。</p>
+<p>在主题的配置文件中搜索<code>pace</code>，找到如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pace:</span><br><span class="line">  enable: true</span><br><span class="line">  # Themes list:</span><br><span class="line">  # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple</span><br><span class="line">  # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal</span><br><span class="line">  theme: minimal</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="更改Google字体库"><a href="#更改Google字体库" class="headerlink" title="更改Google字体库"></a>更改Google字体库</h3><p>改为Google国内的字体库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">host: https://fonts.geekzu.org</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="博客背景图片"><a href="#博客背景图片" class="headerlink" title="博客背景图片"></a>博客背景图片</h3><ul>
+<li><p>背景图片命名为<code>background.jpg</code>放入 <code>themes/next/source/images</code></p>
+</li>
+<li><p>在<code>themes/next/source/css/_schemes/Mist/index.styl</code>中添加CSS样式（在最后添加即可）</p>
+</li>
+<li><p>同时将代码添加到 blog_root&#x2F;source&#x2F;_data&#x2F;styles.style 下，设置成功。如果没有这个目录，直接新建即可。</p>
+</li>
+<li><p>具体设置<a href="https://www.likecs.com/show-207924.html">Link</a></p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 背景图片</span><br><span class="line">body &#123;</span><br><span class="line">	background:pink;</span><br><span class="line">    background:url(/images/background.jpg);</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed; //不重复</span><br><span class="line">    background-position:top center;</span><br><span class="line">&#125;</span><br><span class="line">//博客内容透明化</span><br><span class="line">//文章内容的透明度设置</span><br><span class="line">.content-wrap &#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//侧边框的透明度设置</span><br><span class="line">.sidebar &#123;</span><br><span class="line">  opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//菜单栏的透明度设置</span><br><span class="line">.header-inner &#123;</span><br><span class="line">  background: rgba(255,255,255,0.9);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//搜索框（local-search）的透明度设置</span><br><span class="line">.popup &#123;</span><br><span class="line">  opacity: 0.9;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">background:url 为图片路径，也可以直接使用链接。</span><br><span class="line">background-repeat：若果背景图片不能全屏，那么是否平铺显示，充满屏幕</span><br><span class="line">background-attachment：背景是否随着网页上下滚动而滚动，fixed 为固定</span><br><span class="line">background-size：图片展示大小，这里设置 100%，100% 的意义为：如果背景图片不能全屏，那么是否通过拉伸的方式将背景强制拉伸至全屏显示。</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="归档页优化（未）"><a href="#归档页优化（未）" class="headerlink" title="归档页优化（未）"></a>归档页优化（未）</h3><p>修改&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post-collapse.swig后的代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% macro render(post) %&#125;</span><br><span class="line"></span><br><span class="line">  &lt;article class=&quot;post post-type-&#123;&#123; post.type | default(&#x27;normal&#x27;) &#125;&#125;&quot; itemscope itemtype=&quot;http://schema.org/Article&quot;&gt;</span><br><span class="line">    &lt;header class=&quot;post-header&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125; class=&quot;post-title&quot;&gt;</span><br><span class="line">        &#123;% if post.link %&#125;&#123;# Link posts #&#125;</span><br><span class="line">          &lt;a class=&quot;post-title-link post-title-link-external&quot; target=&quot;_blank&quot; href=&quot;&#123;&#123; url_for(post.link) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">            &#123;&#123; post.title or post.link &#125;&#125;</span><br><span class="line">            &lt;i class=&quot;fa fa-external-link&quot;&gt;&lt;/i&gt;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">            &lt;a class=&quot;post-title-link&quot; href=&quot;&#123;&#123; url_for(post.path) &#125;&#125;&quot; itemprop=&quot;url&quot;&gt;</span><br><span class="line">              &#123;% if post.type === &#x27;picture&#x27; %&#125;</span><br><span class="line">                &#123;&#123; post.content &#125;&#125;</span><br><span class="line">              &#123;% else %&#125;</span><br><span class="line">                &lt;span itemprop=&quot;name&quot;&gt;&#123;&#123; post.title | default(__(&#x27;post.untitled&#x27;)) &#125;&#125;&lt;/span&gt;</span><br><span class="line">              &#123;% endif %&#125;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">      &lt;/&#123;% if theme.seo %&#125;h3&#123;% else %&#125;h2&#123;% endif %&#125;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div class=&quot;post-meta&quot;&gt;</span><br><span class="line">        &lt;time class=&quot;post-time&quot; itemprop=&quot;dateCreated&quot;</span><br><span class="line">              datetime=&quot;&#123;&#123; moment(post.date).format() &#125;&#125;&quot;</span><br><span class="line">              content=&quot;&#123;&#123; date(post.date, config.date_format) &#125;&#125;&quot; &gt;</span><br><span class="line">          &#123;&#123; date(post.date, &#x27;MM-DD&#x27;) &#125;&#125;</span><br><span class="line">        &lt;/time&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">  &lt;/article&gt;</span><br><span class="line"></span><br><span class="line">&#123;% endmacro %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="追加版权信息（未）"><a href="#追加版权信息（未）" class="headerlink" title="追加版权信息（未）"></a>追加版权信息（未）</h3><ol>
+<li>修改主题<code>配置文件</code>,搜索<code>post_copyright</code></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">post_copyright:</span><br><span class="line">- enable: false</span><br><span class="line">+ enable: true</span><br><span class="line">  license: CC BY-NC-SA 3.0</span><br><span class="line">  license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>如果觉得默认不好看,则可以自定义样式,找到<code>themes/next/layout/_macro/post.swig</code>，在<code>footer</code>之前添加如下代码(添加之前确保已添加样式)：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">	  &lt;p id=&quot;div-border-left-red&quot;&gt;</span><br><span class="line">	   &lt;b&gt;本文基于&lt;a target=&quot;_blank&quot; title=&quot;Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)&quot; href=&quot;http://creativecommons.org/licenses/by-sa/4.0/&quot;&gt; 知识共享署名-相同方式共享 4.0 &lt;/a&gt;国际许可协议发布&lt;/b&gt;&lt;br/&gt;</span><br><span class="line">	    &lt;span&gt;</span><br><span class="line">	    &lt;b&gt;本文地址：&lt;/b&gt;&lt;a href=&quot;&#123;&#123; url_for(page.path) &#125;&#125;&quot; title=&quot;&#123;&#123; page.title &#125;&#125;&quot;&gt;&#123;&#123; page.permalink &#125;&#125;&lt;/a&gt;&lt;br/&gt;&lt;b&gt;转载请注明出处，谢谢！&lt;/b&gt;</span><br><span class="line">	    &lt;/span&gt;</span><br><span class="line">	  &lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="动态title（未）"><a href="#动态title（未）" class="headerlink" title="动态title（未）"></a>动态title（未）</h3><p><code>themes/next/source/js/src</code>下创建<code>dytitle.js</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">var OriginTitile = document.title;</span><br><span class="line">var titleTime;</span><br><span class="line">document.addEventListener(&#x27;visibilitychange&#x27;, function () &#123;</span><br><span class="line">    if (document.hidden) &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/TEP.png&quot;);</span><br><span class="line">        document.title = &#x27;w(ﾟДﾟ)w 出BUG啦！！！！&#x27;;</span><br><span class="line">        clearTimeout(titleTime);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        $(&#x27;[rel=&quot;shortcut icon&quot;]&#x27;).attr(&#x27;href&#x27;, &quot;/favicon.png&quot;);</span><br><span class="line">        document.title = &#x27;♪(^∇^*)又好了。。。 &#x27; + OriginTitile;</span><br><span class="line">        titleTime = setTimeout(function () &#123;</span><br><span class="line">            document.title = OriginTitile;</span><br><span class="line">        &#125;, 2000);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="设置头像"><a href="#设置头像" class="headerlink" title="设置头像"></a>设置头像</h3><p>修改字段 <code>avatar</code>， 值设置成头像的链接地址。</p>
+<p>地址可以是URI，也可以是主题<code>source/images/</code>目录下</p>
+<h3 id="设置“订阅”"><a href="#设置“订阅”" class="headerlink" title="设置“订阅”"></a>设置“订阅”</h3><p>在主题配置文件中，找到<code>follow_me</code>下面可以设置RSS</p>
+<p>切换到根目录下，然后运行如下代码，安装<code>hexo-generator-feed</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ npm install --save hexo-generator-feed</span><br></pre></td></tr></table></figure>
+
+<p>在<code>hexo</code>的<code>_config.yml</code>中，在最后添加如下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">plugins: hexo-generate-feed</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="添加自定义菜单"><a href="#添加自定义菜单" class="headerlink" title="添加自定义菜单"></a>添加自定义菜单</h3><p>以新建「相册」菜单为例：在博客目录下的 source 文件夹下新建名为 photo 文件夹，然后在 photo 文件夹下新建一个 <a href="https://link.juejin.im/?target=http://index.md">index.md</a> 文件，然后在该文件填写：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 相册</span><br><span class="line">date: 2018-04-16 22:14:07</span><br><span class="line">type: &quot;photo&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>然后打开主题配置文件 <code>_config.yml</code>，在 menu 中添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || home</span><br><span class="line">  archives: /archives || archive</span><br><span class="line">  categories: /categories || th</span><br><span class="line">  tags: /tags || tags</span><br><span class="line">  #添加了「相册」菜单</span><br><span class="line">  相册: /photo || camera</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>解释下：这里的「相册」是博客中显示的菜单名称，紧跟的 photo 要和前面 index.md 文件的 type 值一致，|| 后面的菜单的图标，图标名称来自于 FontAwesome icon，若没有配置图标，默认会使用问号图标。</em></p>
+</blockquote>
+<h3 id="设置文章封面"><a href="#设置文章封面" class="headerlink" title="设置文章封面"></a>设置文章封面</h3><p>如果只是插入本地图片作为文章封面，即在博客首页的时候会显示文章的封面图片，进入这篇文章的详细页面后，将不显示这张图片。</p>
+<p>按如下方式操作：</p>
+<p>1）修改 <code>\themes\next\layout\_macro\post.swing</code> 文件。将如下代码复制：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;% if post.summary_img  %&#125;</span><br><span class="line">  &lt;div class=&quot;out-img-topic&quot;&gt;</span><br><span class="line">    &lt;img src=&#123;&#123; post.summary_img &#125;&#125; class=&quot;img-topic&quot;&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2）在新建的文章添加一个字段属性：<code>summary_img</code>。<code>summary_img</code> 的值是图片的路径，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: CSS 各种Hack手段</span><br><span class="line">date: 2017-06-25 03:25:24</span><br><span class="line">categories: 前端</span><br><span class="line">tags: [CSS]</span><br><span class="line">comments: false</span><br><span class="line">summary_img: /images/css-hack-1.png</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>图片存放的文件夹只能新建在 <code>source</code> 目录下。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>JAVA前端及前端</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Shell</title>
+    <url>/posts/4592b2fd/</url>
+    <content><![CDATA[<p><strong>概述：</strong>Linux中的shell脚本的编写</p>
+<span id="more"></span>
+
+<h1 id="shell编程"><a href="#shell编程" class="headerlink" title="shell编程"></a>shell编程</h1><h2 id="基础了解"><a href="#基础了解" class="headerlink" title="基础了解"></a>基础了解</h2><p>c语言编写</p>
+<p><img src="https://s2.loli.net/2022/06/18/VzDP9Q5d8avXfUH.png" alt="shell1"></p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>默认为<code>/bin/bash</code>， 其他<code>ash, bash, ksh, csh, zsh</code>等</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看有哪些解释器</span></span><br><span class="line">cat /etc/shells </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">切换，直接输入相应的解释器名称如</span></span><br><span class="line">ash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">可以直接安装相应的shell解释器</span></span><br></pre></td></tr></table></figure>
+
+<p>默认解释器<code>/bin/bash</code>的优点</p>
+<ol>
+<li>tab补全</li>
+<li>历史命令 history [n] n为数字； !n 可以执行指定的n行的命令</li>
+<li>有快捷键，支持管道和重定向</li>
+</ol>
+<h3 id="简单入门"><a href="#简单入门" class="headerlink" title="简单入门"></a>简单入门</h3><ol>
+<li>声明解释器<code>#!/bin/bash</code></li>
+<li>编写注释, 如<code>#这是一个测试shell脚本</code></li>
+<li>执行指令<code>echo helloWorld</code> ，理论上，执行指令可以写无限条，非交互式的指令</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vim hello.sh     #注意文件后缀，以下是文件内容</span><br><span class="line">----------------------------------</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">这是一脚本</span></span><br><span class="line">echo hellWorld</span><br><span class="line">----------------------------------</span><br><span class="line">:wq				 #退出vim</span><br><span class="line">----------------------------------</span><br><span class="line">chmod +x hello.sh#设置权限，全局</span><br><span class="line">/opt/hello.sh 	 #绝对路径</span><br><span class="line"></span><br><span class="line">bash /opt/hello.sh#直接使用解释器，但会开启新的子进程</span><br><span class="line"></span><br><span class="line">source /opt/hello.sh#实质上使用的默认的解释器 ，不会开启解释器子进程</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 搭建yum仓库</span><br><span class="line">1. 挂载光盘文件到/mnt---------------</span><br><span class="line">mount /dev/cdrom /mnt</span><br><span class="line"></span><br><span class="line">2. 先备份yum仓库配置----------------</span><br><span class="line">mkdir /etc/yum.repo.d/bak</span><br><span class="line">mv /etc/yum.repo.d/*/repo</span><br><span class="line"></span><br><span class="line">3. 在/opt下编写脚本yum.sh，内容如下--</span><br><span class="line">#!/bin/bash</span><br><span class="line">#搭建软件仓库</span><br><span class="line">rm -rf /etc/yum.repos.d/*.repo</span><br><span class="line">echo &quot;[abc]</span><br><span class="line">name=abctest</span><br><span class="line">baseurl=file:///mnt</span><br><span class="line">gpgcheck=0&quot; &gt;&gt; abc.repo</span><br><span class="line"></span><br><span class="line">4. 执行脚本</span><br><span class="line">chmod +x /opt/yum.sh</span><br><span class="line">/opt/yum.sh</span><br><span class="line"></span><br><span class="line">5. 执行成功，验证域名仓库是否搭建成功</span><br><span class="line">yum repolist</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ol>
+<li>不能以数字开头</li>
+<li>等号左右不留空格</li>
+<li>双引号括起来的内容<code>“$”</code>，<code>“(” </code>和反引号都拥有特殊含义，而单引号括起来的内容都是普通字符</li>
+<li>需要增加变量的值,用双引号包含<code>&quot;$变量名&quot;</code>或用<code>$&#123;变量名&#125;</code>包含变量名</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">调用</span></span><br><span class="line">[root@localhost ~]# name=zhangsan</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">调用变量来使用,语法：$变量名</span></span><br><span class="line">[root@localhost ~]# echo $name</span><br><span class="line">zhangsan</span><br><span class="line">[root@localhost ~]# a=10</span><br><span class="line">[root@localhost ~]# echo $&#123;a&#125;RMB</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 设置</span><br><span class="line">命令 set[选项]</span><br><span class="line"></span><br><span class="line">-u: 如果设定此选项，调用未声明的选项时会报错，默认无任何提示</span><br><span class="line">-x: 如果设定此选项，在命令执行之前，会把命令先输出一次</span><br><span class="line">+参数: 取消某个set曾启动的参数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 删除</span><br><span class="line">unset [变量名]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">USER			当前用户名</span><br><span class="line">HOME			当前用户的家目录</span><br><span class="line">UID				当前用户的id号</span><br><span class="line">SHELL			当前用户的解释器</span><br><span class="line">PWD				当前位置</span><br><span class="line">PS1				一级提示符</span><br><span class="line">PS2				二级提示符</span><br><span class="line">PATH			存储执行指令的目录</span><br><span class="line">env 			查看所有环境变量</span><br><span class="line"></span><br><span class="line">RANDOM 			可以产生随机数</span><br></pre></td></tr></table></figure>
+
+<h3 id="预定义变量与位置变量"><a href="#预定义变量与位置变量" class="headerlink" title="预定义变量与位置变量"></a>预定义变量与位置变量</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$n			n为数字，$0表示当前 Shell 脚本程序的名称，$1-9 代 表 第 一 到 第 九个 参 数 , 十 以上 的 参 数 需 要 用 大 括 号 包 含 ， 如 9代表第一到第九个参数,十以上的参数需要用大括号包含，如9代表第一到第九个参数,十以上的参数需要用大括号包含，如&#123;10&#125;</span><br><span class="line"></span><br><span class="line">$* 			这个变量代表命令行中所有的参数，$把所有的参数看成一个整体</span><br><span class="line">$@ 			这个变量也代表命令行中所有的参数，不过$@把每个参数区分对待</span><br><span class="line">$# 			这个变量代表命令行中所有参数的个数</span><br><span class="line">$$ 			随机进程号</span><br><span class="line">$? 			判断上一个任务是否成功，0表示成功，非0表示失败</span><br></pre></td></tr></table></figure>
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><h4 id="单双引号"><a href="#单双引号" class="headerlink" title="单双引号"></a>单双引号</h4><p>单引号：可以屏蔽特殊符号，直接当成字符串来处理</p>
+<p>双引号：界定范围，不可屏蔽特殊字符</p>
+<h4 id="反撇号-96-与"><a href="#反撇号-96-与" class="headerlink" title="反撇号&#96;与$()"></a>反撇号&#96;与$()</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a=date</span><br><span class="line">echo $a #输出结果 date</span><br><span class="line"></span><br><span class="line">a=`date`</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br><span class="line"></span><br><span class="line">a=$(date)</span><br><span class="line">echo $a #输出结果2021年 09月 23日 星期四 21:10:08 CST</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="read交互式指令"><a href="#read交互式指令" class="headerlink" title="read交互式指令"></a>read交互式指令</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">read -p “提示的信息” 变量名</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="屏蔽输入"><a href="#屏蔽输入" class="headerlink" title="屏蔽输入"></a>屏蔽输入</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">接上例</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line">read -p &quot;请输入用户名：&quot; u</span><br><span class="line">useradd $u</span><br><span class="line">stty -echo						#屏蔽输入信息</span><br><span class="line">read -p &quot;请输入密码：&quot; p</span><br><span class="line">stty echo						#显示输入信息</span><br><span class="line">echo &quot;$p&quot; | passwd --stdin $u</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="定义全局变量"><a href="#定义全局变量" class="headerlink" title="定义全局变量"></a>定义全局变量</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export b=20 			#定义变量的同时，并发布为全局效果</span><br><span class="line">a=200 					#定义普通变量</span><br><span class="line">export a 				#将已有的变量发布为全局变量</span><br><span class="line">export -n a 			#取消全局效果，恢复局部效果</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># expr可以在运算的同时将结果输出</span><br><span class="line">expr 3 – 1  		减法</span><br><span class="line">expr 2 + 2  		加法</span><br><span class="line">expr 2 &#x27;*&#x27; 2  		乘法</span><br><span class="line">expr 2 \* 2   		使用乘法时，这里使用\代表转义符号，可以屏蔽之后1个字符的特殊效果</span><br><span class="line">expr 4 / 2  		除法</span><br><span class="line">expr 10 % 3  		取余数</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 用$[ ]结构，配合echo输出，同样可以实现加 减 乘 除 取余</span><br><span class="line">echo $[1+1]</span><br><span class="line">echo $[2-1]</span><br><span class="line">echo $[2*2]</span><br><span class="line">echo $[4/2]</span><br><span class="line">echo $[5%3]</span><br><span class="line"></span><br><span class="line">$(())与$[]效果一致</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># let指令，不输出计算结果，专用于创建变量，或者对变量进行自增减</span><br><span class="line">let a=1+1</span><br><span class="line">let a++</span><br><span class="line">let a*=10</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># bc指令可以处理小数的结果 ，参数scale=n可以指定小数保留的位数,quit退出bc模式</span><br><span class="line">echo &quot;10/3&quot; | bc</span><br><span class="line">echo &quot;scal=3;10/3&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 关系运算符只支持数字，不支持字符串，除非字符串的值是数字</span><br><span class="line">-eq</span><br><span class="line">equal</span><br><span class="line">检测两个数是否相等，相等返回true。</span><br><span class="line">[ $a -eq $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-ne</span><br><span class="line">not equal</span><br><span class="line">检测两个数是否相等，不相等返回true。</span><br><span class="line">[ $a -ne $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-gt </span><br><span class="line">great than</span><br><span class="line">检测左边的数是否大于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -gt $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-lt </span><br><span class="line">less than</span><br><span class="line">检测左边的数是否小于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -lt $b ] 返回 true。</span><br><span class="line"></span><br><span class="line">-ge</span><br><span class="line">great than or equal</span><br><span class="line">检测左边的数是否大于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -ge $b ] 返回 false。</span><br><span class="line"></span><br><span class="line">-le</span><br><span class="line">less than or equal</span><br><span class="line">检测左边的数是否小于等于右边的，如果是，则返回 true。</span><br><span class="line">[ $a -le $b ] 返回 true。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">！</span><br><span class="line">非运算，表达式为 true 则返回 false，否则返回 true</span><br><span class="line">[ ! false ] 返回 true。</span><br><span class="line"></span><br><span class="line">-o</span><br><span class="line">或（或者）运算，有一个表达式为 true则返回 true。</span><br><span class="line">[ $a -lt 20 -o $b -gt 100 ] 返回 true。</span><br><span class="line"></span><br><span class="line">-a</span><br><span class="line">与（并且）运算，两个表达式都为 true才返回 true。</span><br><span class="line">[ $a -lt 20 -a $b -gt 100 ] 返回 false。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 字符串运算</span><br><span class="line">!=</span><br><span class="line">检测两个字符串是否相等，不相等返回true。</span><br><span class="line">[ $a != $b ] 返回true。</span><br><span class="line"></span><br><span class="line">=</span><br><span class="line">检测两个字符串是否相等，相等返回true。</span><br><span class="line">[ $a = $b ] 返回false。</span><br><span class="line"></span><br><span class="line">-z </span><br><span class="line">检测字符串长度是否为0，为0返回 true。 </span><br><span class="line">[ -z $a ] 返回 false。</span><br><span class="line"></span><br><span class="line">-n</span><br><span class="line">检测字符串长度是否为0，不为0返回true。</span><br><span class="line">[ -n $a ] 返回 true。</span><br><span class="line"></span><br><span class="line">str </span><br><span class="line">检测字符串是否为空，不为空返回 true。 </span><br><span class="line">[ $a ] 返回 true。</span><br><span class="line">------------------------------------------------------</span><br><span class="line">[ a == a ] 判断字符串a是否等于a，如果相等，返回值就是0</span><br><span class="line">[ root == $USER ] 判断当前用户名是否叫root，如果是，返回值就是0</span><br><span class="line">[ root != $USER ] 判断当前用户名是否不叫root，如果不叫root，返回值就是0</span><br><span class="line">[ -z $a ] 判断变量a是否为空，如果是，返回值是0</span><br><span class="line">[ ! -z $a ] 判断变量a是否不为空，如果是，返回true，0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 文件测试运算符</span><br><span class="line">-b [file]</span><br><span class="line">检测文件是否是块设备文件，如果是，则返回 true。</span><br><span class="line">[ -b $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-c [file]</span><br><span class="line">检测文件是否是字符设备文件，如果是，则返回true。</span><br><span class="line">[ -c $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-d [file]</span><br><span class="line">检测文件是否是目录，如果是，则返回 true。</span><br><span class="line">[ -d $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-f [file]</span><br><span class="line">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</span><br><span class="line">[ -f $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-g [file]</span><br><span class="line">检测文件是否设置了 SGID 位，如果是，则返回true。</span><br><span class="line">[ -g $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-k [file]</span><br><span class="line">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</span><br><span class="line">[ -k $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-p [file]</span><br><span class="line">检测文件是否是有名管道，如果是，则返回 true。</span><br><span class="line">[ -p $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-u [file]</span><br><span class="line">检测文件是否设置了 SUID 位，如果是，则返回true。</span><br><span class="line">[ -u $file ] 返回 false。</span><br><span class="line"></span><br><span class="line">-r [file]</span><br><span class="line">检测文件是否可读，如果是，则返回 true。</span><br><span class="line">[ -r $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-w [file]</span><br><span class="line">检测文件是否可写，如果是，则返回 true。</span><br><span class="line">[ -w $file ] 返回 true</span><br><span class="line"></span><br><span class="line">-x [file]</span><br><span class="line">检测文件是否可执行，如果是，则返回 true。</span><br><span class="line">[ -x $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-s [file]</span><br><span class="line">检测文件是否为空（文件大小是否大于0），不为空返回 true。</span><br><span class="line">[ -s $file ] 返回 true。</span><br><span class="line"></span><br><span class="line">-e [file]</span><br><span class="line">检测文件（包括目录）是否存在，如果是，则返回true。</span><br><span class="line">[ -e $file ] 返回 true。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">if 条件测试 ;then </span><br><span class="line">	执行指令 </span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试 ;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br><span class="line">---------------------------------------</span><br><span class="line">if 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">elif 条件测试;then</span><br><span class="line">	执行指令</span><br><span class="line">else</span><br><span class="line">	执行指令</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for 变量名 in 值1 值2 值3</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br><span class="line">---------------------------------------</span><br><span class="line">for i in &#123;1..10&#125; 使用常量循环十次</span><br><span class="line"></span><br><span class="line">a=10</span><br><span class="line">for i in $(seq $a)  使用seq命令可以调用变量</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">while 条件测试</span><br><span class="line">do</span><br><span class="line">	执行指令</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>linux-centOS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客建立</title>
+    <url>/posts/78ed23a3/</url>
+    <content><![CDATA[<p><strong>概述：</strong>基于于hexo和GitHub的个人博客</p>
+<span id="more"></span>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">常用命令</span><br><span class="line">hexo clean</span><br><span class="line">|</span><br><span class="line">hexo g -d || hexo d -g</span><br><span class="line">| </span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="git"><a href="#git" class="headerlink" title="git"></a>git</h3><ol>
+<li>准备安装包</li>
+<li>next到默认编辑器，我先有notepad3，所以选择它为默认编辑器（有全局path）</li>
+<li>next到<code>Let Git decide</code>，可以默认，也可以选mian</li>
+<li>一直next到实验项，有<code>NEW</code>字样的，都不选</li>
+<li>安装结束</li>
+</ol>
+<h3 id="node-js"><a href="#node-js" class="headerlink" title="node.js"></a>node.js</h3><ol>
+<li>安装一直next即可，注意换安装路径</li>
+<li>设置环境变量</li>
+<li>打开安装目录，新建<code>node_global</code>和<code>node_cache</code> 两个文件夹</li>
+<li>输入“cmd”，点击“以管理员身份运行”</li>
+<li>在命令提示符窗口输入<code>npm config set prefix &quot;安装路径\node_global&quot;</code></li>
+<li>接着输入<code>npm config set cache &quot;安装路径\node_cache&quot;</code></li>
+<li>环境变量中设置：<ul>
+<li>系统中：变量名为<code>NODE_PATH</code> ，变量值为<code>安装路径\node_global\node_modules</code> </li>
+<li>用户Path中：更改<code>../Roaming/npm</code>为<code>安装路径\node_global</code></li>
+<li>系统Path中：新建，输入<code>%NODE_PATH%</code></li>
+</ul>
+</li>
+<li>下面的操作都需管理员身份：可在nodejs文件属性-&gt;安全-&gt;编辑-&gt;选择Users-&gt;完全控制-&gt;确定后退出</li>
+<li>管理员cmd输入：<code>npm install -g npm-windows-upgrade</code></li>
+<li>管理员Windows powershell输入：<code>set-ExecutionPolicy RemoteSigned</code>-&gt;Y，确定-&gt;选默认最高</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm -v </span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h3><ol>
+<li>本地建立一个Hexo文件夹</li>
+<li>在文件夹中，右键-&gt;<code>Git Bash</code></li>
+<li>命令框中安装Hexo</li>
+<li>输入<code>npm install -g hexo</code></li>
+<li>初始化<code>hexoinit</code></li>
+<li>npm install</li>
+<li>hexo server，到此测试基本完成</li>
+<li>下面是重新部署命令，可以不输入</li>
+<li>hexo clean</li>
+<li>hexo generate</li>
+<li>hexo deploy</li>
+<li>以上为本地测试</li>
+</ol>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><ol>
+<li>准备一个仓库<code>modishuriken.github.io</code></li>
+<li>仓库名字后缀一定是<code>github.io</code></li>
+<li>公开的</li>
+<li>用cmd：ping <code>modishuriken.github.io</code></li>
+<li>记住IP地址</li>
+</ol>
+<h3 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h3><ol>
+<li>注册域名</li>
+<li>使用DNS解析服务</li>
+<li>选择域名-&gt;解析设置</li>
+<li>设置两个记录类型<ul>
+<li>记录类型：A、 主机记录：@、 解析路线：默认、记录值：IP地址、TTL：10min</li>
+<li>记录类型：CNAME、 主机记录：www、 解析路线：默认、记录值：<code>modishuriken.github.io</code>、TTL：10min</li>
+</ul>
+</li>
+</ol>
+<h2 id="设置IP解析的地方"><a href="#设置IP解析的地方" class="headerlink" title="设置IP解析的地方"></a>设置IP解析的地方</h2><ol>
+<li>阿里云的DNS解析</li>
+<li>在本地创建的Hexo文件夹下的source文件夹中创建<ul>
+<li>右键新建txt文本-&gt;输入你购买的域名<a href="http://www.modishuriken.top/">www.modishuriken.top</a>  -&gt;保存关闭</li>
+<li>右键该文本重命名-&gt;将.txt后缀去掉-&gt;会提示文件不可用继续确定即可</li>
+</ul>
+</li>
+<li>在GitHub上：<ul>
+<li>进入setting-&gt;Repositories-&gt;选择modishuriken.github.io</li>
+<li>choose Settings</li>
+<li>find GitHub Page</li>
+<li>choose theme and wait a moment</li>
+<li>flash Github Page</li>
+<li>Custom domain -&gt; input: <a href="http://www.modishuriken.top/">www.modishuriken.top</a> -&gt; save</li>
+</ul>
+</li>
+<li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
+<li>deploy: </li>
+<li>type:  git </li>
+<li>repository: <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>branch: main</li>
+<li>注意有空格</li>
+<li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="搞定上面的后，进入bash"><a href="#搞定上面的后，进入bash" class="headerlink" title="搞定上面的后，进入bash"></a>搞定上面的后，进入bash</h2><p>git部署至Hexo</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="依次输入"><a href="#依次输入" class="headerlink" title="依次输入"></a>依次输入</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">	生成静态文件</span><br><span class="line">hexo d</span><br><span class="line">	部署到服务器，这一步需要保证Github上拥有本机的公钥</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo clean 		</span><br><span class="line">		清除缓存文件 (db.json) 和已生成的静态文件 (public)</span><br><span class="line">		在某些情况（尤其是更换主题后），如果发现您对站点的更改无论如何也不生效，您可能需要运行该命令。</span><br><span class="line">		</span><br><span class="line">hexo generate</span><br><span class="line">		生成静态文件</span><br><span class="line">		</span><br><span class="line">hexo deploy</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="日常上传"><a href="#日常上传" class="headerlink" title="日常上传"></a>日常上传</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ hexo clean //清除缓存</span><br><span class="line">$ hexo g  //生成静态文件</span><br><span class="line">$ hexo d  //上传Github</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="关于使用hexo"><a href="#关于使用hexo" class="headerlink" title="关于使用hexo"></a>关于使用hexo</h2><p><a href="https://hexo.io/zh-cn/docs/configuration">详情</a></p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="网站配置"><a href="#网站配置" class="headerlink" title="网站配置"></a>网站配置</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>title</code></td>
+<td align="left">网站标题</td>
+</tr>
+<tr>
+<td align="left"><code>subtitle</code></td>
+<td align="left">网站副标题</td>
+</tr>
+<tr>
+<td align="left"><code>description</code></td>
+<td align="left">网站描述</td>
+</tr>
+<tr>
+<td align="left"><code>keywords</code></td>
+<td align="left">网站的关键词。支持多个关键词。</td>
+</tr>
+<tr>
+<td align="left"><code>author</code></td>
+<td align="left">您的名字</td>
+</tr>
+<tr>
+<td align="left"><code>language</code></td>
+<td align="left">网站使用的语言。对于简体中文用户来说，使用不同的主题可能需要设置成不同的值，请参考你的主题的文档自行设置，常见的有 <code>zh-Hans</code>和 <code>zh-CN</code>。</td>
+</tr>
+<tr>
+<td align="left"><code>timezone</code></td>
+<td align="left">网站时区。Hexo 默认使用您电脑的时区。请参考 <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区列表</a> 进行设置，如 <code>America/New_York</code>, <code>Japan</code>, 和 <code>UTC</code> 。一般的，对于中国大陆地区可以使用 <code>Asia/Shanghai</code>。</td>
+</tr>
+</tbody></table>
+<p>其中，<code>description</code>主要用于SEO，告诉搜索引擎一个关于您站点的简单描述，通常建议在其中包含您网站的关键词。<code>author</code>参数用于主题显示文章的作者。</p>
+<h4 id="网址配置"><a href="#网址配置" class="headerlink" title="网址配置"></a>网址配置</h4><table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">描述</th>
+<th align="left">默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>url</code></td>
+<td align="left">网址, 必须以 <code>http://</code> 或 <code>https://</code> 开头</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>root</code></td>
+<td align="left">网站根目录</td>
+<td align="left"><code>url&#39;s pathname</code></td>
+</tr>
+<tr>
+<td align="left"><code>permalink</code></td>
+<td align="left">文章的 <a href="https://hexo.io/zh-cn/docs/permalinks">永久链接</a> 格式</td>
+<td align="left"><code>:year/:month/:day/:title/</code></td>
+</tr>
+<tr>
+<td align="left"><code>permalink_defaults</code></td>
+<td align="left">永久链接中各部分的默认值</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls</code></td>
+<td align="left">改写 <a href="https://hexo.io/zh-cn/docs/variables"><code>permalink</code></a> 的值来美化 URL</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls.trailing_index</code></td>
+<td align="left">是否在永久链接中保留尾部的 <code>index.html</code>，设置为 <code>false</code> 时去除</td>
+<td align="left"><code>true</code></td>
+</tr>
+<tr>
+<td align="left"><code>pretty_urls.trailing_html</code></td>
+<td align="left">是否在永久链接中保留尾部的 <code>.html</code>, 设置为 <code>false</code> 时去除 (<em>对尾部的 <code>index.html</code>无效</em>)</td>
+<td align="left"><code>true</code></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>网站存放在子目录</p>
+<p>如果您的网站存放在子目录中，例如 <code>http://example.com/blog</code>，则请将您的 <code>url</code> 设为 <code>http://example.com/blog</code> 并把 <code>root</code> 设为 <code>/blog/</code>。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 比如，一个页面的永久链接是 http://example.com/foo/bar/index.html</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: false</span><br><span class="line"># 此时页面的永久链接会变为 http://example.com/foo/bar/</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JAVA前端及前端</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>git</tag>
+        <tag>nodejs</tag>
       </tags>
   </entry>
 </search>
