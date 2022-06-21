@@ -35,20 +35,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"modishuriken.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":320,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
-  <meta name="description" content="概述：Oracle数据库的基础安装和用户使用的注意事项">
+  <meta name="description" content="概述：Java基础语法的使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle1">
-<meta property="og:url" content="https://modishuriken.github.io/posts/f145fed6/index.html">
+<meta property="og:title" content="Java基础">
+<meta property="og:url" content="https://modishuriken.github.io/posts/f7ede91d/index.html">
 <meta property="og:site_name" content="Keeping">
-<meta property="og:description" content="概述：Oracle数据库的基础安装和用户使用的注意事项">
+<meta property="og:description" content="概述：Java基础语法的使用">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-18T13:06:36.383Z">
+<meta property="article:published_time" content="2022-06-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-21T11:15:59.710Z">
 <meta property="article:author" content="modiShuriken">
-<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://modishuriken.github.io/posts/f145fed6/">
+<link rel="canonical" href="https://modishuriken.github.io/posts/f7ede91d/">
 
 
 <script id="page-configurations">
@@ -61,7 +61,7 @@
   };
 </script>
 
-  <title>Oracle1 | Keeping</title>
+  <title>Java基础 | Keeping</title>
   
 
 
@@ -211,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/f145fed6/">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/f7ede91d/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/lin.png">
@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Oracle1
+          Java基础
         </h1>
 
         <div class="post-meta">
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：21:06:36" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+              <time title="创建时间：2022-06-21 00:00:00 / 修改时间：19:15:59" itemprop="dateCreated datePublished" datetime="2022-06-21T00:00:00+08:00">2022-06-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,7 +243,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                  <a href="/categories/JAVA%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">JAVA基础</span></a>
                 </span>
             </span>
 
@@ -258,61 +258,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>概述：</strong>Oracle数据库的基础安装和用户使用的注意事项</p>
+        <p><strong>概述：</strong>Java基础语法的使用</p>
 <span id="more"></span>
 
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
-<h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
-<li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
-<li>网页客服端端口，会与tomcat的8080端口冲突</li>
-<li>如果安装失败，先停掉侦听服务，再停掉Service服务，然后运行安装包，进行卸载</li>
-</ol>
-<h2 id="用户说明"><a href="#用户说明" class="headerlink" title="用户说明"></a>用户说明</h2><ol>
-<li><p>Sys：超级用户，最高限权，具有sysdba角色，<strong>建立数据库</strong></p>
-<blockquote>
-<p>登录语句：sql&gt; conn sys&#x2F;sys as sysdba;</p>
-</blockquote>
-</li>
-<li><p>System：管理员，具有sysoper角色</p>
-<blockquote>
-<p>登录语句：sql&gt; conn system&#x2F;manager;</p>
-</blockquote>
-</li>
-<li><p>scott：普通用户，默认未解锁</p>
-</li>
-</ol>
-<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建</span><br><span class="line">sql&gt; create user 用户名 identified by 密码;</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">sql&gt; alter user 用户名 identified by 密码;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>注意：oralce对权限管理比较严谨，普通用户之间也是默认不能互相访问的，需要互相授权。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sql&gt; grant create session to 用户名;		授予用户创建session的权限，即登陆权限。</span><br><span class="line">sql&gt; alter user 用户名 quota unlimited on USERS;	授予用户使用表空间的权限。</span><br><span class="line">sql&gt; grant create table to 用户名;			授予创建表的权限。</span><br><span class="line">sql&gt; grant drop any table to 用户名;		授予删除任意表的权限</span><br><span class="line">sql&gt; grant insert any table to 用户名;		授予向任意表中插入行的权限</span><br><span class="line">sql&gt; grant update any table to 用户名;		修改任意表中行的权限</span><br><span class="line"></span><br><span class="line">sql&gt; grant select on emp  to 用户名;		授予用户查看指定表的权限</span><br><span class="line">sql&gt; conn 用户名/密码;</span><br><span class="line">sql&gt; select * from scott.emp;				用户可以查看用户scott中的表emp;</span><br><span class="line">sql&gt; revoke select on emp from 用户名;		收回用户的查询权限</span><br><span class="line">sql&gt; revoke all on emp from 用户名;		收回用户的所有权限</span><br><span class="line"></span><br><span class="line">或者管理员登陆</span><br><span class="line">GRANT SELECT,DELETE,UPDATE,INSERT ON scott.emp TO wangcao ;</span><br><span class="line">GRANT ALL PRIVILEGES ON scott.emp to wangcao;</span><br></pre></td></tr></table></figure>
-
-<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>三类：系统权限、角色、对象权限</p>
-<ul>
-<li><p>系统权限：在11g中系统权限有200个,比如create table，UNLIMITED TABLESPACE等</p>
-<blockquote>
-<p>查询当前用户拥有的系统权限：select * from user_sys_privs; </p>
-</blockquote>
-</li>
-<li><p>角色：一类权限的分组，不是很严格的系统可以授予开发用户CONNECT、RESOURCE角色权限</p>
-<blockquote>
-<p>DBA:该角色具有数据库所有的权限。<br>CONNECT:该角色具有连接数据库的权限，和create session的权限一样。<br>RESOURCE:该角色是应用程序开发角色，具有如下权限:</p>
-<p>​					select * from dba_sys_privs where GRANTEE&#x3D;’RESOURCE’; </p>
-</blockquote>
-<blockquote>
-<p>查询当前用户的角色：SELECT * FROM USER_ROLE_PRIVS; </p>
-</blockquote>
-</li>
-<li><p>对象权限：其它拥有用户的对象的权限，包括：<br>SELECT,DELETE,UPDATE,ALTER,INSERT,INDEX,REFERENCES,FLASHBACK,DEBUG,QUERY REWRITE,</p>
-<p>ON COMMIT REFRESH；</p>
-<p>不包括：<strong>drop</strong></p>
-<blockquote>
-<p>查询当前用户拥有的对象权限：SELECT * FROM USER_TAB_PRIVS;</p>
-<p>​														select * from session_privs;</p>
-</blockquote>
-</li>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
+<li>跨平台</li>
+<li>面向对象</li>
+<li>支持多线程</li>
 </ul>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><p><strong>byte：</strong>8位有符号整数，int类型空间的四分之一，大型数组中节约空间，默认为0（127&#x2F;int）</p>
+<p><strong>short：</strong>16位有符号整数，int类型空间的二分之一，大型数组中节约空间，默认为0(32767&#x2F;int)</p>
+<p><strong>int：</strong>32位有符号整数，整形变量默认为int型，默认为0</p>
+<p><strong>long：</strong> 64位有符号整数，默认值为<strong>0L</strong></p>
+<p><strong>float：</strong>32位单精度浮点数，大型浮点数组中节约空间，默认为<strong>0.0f</strong></p>
+<p><strong>double：</strong>64位双精度浮点数，浮点数变量默认为double型，默认为<strong>0.0d</strong></p>
+<p><strong>boolean：</strong>一位，true&#x2F;false， 默认为false</p>
+<p><strong>char：</strong>16位Unicode字符，最小值为\u0000（0），最大值为\uffff（65535）</p>
+<p><strong>注</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int i = 10;</span><br><span class="line">byte b = i;   --error，类型转换为强制转换</span><br><span class="line"></span><br><span class="line">int i = 130;</span><br><span class="line">byte b = (int)i;   --warnig,数值溢出，-126</span><br></pre></td></tr></table></figure>
+
+<p>溢出规则：最大值加一，为最小值；反之</p>
+<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><p><strong>+&#x3D;：</strong>隐式操作，将结果类型（最后赋值的变量）提升为结果类型（被赋值的数值）。</p>
+<p>​		如：两整型相加，如 <code>byte</code>、<code>short</code> 或者 <code>int</code>，首先会将它们提升到 int 类型，然后在执行加法操作。 </p>
+<p><strong>+：</strong>任何数据类型与字符串，都是拼接操作</p>
+<p><strong>三目运算：</strong>三个数值中，类型最大的为准</p>
+<h4 id="String-引用类型"><a href="#String-引用类型" class="headerlink" title="String(引用类型)"></a>String(引用类型)</h4><p><strong>基本数据类型转换为String类型：</strong></p>
+<ul>
+<li>String.valueOf(变量类型  变量)</li>
+</ul>
+<p>1）String.valueOf([boolean] b) : 将 boolean 变量 b 转换成字符串<br>2）String.valueOf(char c)</p>
+<p>3）String.valueOf(double d)<br>4）String.valueOf(float f)<br>5）String.valueOf(int i) </p>
+<p>6）String.valueOf(long l) String.valueOf(char[] data) : 将 char 数组 data 转换成字符串<br>7）String.valueOf(char[] data, int offset, int count) :<br>                将 char 数组 data 中 由 data[offset] 开始取 count 个元素 转换成字符串 String.valueOf(Object obj) : 将 obj 对象转换成 字符串, 等于 obj.toString() </p>
+<p><strong>String类型转基本数据类型：</strong></p>
+<p>（1）byte : Byte.parseByte(String s) : 将 s 转换成 byte </p>
+<p>（2）Byte.parseByte(String s, int radix) : 以 radix 为基底 将 s 转换为 byte ，比如说 Byte.parseByte(“11”, 16) 会得到 17 </p>
+<p>（3）double : Double.parseDouble(String s) : 将 s 转换成 double </p>
+<p>（4）float : Double.parseFloat(String s) : 将 s 转换成 float </p>
+<p>（5）int : Integer.parseInt(String s) : 将 s 转换成 int </p>
+<p>（6）long : Long.parseLong(String s)</p>
+<p>特殊：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">char: </span><br><span class="line">String str = “abssd”；</span><br><span class="line">char[] ch = str.toCharArray();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">boolean:</span><br><span class="line">String s=&quot;888&quot;;</span><br><span class="line">//String s=&quot;true&quot;; //这个输出就是true</span><br><span class="line">Boolean b =new Boolean(s);</span><br><span class="line">b.parseBoolean(s);</span><br><span class="line">System.out.println(b.parseBoolean(s)）；//false</span><br><span class="line"></span><br><span class="line">java.lang.Boolean.parseBoolean(String s) 解析字符串参数作为一个布尔值。返回的布尔型参数的值为true，如果字符串参数不为null，是相等的，忽略大小写字符串“true”。</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="包装类型"><a href="#包装类型" class="headerlink" title="包装类型"></a>包装类型</h4><p>int —-&gt; Integer —-&gt; Integer.MAX_VALUE&#x2F;Integer.toBinaryString()(二进制符号位，0正，1负)</p>
+<p>byte —-&gt; Byte</p>
+<p>short —-&gt; Short </p>
+<p>float —-&gt; Float</p>
+<p>double —-&gt; Double</p>
+<p>boolean —-&gt; Boolean</p>
+<p>char —-&gt; Character</p>
+<p>long —-&gt; Long</p>
+<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><p><strong>增强for循环：</strong></p>
+<p>foreach(元素类型type  元素变量value  ：遍历对象obj)</p>
+<p>注：一般结合泛型使用</p>
 
     </div>
 
@@ -341,7 +342,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
           </div>
 
         
@@ -350,13 +351,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/293bc84/" rel="prev" title="Oracle3">
-      <i class="fa fa-chevron-left"></i> Oracle3
+    <a href="/posts/75948c12/" rel="prev" title="Oracle2">
+      <i class="fa fa-chevron-left"></i> Oracle2
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/9cf72927/" rel="next" title="Oracle4">
-      Oracle4 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -415,7 +413,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">安装注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">用户说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="nav-number">4.</span> <span class="nav-text">管理用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90"><span class="nav-number">5.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E5%88%86%E7%B1%BB"><span class="nav-number">5.1.</span> <span class="nav-text">权限分类</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.1.1.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#String-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">String(引用类型)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.3.</span> <span class="nav-text">包装类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">循环结构</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
