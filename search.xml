@@ -1682,6 +1682,44 @@
 <h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><p><strong>增强for循环：</strong></p>
 <p>foreach(元素类型type  元素变量value  ：遍历对象obj)</p>
 <p>注：一般结合泛型使用</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong>初始化：</strong>静态初始化不允许二次赋值；动态初始化<code>int[] arr = new int[ARR_NUM]</code></p>
+<ul>
+<li><p>属性length</p>
+</li>
+<li><p>Arrays工具类</p>
+<ul>
+<li><p>Arrays.copyOfRange(T[ ] original,int from,int to)</p>
+<p>将一个原始的[数组]original，从下标from开始复制，复制到上标to，生成一个新的数组。</p>
+</li>
+<li><p>Arrays.toString(nums) 				&#x2F;&#x2F;转字符串，输出时用和（带有【】）</p>
+</li>
+<li><p>Arrays.copyOf(nums， length)  &#x2F;&#x2F;复制，扩容自动填0 ，返回一个新数组</p>
+</li>
+<li><p>Arrays.sort(nums)						&#x2F;&#x2F;升序（快速排序）</p>
+</li>
+<li><p>System.arraycopy(arr1,index1,  arr2, index2, length)  &#x2F;&#x2F;arr1-&gt;arr2数组合并</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类的子类特点：</p>
+<ul>
+<li>子类想要继承抽象类，就必须实现抽象类中的所有的抽象方法</li>
+<li>子类不想实现父类的抽象方法，那么子类必须为抽象类。</li>
+</ul>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承后子类需要注意的是：</p>
+<ul>
+<li><code>Java</code> 只会隐式的调用无参构造函数，<ul>
+<li>如果父类没有无参构造函数，那么子类中就必须显示的调用 <code>super</code>关键字来调用已有的有参构造函数来初始化父类。</li>
+</ul>
+</li>
+<li><code>super.</code> 什么时候不能省略呢？<ul>
+<li>子类也想使用一下父类的被覆盖的方法</li>
+<li>子类中出现和父类一样的属性或者方法，此时，你要想去调用父类的那个属性或者方法</li>
+</ul>
+</li>
+<li>若是父类的方法没有声明异常，则子类继承方法后，也不能声明异常。</li>
+</ul>
 ]]></content>
       <categories>
         <category>JAVA基础</category>
