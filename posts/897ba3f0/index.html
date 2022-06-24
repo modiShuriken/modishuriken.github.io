@@ -35,20 +35,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"modishuriken.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":320,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
-  <meta name="description" content="概述：Oracle数据库的基础安装和用户使用的注意事项">
+  <meta name="description" content="概述：Maven在IDEA中使用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Oracle1">
-<meta property="og:url" content="https://modishuriken.github.io/posts/f145fed6/index.html">
+<meta property="og:title" content="Maven阶段二">
+<meta property="og:url" content="https://modishuriken.github.io/posts/897ba3f0/index.html">
 <meta property="og:site_name" content="Keeping">
-<meta property="og:description" content="概述：Oracle数据库的基础安装和用户使用的注意事项">
+<meta property="og:description" content="概述：Maven在IDEA中使用">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-06-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-06-18T13:06:36.383Z">
+<meta property="article:published_time" content="2022-06-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-24T11:28:59.329Z">
 <meta property="article:author" content="modiShuriken">
-<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="Maven">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://modishuriken.github.io/posts/f145fed6/">
+<link rel="canonical" href="https://modishuriken.github.io/posts/897ba3f0/">
 
 
 <script id="page-configurations">
@@ -61,7 +61,7 @@
   };
 </script>
 
-  <title>Oracle1 | Keeping</title>
+  <title>Maven阶段二 | Keeping</title>
   
 
 
@@ -211,7 +211,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/f145fed6/">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/897ba3f0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/lin.png">
@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Oracle1
+          Maven阶段二
         </h1>
 
         <div class="post-meta">
@@ -235,7 +235,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-06-18 00:00:00 / 修改时间：21:06:36" itemprop="dateCreated datePublished" datetime="2022-06-18T00:00:00+08:00">2022-06-18</time>
+              <time title="创建时间：2022-06-24 00:00:00 / 修改时间：19:28:59" itemprop="dateCreated datePublished" datetime="2022-06-24T00:00:00+08:00">2022-06-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -243,7 +243,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
                 </span>
             </span>
 
@@ -258,61 +258,86 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>概述：</strong>Oracle数据库的基础安装和用户使用的注意事项</p>
+        <p>概述：Maven在IDEA中使用</p>
 <span id="more"></span>
 
-<h2 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h2><p>Oracle Database 11g Express Edition</p>
-<h2 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h2><ol>
-<li>指定数据库口令： 用于SYS和SYSTEM数据库账户的密码设置，所以要记住。</li>
-<li>网页客服端端口，会与tomcat的8080端口冲突</li>
-<li>如果安装失败，先停掉侦听服务，再停掉Service服务，然后运行安装包，进行卸载</li>
-</ol>
-<h2 id="用户说明"><a href="#用户说明" class="headerlink" title="用户说明"></a>用户说明</h2><ol>
-<li><p>Sys：超级用户，最高限权，具有sysdba角色，<strong>建立数据库</strong></p>
-<blockquote>
-<p>登录语句：sql&gt; conn sys&#x2F;sys as sysdba;</p>
-</blockquote>
-</li>
-<li><p>System：管理员，具有sysoper角色</p>
-<blockquote>
-<p>登录语句：sql&gt; conn system&#x2F;manager;</p>
-</blockquote>
-</li>
-<li><p>scott：普通用户，默认未解锁</p>
-</li>
-</ol>
-<h2 id="管理用户"><a href="#管理用户" class="headerlink" title="管理用户"></a>管理用户</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">创建</span><br><span class="line">sql&gt; create user 用户名 identified by 密码;</span><br><span class="line"></span><br><span class="line">修改</span><br><span class="line">sql&gt; alter user 用户名 identified by 密码;</span><br></pre></td></tr></table></figure>
+<p><strong>Maven在IDEA中的版本兼容型</strong>:</p>
+<p>查找发布时间在IDEA版本之前的  <a target="_blank" rel="noopener" href="http://maven.apache.org/docs/history.html">Link01</a></p>
+<p>下载指定版本MAVEN<a target="_blank" rel="noopener" href="https://archive.apache.org/dist/maven/maven-3/">Link02</a></p>
+<h1 id="创建父工程"><a href="#创建父工程" class="headerlink" title="创建父工程"></a>创建父工程</h1><p>创建一个Project —-&gt; 选择Maven —-&gt; 配置名字和坐标 —-&gt; 注意Maven版本问题</p>
+<p>配置Maven信息：setting —-&gt; build —-&gt; Maven</p>
+<h1 id="创建Java模块工程"><a href="#创建Java模块工程" class="headerlink" title="创建Java模块工程"></a>创建Java模块工程</h1><p>右键父工程标题new  —-&gt; module  —-&gt; 配置名字  —-&gt; 在main目录下写Java源代码  —-&gt;在test目录下写Java测试代码  —-&gt; 直接在testJava中直接运行（最右边上有Maven，进行命令行操作）</p>
+<h1 id="创建web模块工程"><a href="#创建web模块工程" class="headerlink" title="创建web模块工程"></a>创建web模块工程</h1><p>右键父工程标题new  —-&gt; module  —-&gt; 配置名字  —-&gt;在pom.xml文件中添加<code>&lt;packaging&gt;war&lt;/packaging&gt;</code></p>
+<p>File  —-&gt;  project Structure —-&gt;  Facets —-&gt; 添加该子工程（模块）</p>
+<p>在Deployment Descriptors中修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\Maven_workspace\space\父工程名\子工程名\src\main\webapp\WEB-INF\web.xml</span><br></pre></td></tr></table></figure>
+
+<p>在Web Resource Directories中修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">D:\Maven_workspace\space\父工程名\子工程名\src\main\webapp</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h2><p>注意：oralce对权限管理比较严谨，普通用户之间也是默认不能互相访问的，需要互相授权。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sql&gt; grant create session to 用户名;		授予用户创建session的权限，即登陆权限。</span><br><span class="line">sql&gt; alter user 用户名 quota unlimited on USERS;	授予用户使用表空间的权限。</span><br><span class="line">sql&gt; grant create table to 用户名;			授予创建表的权限。</span><br><span class="line">sql&gt; grant drop any table to 用户名;		授予删除任意表的权限</span><br><span class="line">sql&gt; grant insert any table to 用户名;		授予向任意表中插入行的权限</span><br><span class="line">sql&gt; grant update any table to 用户名;		修改任意表中行的权限</span><br><span class="line"></span><br><span class="line">sql&gt; grant select on emp  to 用户名;		授予用户查看指定表的权限</span><br><span class="line">sql&gt; conn 用户名/密码;</span><br><span class="line">sql&gt; select * from scott.emp;				用户可以查看用户scott中的表emp;</span><br><span class="line">sql&gt; revoke select on emp from 用户名;		收回用户的查询权限</span><br><span class="line">sql&gt; revoke all on emp from 用户名;		收回用户的所有权限</span><br><span class="line"></span><br><span class="line">或者管理员登陆</span><br><span class="line">GRANT SELECT,DELETE,UPDATE,INSERT ON scott.emp TO wangcao ;</span><br><span class="line">GRANT ALL PRIVILEGES ON scott.emp to wangcao;</span><br></pre></td></tr></table></figure>
-
-<h3 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h3><p>三类：系统权限、角色、对象权限</p>
+<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="工程导入"><a href="#工程导入" class="headerlink" title="工程导入"></a>工程导入</h2><p>从GitHub中参与项目时</p>
+<p>（待补充）</p>
+<h2 id="来自工程目录"><a href="#来自工程目录" class="headerlink" title="来自工程目录"></a>来自工程目录</h2><p>本地有相应的目录但没有导入进IDEA中</p>
 <ul>
-<li><p>系统权限：在11g中系统权限有200个,比如create table，UNLIMITED TABLESPACE等</p>
-<blockquote>
-<p>查询当前用户拥有的系统权限：select * from user_sys_privs; </p>
-</blockquote>
+<li>导入后都需要配置本地的Maven</li>
+<li>Java<ul>
+<li>Project Structure —-&gt; Modules —-&gt; 添加 —-&gt; Import module from external model —-&gt; Maven</li>
+</ul>
 </li>
-<li><p>角色：一类权限的分组，不是很严格的系统可以授予开发用户CONNECT、RESOURCE角色权限</p>
-<blockquote>
-<p>DBA:该角色具有数据库所有的权限。<br>CONNECT:该角色具有连接数据库的权限，和create session的权限一样。<br>RESOURCE:该角色是应用程序开发角色，具有如下权限:</p>
-<p>​					select * from dba_sys_privs where GRANTEE&#x3D;’RESOURCE’; </p>
-</blockquote>
-<blockquote>
-<p>查询当前用户的角色：SELECT * FROM USER_ROLE_PRIVS; </p>
-</blockquote>
-</li>
-<li><p>对象权限：其它拥有用户的对象的权限，包括：<br>SELECT,DELETE,UPDATE,ALTER,INSERT,INDEX,REFERENCES,FLASHBACK,DEBUG,QUERY REWRITE,</p>
-<p>ON COMMIT REFRESH；</p>
-<p>不包括：<strong>drop</strong></p>
-<blockquote>
-<p>查询当前用户拥有的对象权限：SELECT * FROM USER_TAB_PRIVS;</p>
-<p>​														select * from session_privs;</p>
-</blockquote>
+<li>Web<ul>
+<li>Project Structure —-&gt; Modules —-&gt; 添加 —-&gt; Import module from external model —-&gt; Maven</li>
+<li>Facets —-&gt; 添加 —-&gt; 在Deployment Descriptors中修改 —-&gt; 在Web Resource Directories中修改</li>
+</ul>
 </li>
 </ul>
+<h1 id="部分核心概念"><a href="#部分核心概念" class="headerlink" title="部分核心概念"></a>部分核心概念</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>为了让构建过程自动化完成，Maven 设定了三个生命周期，生命周期中的每一个环节对应构建过程中的一个操作。</p>
+<h3 id="三个生命周期"><a href="#三个生命周期" class="headerlink" title="三个生命周期"></a>三个生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期名称</th>
+<th>作用</th>
+<th>各个环节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Clean</td>
+<td>清理操作相关</td>
+<td>pre-clean clean post-clean</td>
+</tr>
+<tr>
+<td>Site</td>
+<td>生成站点相关</td>
+<td>pre-site site post-site deploy-site</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>主要构建过程</td>
+<td>validate generate-sources process-sources generate-resources process-resources 复制并处理资源文件，至目标目录，准备打包。 compile 编译项目 main 目录下的源代码。 process-classes generate-test-sources process-test-sources generate-test-resources process-test-resources 复制并处理资源文件，至目标测试目录。 test-compile 编译测试源代码。 process-test-classes test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。 prepare-package package 接受编译好的代码，打包成可发布的格式，如JAR。 pre-integration-test integration-test post-integration-test verify install将包安装至本地仓库，以让其它项目依赖。 deploy将最终的包复制到远程的仓库，以让其它开发人员共享；或者部署到服务器上运行（需借助插件，例如：cargo）。</td>
+</tr>
+</tbody></table>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>前面三个生命周期彼此是独立的。</li>
+<li>在任何一个生命周期内部，执行任何一个具体环节的操作，都是从本周期最初的位置开始执行，直到指定的地方。（本节记住这句话就行了，其他的都不需要记）</li>
+</ul>
+<p>Maven 之所以这么设计其实就是为了提高构建过程的自动化程度：让使用者只关心最终要干的即可，过程中的各个环节是自动执行的。</p>
+<h2 id="插件和目标"><a href="#插件和目标" class="headerlink" title="插件和目标"></a>插件和目标</h2><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>Maven 的核心程序仅仅负责宏观调度，不做具体工作。具体工作都是由 Maven 插件完成的。例如：编译就是由 maven-compiler-plugin-3.1.jar 插件来执行的。</p>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>一个插件可以对应多个目标，而每一个目标都和生命周期中的某一个环节对应。</p>
+<p>Default 生命周期中有 compile 和 test-compile 两个和编译相关的环节，这两个环节对应 compile 和 test-compile 两个目标，而这两个目标都是由 maven-compiler-plugin-3.1.jar 插件来执行的。</p>
+<h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2><ul>
+<li>本地仓库：在当前电脑上，为电脑上所有 Maven 工程服务</li>
+<li>远程仓库：需要联网<ul>
+<li>局域网：我们自己搭建的 Maven 私服，例如使用 Nexus 技术。</li>
+<li>Internet<ul>
+<li>中央仓库</li>
+<li>镜像仓库：内容和中央仓库保持一致，但是能够分担中央仓库的负载，同时让用户能够就近访问提高下载速度，例如：Nexus aliyun</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>建议：不要中央仓库和阿里云镜像混用，否则 jar 包来源不纯，彼此冲突。</p>
 
     </div>
 
@@ -341,7 +366,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+              <a href="/tags/Maven/" rel="tag"># Maven</a>
           </div>
 
         
@@ -350,13 +375,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/293bc84/" rel="prev" title="Oracle3">
-      <i class="fa fa-chevron-left"></i> Oracle3
+    <a href="/posts/b2fb8d59/" rel="prev" title="Maven阶段一">
+      <i class="fa fa-chevron-left"></i> Maven阶段一
     </a></div>
-      <div class="post-nav-item">
-    <a href="/posts/9cf72927/" rel="next" title="Oracle4">
-      Oracle4 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -415,7 +437,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">安装注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E8%AF%B4%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">用户说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="nav-number">4.</span> <span class="nav-text">管理用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90"><span class="nav-number">5.</span> <span class="nav-text">权限</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E5%88%86%E7%B1%BB"><span class="nav-number">5.1.</span> <span class="nav-text">权限分类</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%88%B6%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">创建父工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAJava%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">创建Java模块工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAweb%E6%A8%A1%E5%9D%97%E5%B7%A5%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">创建web模块工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C"><span class="nav-number">4.</span> <span class="nav-text">其他操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E5%AF%BC%E5%85%A5"><span class="nav-number">4.1.</span> <span class="nav-text">工程导入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A5%E8%87%AA%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="nav-number">4.2.</span> <span class="nav-text">来自工程目录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E5%88%86%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">部分核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.1.</span> <span class="nav-text">生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">5.1.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">5.1.2.</span> <span class="nav-text">三个生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9"><span class="nav-number">5.1.3.</span> <span class="nav-text">特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%92%8C%E7%9B%AE%E6%A0%87"><span class="nav-number">5.2.</span> <span class="nav-text">插件和目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">5.2.2.</span> <span class="nav-text">目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%93%E5%BA%93"><span class="nav-number">5.3.</span> <span class="nav-text">仓库</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

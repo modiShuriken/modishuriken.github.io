@@ -1763,12 +1763,322 @@
 <li>不能被 <code>public</code>,<code>protected</code>,<code>private</code>,<code>static</code> 修饰。</li>
 <li>匿名内部类为局部的，所以局部内部类的所有限制都对其有效。</li>
 </ul>
+<h3 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h3><p>定义：只封装实体属性，不做任何业务处理</p>
+<p>标准的JavaBean规范：</p>
+<ul>
+<li>封装型，setter和getter</li>
+<li>提供无参构造</li>
+<li>实现序列化接口</li>
+</ul>
 ]]></content>
       <categories>
         <category>JAVA基础</category>
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven阶段一</title>
+    <url>/posts/b2fb8d59/</url>
+    <content><![CDATA[<p><strong>概述：</strong>Maven的基础</p>
+ <span id="more"></span>
+
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>直接在官网下载zip包</p>
+<p>放在C盘的dev文件类（文件名没有中文和空格）</p>
+<p>其中Maven的核心配置文件是：conf&#x2F;settings.xml</p>
+<h2 id="配置本地仓库"><a href="#配置本地仓库" class="headerlink" title="配置本地仓库"></a>配置本地仓库</h2><p>找到本地仓库的注释：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- localRepository</span><br><span class="line">   | The path to the local repository maven will use to store artifacts.</span><br><span class="line">   |</span><br><span class="line">   | Default: $&#123;user.home&#125;/.m2/repository</span><br><span class="line">  &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;</span><br><span class="line">  --&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后设置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;localRepository&gt;本机地址，不选C盘&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置阿里云仓库"><a href="#配置阿里云仓库" class="headerlink" title="配置阿里云仓库"></a>配置阿里云仓库</h2><p>找到mirrors标签，注释（<code>&lt;!---&gt;</code>）原有的标签，然后添加</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span>        </span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> 注意在标签的内部</p>
+<h2 id="配置Maven工程的基础JDK版本"><a href="#配置Maven工程的基础JDK版本" class="headerlink" title="配置Maven工程的基础JDK版本"></a>配置Maven工程的基础JDK版本</h2><p>找到profiles标签，然后添加</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk-1.8<span class="tag">&lt;/<span class="name">id</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">activation</span>&gt;</span>    </span><br><span class="line">		<span class="tag">&lt;<span class="name">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activeByDefault</span>&gt;</span>    </span><br><span class="line">		<span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;/<span class="name">activation</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span>    </span><br><span class="line">		<span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span>    </span><br><span class="line">		<span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span>    </span><br><span class="line">		<span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>前提是配置好了Java环境</p>
+<ul>
+<li>配置MAVEN_HOME</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\dev\apache-maven-3.8.6</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置path</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">%MAVEN_HOME%\bin</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>cmd检查</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="坐标："><a href="#坐标：" class="headerlink" title="坐标："></a><strong>坐标：</strong></h2><ul>
+<li>groupId:组织ID<ul>
+<li>通常是域名倒叙+项目名称</li>
+</ul>
+</li>
+<li>artifactId:项目或者项目的模块ID<ul>
+<li>Maven的工程名称</li>
+</ul>
+</li>
+<li>version:版本号</li>
+</ul>
+<h2 id="坐标与本地仓库的存储路径关系："><a href="#坐标与本地仓库的存储路径关系：" class="headerlink" title="坐标与本地仓库的存储路径关系："></a><strong>坐标与本地仓库的存储路径关系：</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;groupId&gt;javax.servlet&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;servlet-api&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;2.0&lt;/version&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Maven本地仓库的根目录\javax\servlet\servlet-api\2.0\servlet-api-2.0.jar</span><br></pre></td></tr></table></figure>
+
+<h2 id="三个目录："><a href="#三个目录：" class="headerlink" title="三个目录："></a><strong>三个目录：</strong></h2><ul>
+<li>Maven的核心程序：<code>C:\dev\apache-maven-3.8.6</code></li>
+<li>Maven本地仓库：<code>E:\maven-repository</code></li>
+<li>本地工作空间：<code>D:\Maven_workspace</code></li>
+</ul>
+<h2 id="命令运行过程："><a href="#命令运行过程：" class="headerlink" title="命令运行过程："></a><strong>命令运行过程：</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">主命令 插件:目标</span><br></pre></td></tr></table></figure>
+
+<p><code>mvn help:system</code></p>
+<blockquote>
+<ol>
+<li>运行 mvn help:system 之后</li>
+<li>系统会去环境变量 PATH 对应的所有目录中寻找 mvn 命令，然后在 D:\installsoft\maven\apache-maven-<br>3.6.2\bin 中找到了可执行的 mvn 文件</li>
+<li>运行 mvn 文件，也就是执行 mvn 命令</li>
+<li>通常一些软件启动的时候，会有一个启动配置文件， maven 也有， mvn 命令启动的时候会去 ~&#x2F;.m2 目录寻找配置文<br>件 settings.xml ，这个文件是 mvn 命令启动配置文件，可以对 maven 进行一些启动设置（如本地插件缓存放在什么<br>位置等等），若 ~&#x2F;.m2 目录中找不到 settings.xml 文件，那么会去 M2_HOME&#x2F;conf 目录找这个配置文件，然后<br>运行 maven 程序</li>
+<li>mvn 命令后面跟了一个参数： help:sytem ，这个是什么意思呢？这个表示运行 help 插件，然后给 help 插件发<br>送 system 命令</li>
+<li>maven 查看本地缓存目录（默认为 ~&#x2F;.m2 目录）寻找是否有 help 插件，如果本地没有继续下面的步骤</li>
+<li>maven 会去默认的一个站点（ apache 为 maven 提供的一个网站 [repo.maven.apache.org] ，这个叫中央仓库）下载 help 插<br>件到 ~&#x2F;.m2 目录</li>
+<li>运行 help 插件，然后给 help 插件发送 system 指令， help 插件收到 system 指令之后，输出了本地环境变量的信息，如<br>果系统找不到指定的插件或者给插件发送无法识别的命令，都会报错</li>
+</ol>
+</blockquote>
+<p>注意：maven的主要逻辑运行主要靠插件提供，方便扩展</p>
+<h2 id="工程中的配置文件pom-xml"><a href="#工程中的配置文件pom-xml" class="headerlink" title="工程中的配置文件pom.xml"></a><strong>工程中的配置文件pom.xml</strong></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">标签含义：</span><br><span class="line">&lt;project 工程根标签</span><br><span class="line">&lt;modelVersion 固定的，pom.xml标签格式</span><br><span class="line"></span><br><span class="line">&lt;groupId 坐标信息</span><br><span class="line">&lt;artifactId</span><br><span class="line">&lt;version</span><br><span class="line">&lt;packaging 打包方式为jar包（java），war包（web），pom（管理其他工程的工程）</span><br><span class="line"></span><br><span class="line">&lt;properties 定义属性值</span><br><span class="line">	&lt;project.build.sourceEncoding 字符集</span><br><span class="line">	</span><br><span class="line">&lt;dependencies 依赖信息配置</span><br><span class="line">	&lt;scope 依赖的生效范围</span><br></pre></td></tr></table></figure>
+
+<h2 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h2><p>全称：Project Object Model 项目对象模型 </p>
+<p>模型化思想</p>
+<p>对应的配置文件就是pom.xml</p>
+<h2 id="约定的目录结构"><a href="#约定的目录结构" class="headerlink" title="约定的目录结构"></a>约定的目录结构</h2><p><img src="https://s2.loli.net/2022/06/24/Jyk62ApmRtYb3Ke.png" alt="目录结构"></p>
+<h2 id="依赖查询网址"><a href="#依赖查询网址" class="headerlink" title="依赖查询网址"></a>依赖查询网址</h2><p><a href="https://mvnrepository.com/">Link</a></p>
+<h1 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h1><h2 id="生成Java工程"><a href="#生成Java工程" class="headerlink" title="生成Java工程"></a>生成Java工程</h2><h3 id="步骤一"><a href="#步骤一" class="headerlink" title="步骤一"></a>步骤一</h3><p>在E盘创建一个工作空间<code>Maven_workspace\space01</code>，打开cmd</p>
+<p>运行命令<code>mvn archetype:generate</code>，会先下载相应的包</p>
+<p>下载完后，根据提示完成配置</p>
+<hr>
+<p>::: tip :::</p>
+<p>Choose a number:7:默认</p>
+<p>groupId:    <code>com.modishuriken.maven</code></p>
+<p>artifactId:  <code>pro01-maven-java</code></p>
+<p>version:默认即可</p>
+<p>package:默认</p>
+<p>Confirm:确定</p>
+<hr>
+<p>找到自己工程下的配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D:\Maven_workspace\space\pro01-maven-java\pom.xml</span><br></pre></td></tr></table></figure>
+
+<p>更改dependencies中的junit的版本为4.12—-主要是在Java测试程序中使用注解</p>
+<h3 id="步骤二"><a href="#步骤二" class="headerlink" title="步骤二"></a>步骤二</h3><p>添加Java代码</p>
+<p>添加Java测试代码</p>
+<h3 id="步骤三"><a href="#步骤三" class="headerlink" title="步骤三"></a>步骤三</h3><p>执行Maven的构建命令</p>
+<p>运行构建相关的命令时，必须进入到pom.xml 所在的目录下</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn clean &lt;!--删除target目录--&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn compile &lt;!--主程序编译--&gt;</span><br><span class="line">mvn test-compile &lt;!--测试程序编译--&gt;</span><br><span class="line"></span><br><span class="line">target/classes &lt;!--目录结构--&gt;</span><br><span class="line">target/test-classes &lt;!--测试目录结构--&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn test &lt;!--测试Java程序调用命令--&gt;</span><br><span class="line"></span><br><span class="line">测试结果日志</span><br><span class="line">D:\Maven_workspace\space\pro01-maven-java\target\surefire-reports</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn package  &lt;!--打包命令--&gt;</span><br><span class="line"></span><br><span class="line">在target目录下的jar包</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn install &lt;!--安装到本地仓库中--&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="生成web工程"><a href="#生成web工程" class="headerlink" title="生成web工程"></a>生成web工程</h2><p>目录结构：</p>
+<p><img src="https://s2.loli.net/2022/06/24/CSrM5EegX6H8uYI.png" alt="web目录结果"></p>
+<h3 id="步骤一-1"><a href="#步骤一-1" class="headerlink" title="步骤一"></a>步骤一</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetype -DarchetypeArtifaceId=maven-archetype-webapp -DarchetypeVersion=1.4</span><br></pre></td></tr></table></figure>
+
+<p>::: tip</p>
+<p>和Java的步骤相似</p>
+<h3 id="步骤二-1"><a href="#步骤二-1" class="headerlink" title="步骤二"></a>步骤二</h3><p>创建servlet类</p>
+<p>配置web.xml文件</p>
+<p>编译</p>
+<ul>
+<li>配置依赖servlet-api.jar包</li>
+<li>在pom.xml 中的依赖标签中</li>
+<li>pom.xml 文件目录下进行cmd，输入<code>mvn compile</code></li>
+</ul>
+<h3 id="步骤三-1"><a href="#步骤三-1" class="headerlink" title="步骤三"></a>步骤三</h3><p>把target目录下的war包解压到tomcat下</p>
+<p>运行tomcat</p>
+<h2 id="web工程依赖Java工程"><a href="#web工程依赖Java工程" class="headerlink" title="web工程依赖Java工程"></a>web工程依赖Java工程</h2><ul>
+<li>配置依赖本地的jar包</li>
+<li>在pom.xml 中的依赖标签中</li>
+</ul>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><h3 id="依赖范围"><a href="#依赖范围" class="headerlink" title="依赖范围"></a>依赖范围</h3><p>认识标签<code>&lt;scope&gt;</code></p>
+<p>可选值：compile&#x2F;test&#x2F;provided&#x2F;system&#x2F;runtime&#x2F;import</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>mian</th>
+<th>test</th>
+<th>开发过程</th>
+<th>部署到服务器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>compile</td>
+<td>有效</td>
+<td>有效</td>
+<td>有效</td>
+<td>有效</td>
+</tr>
+<tr>
+<td>test</td>
+<td>×</td>
+<td>有效</td>
+<td>有效</td>
+<td>×</td>
+</tr>
+<tr>
+<td>provided<br>服务器已经提供的</td>
+<td>有效</td>
+<td>有效</td>
+<td>有效</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<h3 id="依赖的传递"><a href="#依赖的传递" class="headerlink" title="依赖的传递"></a>依赖的传递</h3><p>可传递的compile</p>
+<p>不可传递的test、provided</p>
+<h3 id="依赖的排除"><a href="#依赖的排除" class="headerlink" title="依赖的排除"></a>依赖的排除</h3><p>含义：阻断依赖的传递</p>
+<p>意义：版本冲突问题</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.atguigu.maven&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;pro01-maven-java&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	&lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">	&lt;!-- 使用excludes标签配置依赖的排除	--&gt;</span><br><span class="line">	&lt;exclusions&gt;</span><br><span class="line">		&lt;!-- 在exclude标签中配置一个具体的排除 --&gt;</span><br><span class="line">		&lt;exclusion&gt;</span><br><span class="line">			&lt;!-- 指定要排除的依赖的坐标（不需要写version） --&gt;</span><br><span class="line">			&lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">			&lt;artifactId&gt;commons-logging&lt;/artifactId&gt;</span><br><span class="line">		&lt;/exclusion&gt;</span><br><span class="line">	&lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>Maven工程之间的继承：</p>
+<ul>
+<li><p><strong>实质：</strong>工程中pom.xml配置的继承</p>
+</li>
+<li><p>管理子工程中的依赖版本问题</p>
+</li>
+<li><p>父工程创建同Java工程创建</p>
+<ul>
+<li>修改pom.xml中的<code>&lt;packaging&gt;</code>标签为pom</li>
+<li>在父工程的根目录下，cmd 调用<code>mvn archetype:generate</code>来创建模块工程</li>
+<li>父工程的pom.xml中多出的<code>&lt;modules&gt;</code> —–也是<strong>聚合</strong>的配置</li>
+</ul>
+</li>
+<li><p>父工程中统一管理依赖信息（管理，不代表子工程有相应的依赖）</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencyManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--Spring Cloud--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>Hoxton.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencyManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>父工程配置好版本号后，子工程不用在写。若子工程写了，那么覆盖掉父工程版本。</p>
+</li>
+<li><p>自定义属性标签</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">在properties标签中</span><br><span class="line">&lt;标签名&gt;标签值&lt;/标签名&gt;</span><br><span class="line"></span><br><span class="line">引用：$&#123;标签名&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>总聚合工程（父工程）的pom.xml中的<code>&lt;modules&gt;</code> —-聚合的配置</p>
+<p>意义：方便安装（顺序）</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Maven阶段二</title>
+    <url>/posts/897ba3f0/</url>
+    <content><![CDATA[<p>概述：Maven在IDEA中使用</p>
+<span id="more"></span>
+
+<p><strong>Maven在IDEA中的版本兼容型</strong>:</p>
+<p>查找发布时间在IDEA版本之前的  <a href="http://maven.apache.org/docs/history.html">Link01</a></p>
+<p>下载指定版本MAVEN<a href="https://archive.apache.org/dist/maven/maven-3/">Link02</a></p>
+<h1 id="创建父工程"><a href="#创建父工程" class="headerlink" title="创建父工程"></a>创建父工程</h1><p>创建一个Project —-&gt; 选择Maven —-&gt; 配置名字和坐标 —-&gt; 注意Maven版本问题</p>
+<p>配置Maven信息：setting —-&gt; build —-&gt; Maven</p>
+<h1 id="创建Java模块工程"><a href="#创建Java模块工程" class="headerlink" title="创建Java模块工程"></a>创建Java模块工程</h1><p>右键父工程标题new  —-&gt; module  —-&gt; 配置名字  —-&gt; 在main目录下写Java源代码  —-&gt;在test目录下写Java测试代码  —-&gt; 直接在testJava中直接运行（最右边上有Maven，进行命令行操作）</p>
+<h1 id="创建web模块工程"><a href="#创建web模块工程" class="headerlink" title="创建web模块工程"></a>创建web模块工程</h1><p>右键父工程标题new  —-&gt; module  —-&gt; 配置名字  —-&gt;在pom.xml文件中添加<code>&lt;packaging&gt;war&lt;/packaging&gt;</code></p>
+<p>File  —-&gt;  project Structure —-&gt;  Facets —-&gt; 添加该子工程（模块）</p>
+<p>在Deployment Descriptors中修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D:\Maven_workspace\space\父工程名\子工程名\src\main\webapp\WEB-INF\web.xml</span><br></pre></td></tr></table></figure>
+
+<p>在Web Resource Directories中修改</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">D:\Maven_workspace\space\父工程名\子工程名\src\main\webapp</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h1><h2 id="工程导入"><a href="#工程导入" class="headerlink" title="工程导入"></a>工程导入</h2><p>从GitHub中参与项目时</p>
+<p>（待补充）</p>
+<h2 id="来自工程目录"><a href="#来自工程目录" class="headerlink" title="来自工程目录"></a>来自工程目录</h2><p>本地有相应的目录但没有导入进IDEA中</p>
+<ul>
+<li>导入后都需要配置本地的Maven</li>
+<li>Java<ul>
+<li>Project Structure —-&gt; Modules —-&gt; 添加 —-&gt; Import module from external model —-&gt; Maven</li>
+</ul>
+</li>
+<li>Web<ul>
+<li>Project Structure —-&gt; Modules —-&gt; 添加 —-&gt; Import module from external model —-&gt; Maven</li>
+<li>Facets —-&gt; 添加 —-&gt; 在Deployment Descriptors中修改 —-&gt; 在Web Resource Directories中修改</li>
+</ul>
+</li>
+</ul>
+<h1 id="部分核心概念"><a href="#部分核心概念" class="headerlink" title="部分核心概念"></a>部分核心概念</h1><h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>为了让构建过程自动化完成，Maven 设定了三个生命周期，生命周期中的每一个环节对应构建过程中的一个操作。</p>
+<h3 id="三个生命周期"><a href="#三个生命周期" class="headerlink" title="三个生命周期"></a>三个生命周期</h3><table>
+<thead>
+<tr>
+<th>生命周期名称</th>
+<th>作用</th>
+<th>各个环节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Clean</td>
+<td>清理操作相关</td>
+<td>pre-clean clean post-clean</td>
+</tr>
+<tr>
+<td>Site</td>
+<td>生成站点相关</td>
+<td>pre-site site post-site deploy-site</td>
+</tr>
+<tr>
+<td>Default</td>
+<td>主要构建过程</td>
+<td>validate generate-sources process-sources generate-resources process-resources 复制并处理资源文件，至目标目录，准备打包。 compile 编译项目 main 目录下的源代码。 process-classes generate-test-sources process-test-sources generate-test-resources process-test-resources 复制并处理资源文件，至目标测试目录。 test-compile 编译测试源代码。 process-test-classes test 使用合适的单元测试框架运行测试。这些测试代码不会被打包或部署。 prepare-package package 接受编译好的代码，打包成可发布的格式，如JAR。 pre-integration-test integration-test post-integration-test verify install将包安装至本地仓库，以让其它项目依赖。 deploy将最终的包复制到远程的仓库，以让其它开发人员共享；或者部署到服务器上运行（需借助插件，例如：cargo）。</td>
+</tr>
+</tbody></table>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>前面三个生命周期彼此是独立的。</li>
+<li>在任何一个生命周期内部，执行任何一个具体环节的操作，都是从本周期最初的位置开始执行，直到指定的地方。（本节记住这句话就行了，其他的都不需要记）</li>
+</ul>
+<p>Maven 之所以这么设计其实就是为了提高构建过程的自动化程度：让使用者只关心最终要干的即可，过程中的各个环节是自动执行的。</p>
+<h2 id="插件和目标"><a href="#插件和目标" class="headerlink" title="插件和目标"></a>插件和目标</h2><h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><p>Maven 的核心程序仅仅负责宏观调度，不做具体工作。具体工作都是由 Maven 插件完成的。例如：编译就是由 maven-compiler-plugin-3.1.jar 插件来执行的。</p>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>一个插件可以对应多个目标，而每一个目标都和生命周期中的某一个环节对应。</p>
+<p>Default 生命周期中有 compile 和 test-compile 两个和编译相关的环节，这两个环节对应 compile 和 test-compile 两个目标，而这两个目标都是由 maven-compiler-plugin-3.1.jar 插件来执行的。</p>
+<h2 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h2><ul>
+<li>本地仓库：在当前电脑上，为电脑上所有 Maven 工程服务</li>
+<li>远程仓库：需要联网<ul>
+<li>局域网：我们自己搭建的 Maven 私服，例如使用 Nexus 技术。</li>
+<li>Internet<ul>
+<li>中央仓库</li>
+<li>镜像仓库：内容和中央仓库保持一致，但是能够分担中央仓库的负载，同时让用户能够就近访问提高下载速度，例如：Nexus aliyun</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>建议：不要中央仓库和阿里云镜像混用，否则 jar 包来源不纯，彼此冲突。</p>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Maven</tag>
       </tags>
   </entry>
 </search>
