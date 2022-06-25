@@ -1705,11 +1705,6 @@
 </ul>
 </li>
 </ul>
-<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><p>抽象类的子类特点：</p>
-<ul>
-<li>子类想要继承抽象类，就必须实现抽象类中的所有的抽象方法</li>
-<li>子类不想实现父类的抽象方法，那么子类必须为抽象类。</li>
-</ul>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承后子类需要注意的是：</p>
 <ul>
 <li><code>Java</code> 只会隐式的调用无参构造函数，<ul>
@@ -1723,6 +1718,83 @@
 </li>
 <li>若是父类的方法没有声明异常，则子类继承方法后，也不能声明异常。</li>
 </ul>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><ul>
+<li>final修饰的类无法继承</li>
+<li>final修饰的方法无法覆盖</li>
+<li>final修饰的变量只能赋值一次</li>
+<li>final修饰的引用只能指向一次</li>
+<li>final修饰的实例变量必须手动初始化，不可默认</li>
+<li>public static final int PI &#x3D; 3.1415;</li>
+</ul>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><ul>
+<li><p>类定义： abstract  class  A {}</p>
+</li>
+<li><p>方法定义(没有方法体)：pubilc  abstract void doSome();</p>
+</li>
+<li><p>抽象类的子类特点：</p>
+<ul>
+<li>子类想要继承抽象类，就必须实现抽象类中的所有的抽象方法</li>
+<li>子类不想实现父类的抽象方法，那么子类必须为抽象类。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>没有方法体的方法是抽象方法？<br>    答：不对。public native int hashCode(); &#x2F;&#x2F;Object类中c++写的动态链接库程序，JVM本地程序</p>
+</blockquote>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><ul>
+<li>定义：interface A {}</li>
+<li>支持多继承</li>
+<li>只有常量和抽象方法（<strong>注意没有方法体</strong>）<ul>
+<li>public static(可省略)</li>
+<li>public static final(可省略)</li>
+</ul>
+</li>
+<li>子类需要实现相应的抽象方法</li>
+<li>同时继承和实现接口<ul>
+<li>class A extends B implements C</li>
+</ul>
+</li>
+<li>支持多态（父类型引用指向子类型）</li>
+</ul>
+<h3 id="访问控制修饰符"><a href="#访问控制修饰符" class="headerlink" title="访问控制修饰符"></a>访问控制修饰符</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>本类</th>
+<th>同包</th>
+<th>子类</th>
+<th>任意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>private</td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>1、内部类可以用多个实例，每个实例都有自己的状态信息，并且与其他外围对象的信息相互独立。<br>2、内部类并没有令人迷惑的<code>“is-a”</code>关系，他就是一个独立的实体。<br>3、内部类提供了更好的封装，除了该外围类，其他类都不能访问。<br>4、创建内部类对象的时刻并不依赖于外围类对象的创建。</p>
 <p>具体来说，内部类信息（属性、方法）可以和外部类重名；内部类是具有类的基本特征的独立实体；可以利用访问修饰符隐藏内部类的实施细节，提供了更好的封装；静态内部类使用时可直接使用，不需先创造外部类。 </p>
 <hr>
@@ -1746,7 +1818,7 @@
 <li>静态内部类可以独立存在，不依赖于其他外围类。</li>
 </ul>
 <hr>
-<p><strong>局部内部类：</strong>【局部内部类有很多局限，应注意作用域】**</p>
+<p><strong>局部内部类：</strong>【局部内部类有很多局限，应注意作用域】</p>
 <ul>
 <li>类前不能有访问修饰符。</li>
 <li>仅在此方法内使用。</li>
@@ -1755,7 +1827,7 @@
 <li>可以随意的访问外部类的任何信息。</li>
 </ul>
 <hr>
-<p><strong>匿名内部类：</strong></p>
+<p><strong>匿名内部类（</strong>★★★）：</p>
 <ul>
 <li>匿名内部类总是默认实现某个接口或继承某个抽象类。</li>
 <li>不能有构造方法，只能有一个实例。</li>
@@ -1763,7 +1835,7 @@
 <li>不能被 <code>public</code>,<code>protected</code>,<code>private</code>,<code>static</code> 修饰。</li>
 <li>匿名内部类为局部的，所以局部内部类的所有限制都对其有效。</li>
 </ul>
-<h3 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h3><p>定义：只封装实体属性，不做任何业务处理</p>
+<h2 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h2><p>定义：只封装实体属性，不做任何业务处理</p>
 <p>标准的JavaBean规范：</p>
 <ul>
 <li>封装型，setter和getter</li>
