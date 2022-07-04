@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon2.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon3.ico">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.geekzu.org/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+    <script>
+    (function () {
+        if ('') {
+            if (prompt('请输入文章密码') !== '') {
+                alert('密码错误！');
+                if (history.length === 1) {
+                    location.replace("http://www.modishuriken.top"); // 这里替换成你的首页
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"modishuriken.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","width":320,"display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+  <meta name="description" content="概述：MyBatis知识框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis(01)">
+<meta property="og:url" content="https://modishuriken.github.io/posts/dc8e0dd8/index.html">
+<meta property="og:site_name" content="Java笔记">
+<meta property="og:description" content="概述：MyBatis知识框架">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-07-04T13:55:03.509Z">
+<meta property="article:author" content="modiShuriken">
+<meta property="article:tag" content="MyBatis">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://modishuriken.github.io/posts/dc8e0dd8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MyBatis(01) | Java笔记</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Java笔记" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Java笔记</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Personal Weblog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://modishuriken.github.io/posts/dc8e0dd8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lin.png">
+      <meta itemprop="name" content="modiShuriken">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Java笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MyBatis(01)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2022-06-26T00:00:00+08:00">2022-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-04 21:55:03" itemprop="dateModified" datetime="2022-07-04T21:55:03+08:00">2022-07-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">JAVA框架</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>概述：MyBatis知识框架</p>
+<span id="more"></span>
+
+<h1 id="三层架构"><a href="#三层架构" class="headerlink" title="三层架构"></a>三层架构</h1><p>在项目开发中遵循的一种形式模式，共三层：</p>
+<ol>
+<li>界面层<ul>
+<li>接收用户的客户端输入，调用业务逻辑层进行功能处理，返回结果给客户端（如servlet）</li>
+</ul>
+</li>
+<li>业务逻辑层<ul>
+<li>项目中的业务逻辑处理，向上为界面层提供处理结果，向下对数据访问层要数据</li>
+</ul>
+</li>
+<li>数据访问层<ul>
+<li>进行数据库的增删改查操作，向上为业务逻辑层提供数据</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>各层不能跨层访问</p>
+</blockquote>
+<h2 id="常用的框架SSM"><a href="#常用的框架SSM" class="headerlink" title="常用的框架SSM"></a>常用的框架SSM</h2><ul>
+<li>Spring: 它是整合其他框架的框架。它的核心是IOC和AOP，由20多个模块构成</li>
+<li>SprintMVC: 专门用来优化控制器（Servlet）的，提供了极简的数据提交，数据携带，页面跳转等功能</li>
+<li>MyBatis: 是持久化层的一个框架。用来数据库访问的优化。专注与sql语句，极大的简化了JDBC的访问</li>
+</ul>
+<h1 id="基本实现步骤"><a href="#基本实现步骤" class="headerlink" title="基本实现步骤"></a>基本实现步骤</h1><ol>
+<li><p>新建数据库中的数据表</p>
+</li>
+<li><p>新建maven项目,选quickstart模板</p>
+</li>
+<li><p>修改目录,添加缺失的目录,修改目录属性</p>
+</li>
+<li><p>修改pom.xml文件,添加MyBatis的依赖,添加mysql的依赖</p>
+<ul>
+<li><p>如果依赖爆红，可能是由于本地仓库中没有，需要刷新一下以下载</p>
+</li>
+<li><p>&#96;&#96;&#96;</p>
+<!--添加MyBatis框架的依赖-->
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+  &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+  &lt;version&gt;3.5.6&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--添加mysql依赖--&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;mysql&lt;/groupId&gt;
+  &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+  &lt;version&gt;5.1.32&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 修改pom.xml文件,添加资源文件指定</span><br><span class="line"></span><br><span class="line">   - 注意：需要将所有含xml和properties文件的路径都指定</span><br><span class="line"></span><br><span class="line">   - ```</span><br><span class="line">     &lt;build&gt;</span><br><span class="line">         &lt;resources&gt;</span><br><span class="line">           &lt;resource&gt;</span><br><span class="line">             &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">             &lt;includes&gt;</span><br><span class="line">               &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">               &lt;include&gt;**/*.properties&lt;/include&gt;</span><br><span class="line">             &lt;/includes&gt;</span><br><span class="line">           &lt;/resource&gt;</span><br><span class="line">           &lt;resource&gt;</span><br><span class="line">             &lt;directory&gt;src/main/resources&lt;/directory&gt;</span><br><span class="line">             &lt;includes&gt;</span><br><span class="line">               &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">               &lt;include&gt;**/*.properties&lt;/include&gt;</span><br><span class="line">             &lt;/includes&gt;</span><br><span class="line">           &lt;/resource&gt;</span><br><span class="line">         &lt;/resources&gt;</span><br><span class="line">       &lt;/build&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>在idea中添加数据库的可视化</p>
+<ul>
+<li><p>在IDEA的最右边添加，注意驱动jar包，和版本不同</p>
+</li>
+<li><p>&#96;&#96;&#96;<br>com.mysql.cj.jdbc.Driver<br>com.mysql.jdbc.Driver</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. 添加jdbc.properties属性文件(数据库的配置)</span><br><span class="line"></span><br><span class="line">   - 需要和上面的驱动对应</span><br><span class="line"></span><br><span class="line">   - ```</span><br><span class="line">     jdbc.driverClassName=com.mysql.cj.jdbc.Driver</span><br><span class="line">     jdbc.url=jdbc:mysql://localhost:3306/ssm?useUnicode=true&amp;characterEncoding=utf8</span><br><span class="line">     jdbc.username=root</span><br><span class="line">     jdbc.password=root</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>.添加SqlMapConfig.xml文件,MyBatis的核心配置文件</p>
+<ul>
+<li>该文件在pom.xml的指定资源路径下</li>
+</ul>
+</li>
+<li><p>创建实体类Student,用来封装数据</p>
+<ul>
+<li>与数据中的类型一一对应</li>
+</ul>
+</li>
+<li><p>添加完成学生表的增删改查的功能的StudentMapper.xml文件</p>
+</li>
+<li><p>创建测试类,进行功能测试</p>
+</li>
+</ol>
+<h1 id="SqlMapConfig-xml文件"><a href="#SqlMapConfig-xml文件" class="headerlink" title="SqlMapConfig.xml文件"></a>SqlMapConfig.xml文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--读取属性文件（jdbc.properties）</span></span><br><span class="line"><span class="comment">        属性：resources目录下的指定文件名称来加载（相对路径）</span></span><br><span class="line"><span class="comment">             url绝对路径</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;jdbc.properties&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--设置日志输出在控制台（STDOUT_LOGGING）--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--&lt;settings&gt;</span></span><br><span class="line"><span class="comment">        &lt;setting name=&quot;logImpl&quot; value=&quot;STDOUT_LOGGING&quot;/&gt;</span></span><br><span class="line"><span class="comment">    &lt;/settings&gt;--&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置实体类的别名--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--单个配置实体类的别名--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;typeAlias type=&quot;top.modi.pojo.Student&quot; alias=&quot;student&quot;&gt;&lt;/typeAlias&gt;--&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--批量配置实体类的别名。别名为实体类的驼峰命名法（规范）--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;top.modi.pojo&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--配置数据库的环境变量（数据库连接配置）--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--default选择&lt;environment&gt;标签的选择--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置事务管理器</span></span><br><span class="line"><span class="comment">                type: JDBC（程序员来处理）</span></span><br><span class="line"><span class="comment">                      MANAGED（由容器Spring来管理事务）</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--配置数据源</span></span><br><span class="line"><span class="comment">                type: JNDI:在服务器端进行数据库连接池管理（弃用）</span></span><br><span class="line"><span class="comment">                      POOLED:使用数据库连接池</span></span><br><span class="line"><span class="comment">                      UNPOOLED:不使用数据库连接池</span></span><br><span class="line"><span class="comment">            --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!--配置数据库连接的基本参数（url,driver,username,password）--&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.driverClassName&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!--注册Mapper.xml文件</span></span><br><span class="line"><span class="comment">        class：动态代理的注册</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;StudentMapper.xml&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="StudentMapper-xml文件"><a href="#StudentMapper-xml文件" class="headerlink" title="StudentMapper.xml文件"></a>StudentMapper.xml文件</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span> <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--namespace:指定命名空间，因为该文件有多个，需要用来区分--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;li&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--id:设置该条语句的调用名</span></span><br><span class="line"><span class="comment">        parameterType:指定传入的参数的类型</span></span><br><span class="line"><span class="comment">        resultType:指定返回结果集的类型，如果是集合，则必须是泛型</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getAll&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;student&quot;</span>&gt;</span></span><br><span class="line">        select id, name, email, age</span><br><span class="line">        from student;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getById&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;student&quot;</span>&gt;</span></span><br><span class="line">        select id, name, email, age</span><br><span class="line">        from student</span><br><span class="line">        where id=#&#123;id&#125;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;getByName&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;String&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;student&quot;</span>&gt;</span></span><br><span class="line">        select id, name, email, age</span><br><span class="line">        from student</span><br><span class="line">        where name LIKE &#x27;%$&#123;name&#125;%&#x27;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;student&quot;</span> &gt;</span></span><br><span class="line">        insert into student (name, email, age)</span><br><span class="line">        values (#&#123;name&#125;, #&#123;email&#125;, #&#123;age&#125;);</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;delete&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;int&quot;</span>&gt;</span></span><br><span class="line">        delete</span><br><span class="line">        from student</span><br><span class="line">        where id = #&#123;id&#125;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;update&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;student&quot;</span>&gt;</span></span><br><span class="line">        update student set name=#&#123;name&#125;, email=#&#123;email&#125;, age=#&#123;age&#125;</span><br><span class="line">        where id=#&#123;id&#125;;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="测试程序"><a href="#测试程序" class="headerlink" title="测试程序"></a>测试程序</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.modi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.*;</span><br><span class="line"><span class="keyword">import</span> org.junit.After;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> top.modi.pojo.Student;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 增删改查的操作</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    SqlSession sqlSession;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">openSqlSession</span><span class="params">()</span> <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">        <span class="comment">//使用文件流读取核心配置文件SqlMapConfig.xml</span></span><br><span class="line">        <span class="type">InputStream</span> <span class="variable">in</span> <span class="operator">=</span> Resources.getResourceAsStream(<span class="string">&quot;SqlMapConfig.xml&quot;</span>);</span><br><span class="line">        <span class="comment">//创建SqlSessionFactory工厂</span></span><br><span class="line">        <span class="type">SqlSessionFactory</span> <span class="variable">factory</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SqlSessionFactoryBuilder</span>().build(in);</span><br><span class="line">        <span class="comment">//取出sqlSession的对象</span></span><br><span class="line">        sqlSession = factory.openSession();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">closeSqlSession</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//关闭（归还）sqlSession</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testA</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="comment">//查询操作</span></span><br><span class="line">        List&lt;Student&gt; list = sqlSession.selectList(<span class="string">&quot;li.getAll&quot;</span>);</span><br><span class="line">        list.forEach(student -&gt; System.out.println(student));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetById</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">stu</span> <span class="operator">=</span> sqlSession.selectOne(<span class="string">&quot;li.getById&quot;</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(stu);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testByName</span><span class="params">()</span> <span class="keyword">throws</span> IOException&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">str</span> <span class="operator">=</span> sqlSession.selectOne(<span class="string">&quot;li.getByName&quot;</span>, <span class="string">&quot;李&quot;</span>);</span><br><span class="line">        System.out.println(str);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testInsert</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> sqlSession.insert(<span class="string">&quot;li.insert&quot;</span>, <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;李&quot;</span>, <span class="string">&quot;12@163.com&quot;</span>, <span class="number">22</span>));</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        <span class="comment">//事务提交不可写入After中！！！</span></span><br><span class="line">        sqlSession.commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> sqlSession.delete(<span class="string">&quot;li.delete&quot;</span>, <span class="number">5</span>);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@org</span>.junit.Test</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> sqlSession.update(<span class="string">&quot;li.update&quot;</span>, <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="number">4</span>,<span class="string">&quot;李&quot;</span>, <span class="string">&quot;12@163.com&quot;</span>, <span class="number">12</span>));</span><br><span class="line">        System.out.println(num);</span><br><span class="line">        sqlSession.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MyBatis/" rel="tag"># MyBatis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/897ba3f0/" rel="prev" title="Maven阶段二">
+      <i class="fa fa-chevron-left"></i> Maven阶段二
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/f7a35e1b/" rel="next" title="MyBatis(02)">
+      MyBatis(02) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">三层架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84%E6%A1%86%E6%9E%B6SSM"><span class="nav-number">1.1.</span> <span class="nav-text">常用的框架SSM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.</span> <span class="nav-text">基本实现步骤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SqlMapConfig-xml%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">SqlMapConfig.xml文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#StudentMapper-xml%E6%96%87%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">StudentMapper.xml文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">测试程序</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="modiShuriken"
+      src="/images/lin.png">
+  <p class="site-author-name" itemprop="name">modiShuriken</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:1559935374@qq.com" title="E-Mail → mailto:1559935374@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">modiShuriken</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div> -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
