@@ -1858,7 +1858,7 @@
 
 <h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> ;</span><br><span class="line">&#125; <span class="keyword">catch</span>(FileNotFoundException | ArithmeticException e) &#123;</span><br><span class="line">	e.printStackTrace();<span class="comment">//异常堆栈信息</span></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">//流的关闭</span></span><br><span class="line">    <span class="comment">//一定会执行的区域</span></span><br><span class="line">    <span class="comment">//先执行try， 再执行finally， 最后执行return</span></span><br><span class="line">    <span class="comment">//特殊情况，推出JVM时不执行：System.exit(0);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//catch后面可以写多个异常，用|(or)链接</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//特殊情况</span><br><span class="line">public static m() &#123;</span><br><span class="line">	int i = 200;</span><br><span class="line">	try &#123;</span><br><span class="line">		return i;</span><br><span class="line">	&#125; catch&#123;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;//返回值为100，但执行顺序是先执行try， 再执行finally， 最后执行return。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//特殊情况</span><br><span class="line">public static m() &#123;</span><br><span class="line">	int i = 200;</span><br><span class="line">	try &#123;</span><br><span class="line">		return i;</span><br><span class="line">	&#125; catch() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125; finally &#123;</span><br><span class="line">		i++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;//返回值为100，但执行顺序是先执行try， 再执行finally， 最后执行return。</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//自定义异常</span><br><span class="line">class A extends Exception &#123;&#125;        //编译时异常</span><br><span class="line">class B extends RunTimeException &#123;&#125; //运行时异常</span><br></pre></td></tr></table></figure>
 
@@ -1867,8 +1867,8 @@
 <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><ul>
 <li>集合不存储基本数据类型</li>
 <li>只存储一个对象的引用</li>
+<li>具体见JavaSE-集合基础</li>
 </ul>
-<p>p665</p>
 <h2 id="实体对象"><a href="#实体对象" class="headerlink" title="实体对象"></a>实体对象</h2><p>定义：只封装实体属性，不做任何业务处理</p>
 <p>标准的JavaBean规范：</p>
 <ul>
@@ -1876,6 +1876,205 @@
 <li>提供无参构造</li>
 <li>实现序列化接口</li>
 </ul>
+<h2 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h2><ul>
+<li>Lambda表达式一定要配合函数式接口一起使用</li>
+<li>@FunctionalInterface注解修饰了接口，那这个接口就是函数式接口，<strong>只能有一个抽象方法</strong></li>
+<li>可以继承Object类的方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">接口 接口名 = (参数列表)-&gt;&#123;函数体&#125;;</span><br><span class="line"></span><br><span class="line">当某方法或类定义需要传入一个抽象类的实例时，可以直接用等式右边重写方法后传入</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">List&lt;Integer&gt; list = Arrays.asList(5,1,3,4,5,0,9,7,0,1,5);</span><br><span class="line">list.forEach(element-&gt; System.out.println(element));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><ul>
+<li><p>主要用于文件和目录的创建、查找和删除等操作</p>
+</li>
+<li><p>构造函数</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public File(String pathname) ：通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例。</span><br><span class="line"></span><br><span class="line">public File(String parent, String child) ：从父路径名字符串和子路径名字符串创建新的 File实例。</span><br><span class="line"></span><br><span class="line">public File(File parent, String child) ：从父抽象路径名和子路径名字符串创建新的 File实例</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>常用方法</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String getAbsolutePath() ：返回此File的绝对路径名字符串。</span><br><span class="line"></span><br><span class="line">public String getPath() ：将此File转换为路径名字符串。</span><br><span class="line"></span><br><span class="line">public String getName() ：返回由此File表示的文件或目录的名称。</span><br><span class="line"></span><br><span class="line">public long length() ：返回由此File表示的文件的长度。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>判断</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public boolean exists() ：此File表示的文件或目录是否实际存在。</span><br><span class="line">public boolean isDirectory() ：此File表示的是否为目录。</span><br><span class="line">public boolean isFile() ：此File表示的是否为文件。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建&amp;删除</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public boolean createNewFile() ：当且仅当具有该名称的文件尚不存在时，创建一个新的空文件。</span><br><span class="line">public boolean delete() ：删除由此File表示的文件或目录。</span><br><span class="line">public boolean mkdir() ：创建由此File表示的目录。</span><br><span class="line">public boolean mkdirs() ：创建由此File表示的目录，包括任何必需但不存在的父目录。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>遍历</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public String[] list() ：返回一个String数组，表示该File目录中的所有子文件或目录。</span><br><span class="line"></span><br><span class="line">public File[] listFiles() ：返回一个File数组，表示该File目录中的所有的子文件或目录。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>一个案例（Lambda）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void printDir3(File dir) &#123;</span><br><span class="line">  	// lambda的改写</span><br><span class="line">    File[] files = dir.listFiles(f -&gt;&#123; </span><br><span class="line">      	return f.getName().endsWith(&quot;.java&quot;) || f.isDirectory(); </span><br><span class="line">    &#125;);</span><br><span class="line">  	</span><br><span class="line">	// 循环打印</span><br><span class="line">    for (File file : files) &#123;</span><br><span class="line">        if (file.isFile()) &#123;</span><br><span class="line">            System.out.println(&quot;文件名:&quot; + file.getAbsolutePath());</span><br><span class="line">      	&#125; else &#123;</span><br><span class="line">        	printDir3(file);</span><br><span class="line">      	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><h3 id="一个基本概念"><a href="#一个基本概念" class="headerlink" title="一个基本概念"></a>一个基本概念</h3><p>1.位（bit）：是计算机内部数据储存的最小单位。</p>
+<p>2.字节（byte）：是计算机中数据处理的基本单位，习惯上用大写B来表示,1B（byte,字节）&#x3D;8bit（位）</p>
+<p>3.字符（char）：是指计算机中使用的字母、数字、字和符号。依据字符不同的编码格式，每个字符单位对应的字节数是不一样的。</p>
+<h3 id="基本流"><a href="#基本流" class="headerlink" title="基本流"></a>基本流</h3><ol>
+<li>字符流<ul>
+<li>以字符为单位传输数据</li>
+<li>一般情况下，字符流都维护着一个缓冲区，默认大小8KB</li>
+</ul>
+</li>
+<li>字节流<ul>
+<li>以字节为单位传输数据</li>
+<li>没有自己维护缓冲区，直接操作文件—但可以自定义缓存区</li>
+</ul>
+</li>
+</ol>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><h4 id="处理字符文件，如文本文件"><a href="#处理字符文件，如文本文件" class="headerlink" title="处理字符文件，如文本文件"></a><strong>处理字符文件，如文本文件</strong></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>FileWriter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>字符输出流</td>
+</tr>
+<tr>
+<td>Buffer</td>
+<td>缓冲区大小默认是8kb</td>
+</tr>
+<tr>
+<td>构造</td>
+<td>FileWriter(File file) 使用File对象来构造FileWriter<br/>FileWriter(File file, boolean append) append为true时，往末尾追加<br/>FileWriter(String fileName) 使用文件路径名来创建FileWriter对象<br/>FileWriter(String fileName, boolean append) append为true时，往末尾追加</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>void flush() 刷新流。<br/>String getEncoding() 返回此流使用的字符编码的名称。<br/>void write(char[] cbuf, int off, int len) 写入字符数组的一部分。<br/>void write(int c) 写一个字符<br/>void write(String str, int off, int len) 写一个字符串的一部分。<br/>void close() 关闭流</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FileReader</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>字符输入流</td>
+</tr>
+<tr>
+<td>Buffer</td>
+<td>没有自带的缓冲区，当读取完毕后，会返回-1</td>
+</tr>
+<tr>
+<td>构造</td>
+<td>FileReader(String fileName) 创建一个新的 FileReader ，给定要读取的文件的名称。<br/>FileReader(File file) 创建一个新的 FileReader ，给出 File 读取。</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>void close() 关闭流并释放与之相关联的任何系统资源。<br/>String getEncoding() 返回此流使用的字符编码的名称。<br/>int read() 读一个字符<br/>int read(char[] cbuf, int offset, int length) 将字符读入数组的一部分。<br/>boolean ready() 告诉这个流是否准备好被读取。</td>
+</tr>
+</tbody></table>
+<h4 id="处理字节文件，流的底层实现类"><a href="#处理字节文件，流的底层实现类" class="headerlink" title="处理字节文件，流的底层实现类"></a><strong>处理字节文件，流的底层实现类</strong></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>FileOutputStream</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>字节输出流</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>构造</td>
+<td>FileOutputStream(File file) 使用File对象来构造FileWriter<br/>FileOutputStream(File file, boolean append) append为true时，往末尾追加<br/>FileOutputStream(String fileName) 使用文件路径名来创建FileWriter对象<br/>FileOutputStream(String fileName, boolean append) append为true时，往末尾追加</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>void write(byte[] b, int off, int len) 将 len 字节从位于偏移量 off 的指定字节<br/>数组写入此文件输出流。<br/>void write(int b) 将指定的字节写入此文件输出流。<br/>void write(byte[] b) 将 b.length 个字节从指定的字节数组写入此文件输出流。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>FileInputStream</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类型</td>
+<td>字节输入流</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>构造</td>
+<td>FileInputStream(File file) 通过打开与实际文件的连接创建一个 FileInputStream ，该文件由文件系统中的 File 对象 file 命名。<br/>FileInputStream(String name) 通过打开与实际文件的连接来创建一个 FileInputStream ，该文件由文件系统中的路径名 name 命名。</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>int read(byte[] b) 从该输入流读取最多 b.length 个字节的数据为字节数组。<br/>int read(byte[] b, int off, int len) 从该输入流读取最多 len 字节的数据为字节数组。<br/>long skip(long n) 跳过并从输入流中丢弃 n 字节的数据。<br/>int read() 从该输入流读取一个字节的数据。</td>
+</tr>
+</tbody></table>
+<h4 id="对象流"><a href="#对象流" class="headerlink" title="对象流"></a>对象流</h4><ul>
+<li><p>对象流：有的时候，我们可能需要将内存中的对象持久化到硬盘上，或者将硬盘中的对象信息读到内存中，这个时候我们需要使用对象输入输出流。</p>
+</li>
+<li><p>序列化： 是将对象转换成一个字节序列的过程，是一个写操作,做永久保存</p>
+</li>
+<li><p>反序列化: 将字节序列转换成对象的过程 ，是一个读操作</p>
+</li>
+<li><p>说明</p>
+<blockquote>
+<ol>
+<li>对象如果要支持序列化，需要实现Serializable标志接口</li>
+<li>对象的静态属性不会被序列化</li>
+<li>transient修饰的成员属性不会被序列化</li>
+<li>serialVersionUID序列化版本号，在序列化前会根据类中的属性和方法来计算出一个版本号，随着对象一起序列化，在反序列化之前也会根据类中的属性和方法来计算一个版本号，根据前后两个版本号进行比对，如果对比结果一致，则反序列化成功，结果不一致，反序列化会失败</li>
+<li>如果自己提供了版本号，java就不会计算版本号，进行版本号的比对</li>
+<li>集合和映射对象都不能直接序列化，如果要序列化，需遍历集合中的元素依次进行序列化</li>
+<li>如果要序列化多个对象（在一个文件中）<ul>
+<li>方法1：<br>  在序列化结束时，需多写一个null值，在反序列化时，读取到null结束，可以避免EOFException</li>
+<li>方法2：<br>  可以将多个对象存储在数组中，对数组进行序列化，达到序列化多个对象的目的（见第6点）</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p>实现类</p>
+<ul>
+<li>ObjectOutputStream<ul>
+<li>构造： ObjectOutputStream(OutputStream out) 创建一个写入指定的OutputStream的ObjectOutputStream。</li>
+<li>方法：void writeObject(Object obj) 将指定的对象写入ObjectOutputStream</li>
+</ul>
+</li>
+<li>ObjectInputStream<ul>
+<li>构造：ObjectInputStream(InputStream in) 创建从指定的InputStream读取的ObjectInputStream。</li>
+<li>方法：Object readObject() 从ObjectInputStream读取一个对象。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>缓冲流 &amp; 转换流 &amp; 打印流 &amp; 系统流 略</p>
 ]]></content>
       <categories>
         <category>JAVA基础</category>
@@ -2193,7 +2392,7 @@
     <content><![CDATA[<p>概述：集合基础</p>
 <span id="more"></span>
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|----Collection接口：单列集合，用来存储一个一个的对象</span><br><span class="line">     |----List接口：存储有序的、可重复的数据。  --&gt;“动态”数组</span><br><span class="line">           |----ArrayList：作为List接口的主要实现类，线程不安全的，效率高;底层采用Object[] elementData数组存储</span><br><span class="line">           |----LinkedList：对于频繁的插入删除操作，使用此类效率比ArrayList效率高底层采用双向链表存储</span><br><span class="line">           |----Vector：作为List的古老实现类，线程安全的，效率低;底层采用Object[]数组存储</span><br><span class="line">           </span><br><span class="line">     |----Set接口：存储无序的、不可重复的数据   --&gt;数学概念上的“集合”</span><br><span class="line">           |----HashSet：作为Set接口主要实现类;线程不安全;可以存null值</span><br><span class="line">           		|----LinkedHashSet：作为HashSet的子类;遍历其内部数据时，可以按照添加顺序遍历;对于频繁的遍历操作，LinkedHashSet效率高于HashSet.</span><br><span class="line">           |----TreeSet：可以按照添加对象的指定属性，进行排序。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|----Map:双列数据，存储key-value对的数据   ---类似于高中的函数：y = f(x)</span><br><span class="line">     |----HashMap:作为Map的主要实现类；线程不安全的，效率高；存储null的key和value</span><br><span class="line">          |----LinkedHashMap:保证在遍历map元素时，可以照添加的顺序实现遍历。</span><br><span class="line">                    原因：在原的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。对于频繁的遍历操作，此类执行效率高于HashMap。</span><br><span class="line">     |----TreeMap:保证照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序，底层使用红黑树</span><br><span class="line">     |----Hashtable:作为古老的实现类；线程安全的，效率低；不能存储null的key和value</span><br><span class="line">          |----Properties:常用来处理配置文件。key和value都是String类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">|----Collection接口：单列集合，用来存储一个一个的对象</span><br><span class="line">     |----List接口：存储有序的、可重复的数据。  --&gt;“动态”数组</span><br><span class="line">           |----ArrayList：作为List接口的主要实现类，线程不安全的，效率高;底层采用Object[] elementData数组存储</span><br><span class="line">           |----LinkedList：对于频繁的插入删除操作，使用此类效率比ArrayList效率高底层采用双向链表存储</span><br><span class="line">           |----Vector：作为List的古老实现类，线程安全的，效率低;底层采用Object[]数组存储</span><br><span class="line">           </span><br><span class="line">     |----Set接口：存储无序的、不可重复的数据   --&gt;数学概念上的“集合”</span><br><span class="line">           |----HashSet：作为Set接口主要实现类;线程不安全;可以存null值(底层hashmap=哈希表)</span><br><span class="line">           		|----LinkedHashSet：作为HashSet的子类;遍历其内部数据时，可以按照添加顺序遍历;对于频繁的遍历操作，LinkedHashSet效率高于HashSet.</span><br><span class="line">           |----TreeSet：可以按照添加对象的指定属性，进行排序。(底层treemap=二叉树;上层SortedSet)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|----Map:双列数据，存储key-value对的数据   ---类似于高中的函数：y = f(x)</span><br><span class="line">     |----HashMap:作为Map的主要实现类；线程不安全的，效率高；存储null的key和value</span><br><span class="line">          |----LinkedHashMap:保证在遍历map元素时，可以照添加的顺序实现遍历。</span><br><span class="line">                    原因：在原的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。对于频繁的遍历操作，此类执行效率高于HashMap。</span><br><span class="line">     |----TreeMap:保证照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序，底层使用红黑树(上层SortedMap)</span><br><span class="line">     |----Hashtable:作为古老的实现类；线程安全的，效率低；不能存储null的key和value</span><br><span class="line">          |----Properties:常用来处理配置文件。key和value都是String类型</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -2286,6 +2485,145 @@
 <li>JDK 8.0中通过Vector()构造器创建对象时，底层都创建了长度为10的数组</li>
 <li>扩容方面，默认扩容为原来的数组长度的2倍</li>
 </ul>
+<h2 id="Set-lt-interface-gt"><a href="#Set-lt-interface-gt" class="headerlink" title="Set&lt;interface&gt;"></a>Set<code>&lt;interface&gt;</code></h2><ul>
+<li>是Collection的子接口，set接口没有提供额外的方法</li>
+<li>无序不重复</li>
+<li>引用数据类型需要重写equals方法</li>
+</ul>
+<h3 id="HashSet-lt-Class-gt"><a href="#HashSet-lt-Class-gt" class="headerlink" title="HashSet&lt;Class&gt;"></a>HashSet<code>&lt;Class&gt;</code></h3><ul>
+<li>哈希表实现；底层是数组，初始为16，超过容量的0.75，将扩大原来的两倍</li>
+<li>元素无序。</li>
+<li>添加、删除操作时间复杂度都是O(1)</li>
+<li>非线程安全</li>
+<li>元素可以为null</li>
+<li>相等的标准：<strong>两个对象通过hashCode()方法比较相等，并且两个对象的equals()方法返回值也相等</strong></li>
+<li></li>
+<li>元素添加过程： (先比较hashCode值，后比较equals)<ol>
+<li>首先调用元素a所在类的hashCode()方法</li>
+<li>如果此位置上没有其他元素，则元素a添加成功</li>
+<li>如果此位置上有其他元素b，则比较元素a与元素b的hash值<ul>
+<li>如果hash值不相同，则元素a添加成功。 —&gt;JDK 8.0 :原来的元素在数组中，指向元素a。（尾插法）</li>
+<li>如果hash值相同，进而需要调用元素a所在类的equals()方法<ol>
+<li>equals()返回true,元素a添加失败</li>
+<li>equals()返回false,则元素a添加成功   —&gt;尾插法</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="LinkedHashSet-lt-Class-gt"><a href="#LinkedHashSet-lt-Class-gt" class="headerlink" title="LinkedHashSet&lt;Class&gt;"></a>LinkedHashSet<code>&lt;Class&gt;</code></h4><ul>
+<li><p>是一个哈希表和链表的结合，且是一个双向链表</p>
+</li>
+<li><p>根据元素的hashCode值来决定元素的存储位置但它同时使用双向链表 维护元素的次序</p>
+</li>
+<li><p>插入是有序的，时间复杂度是O(1)：<strong>有序不重复</strong></p>
+</li>
+</ul>
+<h3 id="TreeSet-lt-Class-gt"><a href="#TreeSet-lt-Class-gt" class="headerlink" title="TreeSet&lt;Class&gt;"></a>TreeSet<code>&lt;Class&gt;</code></h3><ul>
+<li>是一个树结构(红黑树)</li>
+<li>元素是有序的</li>
+<li>添加、删除操作时间复杂度为O(log(n))</li>
+<li>额外的方法</li>
+</ul>
+<blockquote>
+<p>Comparator comparator():如果TreeSet采用了定制顺序，则该方法返回定制排序所使用的Comparator，如果TreeSet采用自然排序，则返回null；</p>
+<p>Object first():返回集合中的第一个元素；</p>
+<p>Object last():返回集合中的最后一个元素；</p>
+<p>Object lower(Object e)：返回指定元素之前的元素。</p>
+<p>Object higher(Object e)：返回指定元素之后的元素。</p>
+<p>SortedSet subSet（Object fromElement，Object toElement）：返回此Set的子集合，含头不含尾；</p>
+<p>SortedSet headSet(Object toElement)：返回此Set的子集，由小于toElement的元素组成；</p>
+<p>SortedSet tailSet(Object fromElement)：返回此Set的子集，由大于fromElement的元素组成;</p>
+</blockquote>
+<ul>
+<li>添加&amp;排序</li>
+</ul>
+<blockquote>
+<p>1.向TreeSet中添加的数据，要求是相同类的对象。<br>2.两种排序方式：自然排序（实现Comparable接口） 和定制排序（Comparator）<br>    1)自然排序中，比较两个对象是否相同的标准为：compareTo()返回0，不再是equals()方法<br>    2)定制排序中，比较两个对象是否相同的标准为：compare()返回0，不再是equals()方法</p>
+</blockquote>
+<p>​		自然排序：<strong>实现Comparable接口</strong>		（按升序（默认情况）排列）</p>
+<p>​						   —-&gt;自定义类(Person)中实现Comparable接口，并重写接口中的compareTo方法</p>
+<p>​		定制排序：<strong>传入参数Comparator接口</strong></p>
+<p>​						   —-&gt;将实现Comparator接口的实例作为形参传递给TreeSet的构造器</p>
+<h1 id="Map-lt-interface-gt"><a href="#Map-lt-interface-gt" class="headerlink" title="Map&lt;interface&gt;"></a>Map<code>&lt;interface&gt;</code></h1><ul>
+<li><p>Map与Collection并列存在。用于保存具有一一映射关系的数据:key-value</p>
+</li>
+<li><p><strong>存储结构</strong>：</p>
+<ul>
+<li>使用Set存储所的key —&gt; key所在的类要重写equals()和hashCode() </li>
+<li>使用Collection存储所的value —&gt;value所在的类要重写equals()</li>
+<li>一个键值对：key-value构成了一个Entry对象。<ul>
+<li>无序的、不可重复的，使用Set存储所的entry</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Map接口的常用方法</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Object put(Object key,Object value)：将指定key-value添加到(或修改)当前map对象中</span><br><span class="line"></span><br><span class="line">void putAll(Map m):将m中的所有key-value对存放到当前map中</span><br><span class="line"></span><br><span class="line">Object remove(Object key)：移除指定key的key-value对，并返回value</span><br><span class="line"></span><br><span class="line">void clear()：清空当前map中的所有数据</span><br><span class="line"></span><br><span class="line">Object get(Object key)：获取指定key对应的value</span><br><span class="line"></span><br><span class="line">boolean containsKey(Object key)：是否包含指定的key</span><br><span class="line"></span><br><span class="line">boolean containsValue(Object value)：是否包含指定的value</span><br><span class="line"></span><br><span class="line">int size()：返回map中key-value对的个数</span><br><span class="line"></span><br><span class="line">boolean isEmpty()：判断当前map是否为空</span><br><span class="line"></span><br><span class="line">boolean equals(Object obj)：判断当前map和参数对象obj是否相等</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历（没有提供迭代器，根据key或者value的存储结构，返回有迭代器的集合进行遍历）</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Set keySet()：		返回所有key构成的Set集合</span><br><span class="line">Collection values()：返回所有value构成的Collection集合</span><br><span class="line">Set entrySet()：		返回所有key-value对构成的Set集合</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="HashMap-lt-class-gt"><a href="#HashMap-lt-class-gt" class="headerlink" title="HashMap&lt;class&gt;"></a>HashMap<code>&lt;class&gt;</code></h2><ul>
+<li><p>new HashMap():底层没有创建一个长度为16的数组。放入值后才有</p>
+</li>
+<li><p>dk 8底层的数组是：Node[] —-&gt; hash\key\value\next</p>
+</li>
+<li><p>存储规则：</p>
+<ol>
+<li>调用key1所在类的hashCode()计算key1哈希值</li>
+<li>如果key1的哈希值与已经存在的数据的哈希值都不相同，此时key1-value1添加成功</li>
+<li>如果key1的哈希值和已经存在的某一个数据(key2-value2)的哈希值相同，调用key1所在类的equals(key2)方法<ul>
+<li>如果equals()返回false:此时key1-value1添加成功</li>
+<li>如果equals()返回true:使用value1<strong>替换</strong>value2。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>扩容：</p>
+<ul>
+<li>扩容为原来容量的2倍，并将原有的数据复制过来。</li>
+<li>扩容之后，原数组中的数据必须重新计算其在新数组中的位置，并放进去（可能重新排序），这就是 resize。</li>
+<li>加载因子：0.75</li>
+<li>数组的长度大于64，且链表的长度超过8，链表会自动转换为红黑树<ul>
+<li><strong>解释：</strong>当HashMapl中的其中一个链的对象个数如果达到了8个，此时如果 capacity没有达到64，那么HashMap会先扩容解决，如果已经达到了64，那么这个链会变成树，结点类型由Node变成 Tree Node类型。当然，如果当映射关系被移除后，下次resize方法时判断树的结点个数低于6个，也会把树再转为链表。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>属性：       bucket：在这个数组中可以存放元素的位置我们称之为“桶”  —-&gt;散列桶</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">DEFAULT_INITIAL_CAPACITY : 	HashMap的默认容量，16</span><br><span class="line">   DEFAULT_LOAD_FACTOR：		HashMap的默认加载因子：0.75</span><br><span class="line">   threshold：					扩容的临界值，= 容量*填充因子：16 * 0.75 =&gt; 12</span><br><span class="line">   TREEIFY_THRESHOLD：			Bucket中链表长度大于该默认值，转化为红黑树:JDK 8.0引入</span><br><span class="line">   MIN_TREEIFY_CAPACITY：		桶中的Node被树化时最小的hash表容量:64</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="LinkedHashMap-lt-class-gt"><a href="#LinkedHashMap-lt-class-gt" class="headerlink" title="LinkedHashMap&lt;class&gt;"></a>LinkedHashMap<code>&lt;class&gt;</code></h3><ul>
+<li>LinkedHashMap继承于HashMap</li>
+<li>LinkedHashMap内部提供了Entry，替换HashMap中的Node.</li>
+<li>迭代顺序与Key-value对的插入顺序一致</li>
+</ul>
+<h2 id="TreeMap-lt-class-gt"><a href="#TreeMap-lt-class-gt" class="headerlink" title="TreeMap&lt;class&gt;"></a>TreeMap<code>&lt;class&gt;</code></h2><ul>
+<li>排序<ul>
+<li>自然排序： TreeMap的所有的Key必须实现Comparable接口，而且所有的Key应该是同一个类的对象，否则将会抛出ClasssCastEXception()</li>
+<li>定制排序：创建 TreeMap时，传入一个 Comparator对象，该对象负责对TreeMap中的所有key进行排序。此时不需要Map的Key实现Comparable接口</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用Properties读取配置文件"><a href="#使用Properties读取配置文件" class="headerlink" title="使用Properties读取配置文件"></a>使用Properties读取配置文件</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Properties：用来读取配置文件</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test2</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="type">Properties</span> <span class="variable">pro</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Properties</span>();</span><br><span class="line">    <span class="comment">//读取配置文件方式一：此时的文件默认在当前的module下</span></span><br><span class="line"><span class="comment">//        FileInputStream fis1 = new FileInputStream(new File(&quot;jdbc1.properties&quot;));</span></span><br><span class="line"><span class="comment">//        pro.load(fis1);</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//读取配置文件方式二：使用ClassLoader</span></span><br><span class="line">    <span class="comment">//配置文件默认识别为：当前module的src下</span></span><br><span class="line">    <span class="type">ClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> ClassLoaderTest.class.getClassLoader();<span class="comment">//获取系统类加载器</span></span><br><span class="line">    <span class="type">InputStream</span> <span class="variable">fis2</span> <span class="operator">=</span> classLoader.getResourceAsStream(<span class="string">&quot;jdbc1.properties&quot;</span>);</span><br><span class="line">    pro.load(fis2);</span><br><span class="line">    <span class="type">String</span> <span class="variable">user</span> <span class="operator">=</span> pro.getProperty(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">password</span> <span class="operator">=</span> pro.getProperty(<span class="string">&quot;password&quot;</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;user=&quot;</span>+user+<span class="string">&quot;,password=&quot;</span>+password);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Collections-lt-util-gt"><a href="#Collections-lt-util-gt" class="headerlink" title="Collections&lt;util&gt;"></a>Collections<code>&lt;util&gt;</code></h1><ol>
+<li>排序</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reverse(List)：反转 List 中元素的顺序</span><br><span class="line">shuffle(List)：对 List 集合元素进行随机排序</span><br><span class="line">sort(List)：根据元素的自然顺序对指定 List 集合元素按升序排序</span><br><span class="line">sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序</span><br><span class="line">swap(List，int， int)：将指定 list 集合中的 i 处元素和 j 处元素进行交换</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查找&amp;替换</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素</span><br><span class="line">Object max(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素</span><br><span class="line">Object min(Collection)</span><br><span class="line">Object min(Collection，Comparator)</span><br><span class="line">int frequency(Collection，Object)：返回指定集合中指定元素的出现次数</span><br><span class="line">void copy(List dest,List src)：将src中的内容复制到dest中</span><br><span class="line">boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替换 List 对象的所有旧值</span><br></pre></td></tr></table></figure>
+
+
+
 <h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><a href="https://blog.csdn.net/weixin_44630656/article/details/113456512">Link01</a></p>
 ]]></content>
       <categories>
