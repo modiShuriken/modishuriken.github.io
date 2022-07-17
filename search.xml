@@ -1352,7 +1352,7 @@
 <li>在本地创建的Hexo文件夹下，找到文件<code>_config.yml</code>并编辑<ul>
 <li>deploy: </li>
 <li>type:  git </li>
-<li>repository: <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#x67;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
+<li>repository: <a href="mailto:&#x67;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;</a>:modiShuriken&#x2F;modishuriken.github.io.git （这个在仓库的code里找git）</li>
 <li>branch: main</li>
 <li>注意有空格</li>
 <li>还有一个url：<a href="https://github.com/modiShuriken/modishuriken.github.io.git">https://github.com/modiShuriken/modishuriken.github.io.git</a></li>
@@ -1465,7 +1465,7 @@
 
 ]]></content>
       <categories>
-        <category>JAVA前端及前端</category>
+        <category>前端</category>
       </categories>
       <tags>
         <tag>hexo</tag>
@@ -2187,7 +2187,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>JAVA前端及前端</category>
+        <category>前端</category>
       </categories>
       <tags>
         <tag>hexo</tag>
