@@ -4250,4 +4250,152 @@
         <tag>Swagger</tag>
       </tags>
   </entry>
+  <entry>
+    <title>vue基本知识</title>
+    <url>/posts/94774664/</url>
+    <content><![CDATA[<p><strong>概述：</strong>vue基本入门</p>
+<span id="more"></span>
+
+<h1 id="Vue准备工作"><a href="#Vue准备工作" class="headerlink" title="Vue准备工作"></a>Vue准备工作</h1><p>参考文档<a href="https://cn.vuejs.org/">(官方文档)</a></p>
+<ol>
+<li>安装Vue工具<strong>Vue CLI</strong></li>
+<li>检查</li>
+<li>创建项目</li>
+<li>启动项目</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">cnpm install -g @vue/cli</span><br><span class="line">vue --version</span><br><span class="line">vue create name-demo</span><br><span class="line"><span class="comment">//进入项目选择，根据需要选择</span></span><br><span class="line"><span class="comment">//一般选择 Babel / Progressive web App... / Router / Vuex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动方式一</span></span><br><span class="line">cd name-demo</span><br><span class="line">cnpm run serve</span><br><span class="line"><span class="comment">//启动方式二: 图形化启动</span></span><br><span class="line">vue ui</span><br></pre></td></tr></table></figure>
+
+<p>文件中比较重要的文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name-demo</span><br><span class="line"> |</span><br><span class="line"> |---src </span><br><span class="line"> 	  |---assets  	 //存放静态文件</span><br><span class="line"> 	  |---component  //存放组件</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Vue基本语法"><a href="#Vue基本语法" class="headerlink" title="Vue基本语法"></a>Vue基本语法</h1><h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">        &lt;p&gt;&#123;&#123; message &#125;&#125;&lt;/p&gt;   	//支持JavaScript</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	export default &#123;</span><br><span class="line">        name: &quot;hello&quot;,</span><br><span class="line">        data() &#123;</span><br><span class="line">            return &#123;</span><br><span class="line">                message: &quot;test&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li><p><strong>v-html</strong>  :  渲染html语句</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p v-html=&quot;data&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>v-bind ( : )</strong>   :  将数据放入标签中的属性中</p>
+</li>
+</ol>
+<h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><ol>
+<li><p><strong>v-if &amp; v-else</strong> : 渲染为<code>true &amp; false</code>的内容</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p v-if=&quot;flag&quot;&gt;xxxx&lt;/p&gt;</span><br><span class="line">&lt;p v-else&gt;yyyy&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>v-show</strong>  :  同上</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p v-show=&quot;flag&quot;&gt;xxxx&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>区别：v-if 会按条件渲染页面（F12中的元素中没有或者有该语句块），切换开销大，而v-show反之。</p>
+</li>
+</ol>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><ol>
+<li><p><strong>v-for</strong>  :  把数组循环遍历一遍 ;  items 数据源 &amp; item每条数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for=&quot;item in items&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li v-for=&quot;(item,index) in items&quot; :key=&quot;item.id&quot;&gt;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>特点：添加元素时，已经渲染好的不会再次渲染</p>
+</li>
+</ol>
+<h2 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h2><ol>
+<li><p><strong>v-on   ( @ )</strong>  : 监听事件</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button @click=&quot;数据/函数名/函数名(有参)&quot;&gt;&lt;/button&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="表单输入绑定"><a href="#表单输入绑定" class="headerlink" title="表单输入绑定"></a>表单输入绑定</h2><ol>
+<li><p>v-model  :  <code>&lt;input&gt;  &lt;textarea&gt;  &lt;select&gt;</code>  双向绑定数据</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;input v-model=&quot;message&quot; / &gt;</span><br><span class="line">&lt;input v-model.lazy=&quot;message&quot; / &gt;   //不会与&lt;p&gt;立即同步</span><br><span class="line">&lt;input v-model.trim=&quot;message&quot; / &gt;   //去除空格</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    &#123;&#123;message&#125;&#125;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">	return &#123;</span><br><span class="line">		message: &quot;&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><ul>
+<li>单文件组件（<code>.vue</code>文件）</li>
+</ul>
+<p>demo01.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;h1&gt;demo01&lt;/h1&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &quot;demo01&quot;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//scoped 限定当前的css样式只在此组件中生效</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">    h1 &#123;</span><br><span class="line">        color: blue;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>引入组件（组件进行组合）</li>
+</ul>
+<p>demo02.vue</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;h1&gt;demo02&lt;/h1&gt;</span><br><span class="line">	&lt;demo01&gt;&lt;/demo01&gt;     //3.使用</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import demo01 from &quot;../components/demo01.vue&quot;  //1.引入</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    name: &quot;demo02&quot;,</span><br><span class="line">    components: &#123;</span><br><span class="line">    	demo01            //2.挂载</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>组件交互（数据交互1–调用传入）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;h1&gt;demo01&lt;/h1&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &quot;demo01&quot;</span><br><span class="line">    props:&#123;</span><br><span class="line">    	key: &#123;        // 在demo02引用的标签中 可以使用的属性</span><br><span class="line">    		type: String, // 该属性的类型</span><br><span class="line">    		default: &quot;&quot;   // 该属性的默认值</span><br><span class="line">    	&#125;</span><br><span class="line">    	names: &#123;</span><br><span class="line">            type: Array,</span><br><span class="line">            //数组和对象必须使用函数进行返回</span><br><span class="line">            default: function() &#123;</span><br><span class="line">                return []</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Prop类型</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String， Number， Boolean， Array， Object， Function</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>自定义事件组件交互（数据交互2–被调用传入）<code>$emit</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;h1&gt;demo01&lt;/h1&gt;</span><br><span class="line">	&lt;button @click=&quot;sendClickHandler&quot;&gt;按钮&lt;/button&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">	name: &quot;demo01&quot;</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &quot;data&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        sendClickHandler()&#123;</span><br><span class="line">            this.&amp;emit(&quot;onEvent&quot;, this.msg)  // onEvent就是demo02通过事件调用demo01的方法名,this.msg将会进行返回</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;h1&gt;demo02&lt;/h1&gt;</span><br><span class="line">	&lt;demo01 @onEvent=&quot;getMsg&quot;&gt;&lt;/demo01&gt;     //3.使用</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import demo01 from &quot;../components/demo01.vue&quot;  //1.引入</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">    name: &quot;demo02&quot;,</span><br><span class="line">    components: &#123;</span><br><span class="line">    	demo01            //2.挂载</span><br><span class="line">    &#125;</span><br><span class="line">    methods: &#123;</span><br><span class="line">    	getMsg(data) &#123;  //data来接收this.msg</span><br><span class="line">            console.log(data)</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>子组件中通过各种事件监听（click..）调用本地方法，再通过$emit 将数据返回给父组件。</p>
+<p>父组件通过$emit中的事件名调用，得到返回的数据，再通过本地方法进行处理。</p>
+<p>从而子组件的数据可以返回给父组件</p>
+</blockquote>
+<ul>
+<li>组件的生命周期</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeCreate/created     创建</span><br><span class="line">beforeMount/mounted      渲染</span><br><span class="line">beforeUpdate/updated     更新</span><br><span class="line">beforeUnmount/unmounted  卸载</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="第三方"><a href="#第三方" class="headerlink" title="第三方"></a>第三方</h2><p>如Swiper等，通过组件组合进行引用，具体参照具体的官方文档</p>
+<h1 id="Axios-amp-路由"><a href="#Axios-amp-路由" class="headerlink" title="Axios &amp; 路由"></a>Axios &amp; 路由</h1><h2 id="网络请求-amp-其封装"><a href="#网络请求-amp-其封装" class="headerlink" title="网络请求 &amp; 其封装"></a>网络请求 &amp; 其封装</h2><ul>
+<li><p>全局引用axios  再main.js中设置</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import axios from &quot;axios&quot;</span><br><span class="line"></span><br><span class="line">const app=createApp(App);</span><br><span class="line">app.config.globalProperties.$axios = axios</span><br><span class="line">app.mount(&#x27;#app&#x27;)</span><br><span class="line"></span><br><span class="line">//组件中调用</span><br><span class="line">this.$axios</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>局部引用</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import axios from &quot;axios&quot;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">	name: &quot;demo03&quot;,</span><br><span class="line">	data() &#123;&#125;,</span><br><span class="line">	mounted() &#123;</span><br><span class="line">		axios(&#123;</span><br><span class="line">			method: &quot;get&quot;,</span><br><span class="line">			url: &quot;xxx&quot;</span><br><span class="line">		&#125;).then(res =&gt; &#123;....&#125;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//简写</span><br><span class="line">axios.get(url)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>封装</p>
+<blockquote>
+<p>创建一个util包，进行公共配置，如请求超时设置，拦截器，post请求处理 ， request&#x2F;response请求处理</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="请求跨域解决方案"><a href="#请求跨域解决方案" class="headerlink" title="请求跨域解决方案"></a>请求跨域解决方案</h2><ol>
+<li>后台在Controller上加注解**@CrossOrigin**</li>
+<li>前台解决：proxy  在config文件中设置</li>
+</ol>
+<h2 id="路由Router"><a href="#路由Router" class="headerlink" title="路由Router"></a>路由Router</h2><p>作用： 管理页面的跳转  需要在main.js中引入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &#123;createRouter, createWebHashHistory &#125; from &quot;vue-router&quot;</span><br><span class="line"></span><br><span class="line">const routes = &#123;</span><br><span class="line">	&#123;</span><br><span class="line">		path: &quot;/&quot;,</span><br><span class="line">		component: demo01</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		path: &quot;/news/:msg&quot;,   //传递参数</span><br><span class="line">		name: news</span><br><span class="line">		component: () =&gt; import(&quot;vue-path&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">	&#123;</span><br><span class="line">		path: &quot;/about&quot;, </span><br><span class="line">		name: about,</span><br><span class="line">		component: () =&gt; import(&quot;vue-path&quot;),</span><br><span class="line">		children: [</span><br><span class="line">			&#123;</span><br><span class="line">				path: &quot;info&quot;,  //不加/</span><br><span class="line">				component: () =&gt; import(&quot;vue-path&quot;)</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const router = createRouter(&#123;</span><br><span class="line">	history: createWebHashHistory(),</span><br><span class="line">	routes</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router;</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line"></span><br><span class="line">&lt;router-link to=&quot;/&quot;&gt;home1&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">&lt;router-link to=&quot;/news/username&quot;&gt;home2&lt;/router-link&gt;  //username参数</span><br><span class="line">&#123;&#123; $route.params.msg &#125;&#125;</span><br><span class="line"></span><br><span class="line">&lt;router-link to=&quot;/about/info&quot;&gt;home3&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Vue状态管理"><a href="#Vue状态管理" class="headerlink" title="Vue状态管理"></a>Vue状态管理</h1><p>简单理解： 管理组件间的数据交互，它提供了一个STORE空间来集中管理数据</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &#123; createStore &#125; from &quot;vuex&quot;</span><br><span class="line"></span><br><span class="line">export default createStore(&#123;</span><br><span class="line">	state: &#123;</span><br><span class="line">		msg: 0   //数据 &amp; 状态</span><br><span class="line">	&#125;,</span><br><span class="line">	//对state中的某些状态进行预处理（不能改变state的状态）</span><br><span class="line">	getters: &#123;</span><br><span class="line">		getMsg(state) &#123;</span><br><span class="line">			return state.msg &gt; 0 ? 1:0</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	//对state中的某些状态进行更改（同步）</span><br><span class="line">	mutations: &#123;</span><br><span class="line">		addMsg(state, num) &#123;</span><br><span class="line">			state.msg++</span><br><span class="line">			state.msg += num</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	//对state中的某些状态进行更改（异步）</span><br><span class="line">	actions: &#123;</span><br><span class="line">		asynSetMsg(&#123; commit &#125;) &#123;  //注意写法</span><br><span class="line">			axios.get(url).then(res =&gt; &#123;</span><br><span class="line">				commit(&quot;addMsg&quot;,res.data)</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123; $store.state.msg &#125;&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; $store.getters.getMsg &#125;&#125;</span><br><span class="line"></span><br><span class="line">&lt;button @click=&quot;xx&quot;&gt;&lt;/button&gt; </span><br><span class="line">methods: &#123;</span><br><span class="line">	xx() &#123;</span><br><span class="line">		this.$store.commit(&quot;addMsg&quot;, 12)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;button @click=&quot;yy&quot;&gt;&lt;/button&gt; </span><br><span class="line">methods: &#123;</span><br><span class="line">	yy() &#123;</span><br><span class="line">		this.$store.dispatch(&quot;asynSetMsg&quot;)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import &#123; mapState,mapGetters,mapMutations,mapActions &#125; from &quot;vuex&quot;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">	//专门来读取vuex</span><br><span class="line">	computed:&#123;</span><br><span class="line">		...mapState([&quot;msg&quot;])</span><br><span class="line">		...mapGetters([&quot;getMsg&quot;])</span><br><span class="line">		...mapMutations([&quot;addMsg&quot;])</span><br><span class="line">		...mapMutations([&quot;asynSetMsg&quot;])</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//直接读取</span><br><span class="line">&#123;&#123; msg &#125;&#125;</span><br><span class="line">&#123;&#123; getMsg &#125;&#125;</span><br><span class="line"></span><br><span class="line">this.addMsg(1212)</span><br><span class="line">this.asynSetMsg</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Vue3新特性"><a href="#Vue3新特性" class="headerlink" title="Vue3新特性"></a>Vue3新特性</h1><p>待补充…</p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
+  </entry>
 </search>
