@@ -4398,4 +4398,81 @@
         <tag>vue</tag>
       </tags>
   </entry>
+  <entry>
+    <title>代理模式</title>
+    <url>/posts/7b510e10/</url>
+    <content><![CDATA[<p>概括：代理模式基础</p>
+<span id="more"></span>
+
+<h1 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h1><ul>
+<li>定义：目标对象不可访问，通过代理对象增强功能访问</li>
+<li>作用：控制目标对象的访问， 增强功能</li>
+<li>分类：静态和动态代理</li>
+</ul>
+<blockquote>
+<p>在学习之前明确谁是目标对象，代理对象，业务接口</p>
+</blockquote>
+<h2 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h2><ul>
+<li>目标对象和代理对象实现同一个业务接口（业务接口service固定）</li>
+<li>目标对象必须实现接口</li>
+<li>代理对象在程序运行前就已经存在</li>
+<li>灵活的进行目标对象的<strong>切换</strong></li>
+</ul>
+<p>目标对象(implement  service)—–&gt;业务接口（Service）(固定的)&lt;——–代理对象(implement  service)&lt;——-客户</p>
+<blockquote>
+<p>面向接口编程</p>
+<p>​	生活化实例：</p>
+<p>​		就例如Type-C接口（一个数据线），将接口定义好以后，我们有两样东西，一个是手机，一个是插座。</p>
+<p>​		当手机不再是这个手机换成另一个手机（键盘）的时候，我还可以用这个接口来给手机充电（插上插座）</p>
+<p>​		同样插座不一定需要，我可以换成充电宝，它也实现了这个Type-C接口，它也可以给我的手机（键盘）充电</p>
+</blockquote>
+<blockquote>
+<p>静态的理解：</p>
+<p>​	关于静态代理，就是把在<strong>代理对象</strong>内部，用<strong>业务接口</strong>去接住传入的<strong>目标对象</strong>（多态），然后调用该<strong>业务接口中的被目标对象实现的方法</strong>（固定的调用方法名），<strong>代理对象</strong>也可以实现其他过程来丰富<strong>业务接口</strong>中的方法（对于客户来说，我只需要知道<strong>业务接口</strong>中的方法名叫啥，就可以调用<strong>代理对象</strong>中丰富后的方法）</p>
+<p>​	局限就是，当业务接口中的<em><strong>方法名变化时</strong></em>，需要更改<strong>代理对象</strong>和<strong>目标对象</strong>中的相应方法</p>
+</blockquote>
+<blockquote>
+<p>动态的理解：</p>
+<p>​	相较于静态代理，弥补了其局限，动态的获得业务中的方法名</p>
+<p>​	其他同静态代理一样，需要传入<strong>目标对象</strong>，实现更多的功能</p>
+</blockquote>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><h3 id="JDK-动态代理"><a href="#JDK-动态代理" class="headerlink" title="JDK 动态代理"></a>JDK 动态代理</h3><ul>
+<li>目标对象必须实现业务接口</li>
+<li>代理对象不需要实现业务接口（比较静态，少了一个）</li>
+<li>代理对象在程序运行前不存在，运行后动态的在内存中创建</li>
+<li>可以对业务接口中的功能进行切换（多了静态没有的东西，也是重点）</li>
+<li>代理对象不能强转为目标对象（也不允许）</li>
+</ul>
+<h4 id="使用的类和接口"><a href="#使用的类和接口" class="headerlink" title="使用的类和接口"></a>使用的类和接口</h4><ol>
+<li><p>Proxy类：java.lang.reflect.Proxy包下，有个方法Proxy.newProxyInstance(  ,   ,   )—-生成动态代理对象</p>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static Object newProxyInstance(ClassLoader loader, //类加载器，加载目标对象</span><br><span class="line">								   Class&lt;?&gt;[] interfaces, //目标对象实现的所有接口</span><br><span class="line">							  InvocationHandler h//实现代理和业务功能，使用匿名内部类实现</span><br><span class="line">												)</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>Method类</p>
+<ul>
+<li>反射用的类，用来进行目标对象的方法（具体的业务实现方法）反射调用</li>
+</ul>
+</li>
+<li><p>InvocationHandler接口</p>
+<ul>
+<li><p>实现代理和业务功能，使用匿名内部类实现</p>
+</li>
+<li><p>&#96;&#96;&#96;java<br>interface Service {}<br>Service service &#x3D; new Service() {<br>@Override<br>public void sing() {<br>    System.out.println(“匿名内部实现”)<br>}<br>}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 动态代理工厂实现</span><br><span class="line"></span><br><span class="line">```Java</span><br><span class="line">public class ProxyFactory &#123;</span><br><span class="line">    //创建接口成员变量</span><br><span class="line">    Service target;</span><br><span class="line">    //传入目标对象</span><br><span class="line">    public ProxyFactory(Service target) &#123;</span><br><span class="line">        this.target = target;</span><br><span class="line">    &#125;</span><br><span class="line">    //获取代理对象的方法，返回一个代理对象</span><br><span class="line">    public Object getAgent() &#123;</span><br><span class="line">        //调用Proxy类中的newProxyInstance方法，创建代理对象</span><br><span class="line">        return Proxy.newProxyInstance(</span><br><span class="line">                //ClassLoader loader,加载目标对象</span><br><span class="line">                target.getClass().getClassLoader(),</span><br><span class="line">                //Class&lt;?&gt;[] interfaces,得到目标对象所实现的所有接口</span><br><span class="line">                target.getClass().getInterfaces(),</span><br><span class="line">                //InvocationHandler h， 实现代理功能的接口</span><br><span class="line">                new InvocationHandler() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public Object invoke(</span><br><span class="line">                                        //创建代理对象</span><br><span class="line">                                         Object proxy,</span><br><span class="line">                                         //method就是目标方法</span><br><span class="line">                                         Method method,</span><br><span class="line">                                         //目标方法的参数</span><br><span class="line">                                         Object[] args) throws Throwable &#123;</span><br><span class="line">                        System.out.println(&quot;代理功能，，，，&quot;);</span><br><span class="line">                        //目标对象的业务方法</span><br><span class="line">                        Object obj = method.invoke(target, args);</span><br><span class="line">                        return obj; //目标方法的返回值</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="CGLib动态代理"><a href="#CGLib动态代理" class="headerlink" title="CGLib动态代理"></a>CGLib动态代理</h3><ul>
+<li>通过动态的在内存中构建子类对象，重写父类方法进行代理（补充了JDK代理的不足）</li>
+<li>目标对象没有实现接口，但需要进行代理</li>
+<li>子类代理是对象字节码框架ASM来实现的</li>
+</ul>
+]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
 </search>
