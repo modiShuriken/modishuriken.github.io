@@ -4475,4 +4475,49 @@
         <tag>设计模式</tag>
       </tags>
   </entry>
+  <entry>
+    <title>日志建议</title>
+    <url>/posts/c3728e62/</url>
+    <content><![CDATA[<p><strong>概述：</strong>打印日志规范</p>
+<span id="more"></span>
+
+<h3 id="基于slf4j框架的日志使用建议"><a href="#基于slf4j框架的日志使用建议" class="headerlink" title="基于slf4j框架的日志使用建议"></a>基于slf4j框架的日志使用建议</h3><ol>
+<li><p>日志格式</p>
+<ol>
+<li>选择合适的日志级别</li>
+<li>规范日志格式（带有时间戳等基本信息方便定位）</li>
+<li>使用参数占位符｛｝</li>
+<li>使用异步日志，避免重复日志（日志框架的配置文件中改）</li>
+<li>建议使用<strong>slf4j框架</strong>的API（便于统一管理）</li>
+</ol>
+</li>
+<li><p>日志内容</p>
+<ol>
+<li>打印，方法的出参 &amp; 入参</li>
+<li>不要使用e.printStackTrace （）打印错误信息，堆栈信息过多</li>
+<li>打印内容完整<ul>
+<li>（<code>log.error(&quot;message&quot;, e)</code> 其中e为异常对象，如果使用 <code>e.message()</code> 不完整）</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>日志使用方向</p>
+<ol>
+<li><strong>分支语句</strong>都建议打印日志</li>
+<li>对一些比较低的<strong>日志级别进行判断</strong>，使用log.isXXXX（）方法判断<ul>
+<li>日志判断，<strong>应用的日志</strong>级别大于<code>debug</code>，比如为<code>info</code>。那么这代码，最终都不会输出日志。</li>
+</ul>
+</li>
+<li>禁止在线上开启debug，会把磁盘打满</li>
+</ol>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JAVA框架</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
 </search>
